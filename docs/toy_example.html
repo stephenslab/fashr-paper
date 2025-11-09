@@ -37,6 +37,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -326,7 +328,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">fashr-paper</a>
+      <a class="navbar-brand" href="index.html">FASH Repository</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -336,12 +338,15 @@ div.tocify {
 <li>
   <a href="about.html">About</a>
 </li>
-<li>
-  <a href="license.html">License</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/AgueroZZ/fashr-paper">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -513,13 +518,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong691ccda">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongf72e7cd">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 691ccda
+aria-hidden="true"></span> <strong>Repository version:</strong> f72e7cd
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong691ccda"
+<div id="strongRepositoryversionstrongf72e7cd"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -528,7 +533,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 691ccda.
+The results in this page were generated with repository version f72e7cd.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -550,7 +555,6 @@ Ignored files:
     Ignored:    data/.DS_Store
     Ignored:    data/toy_example/
     Ignored:    output/.DS_Store
-    Ignored:    output/toy_example/
 
 Untracked files:
     Untracked:  code/00_eQTLs.R
@@ -568,10 +572,10 @@ Untracked files:
     Untracked:  data/dynamic_eQTL_real/
     Untracked:  output/appendixB/
     Untracked:  output/dynamic_eQTL_real/
+    Untracked:  output/toy_example/
 
 Unstaged changes:
-    Modified:   analysis/about.Rmd
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/_site.yml
 
 </code></pre>
 <p>
@@ -616,6 +620,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+dab27e9
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -699,6 +720,43 @@ selected_data &lt;- datasets[[selected_index]]</code></pre>
     col = &quot;black&quot;
   )</code></pre>
 <p><img src="figure/toy_example.rmd/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+dab27e9
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>From this summary statistics, we want to estimate the true effect
 sizes at different time points, as well as the true effect size
 function.</p>
