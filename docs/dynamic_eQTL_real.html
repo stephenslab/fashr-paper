@@ -38,6 +38,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -330,7 +332,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">fashr-paper</a>
+      <a class="navbar-brand" href="index.html">FASH Repository</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -340,12 +342,15 @@ div.tocify {
 <li>
   <a href="about.html">About</a>
 </li>
-<li>
-  <a href="license.html">License</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/AgueroZZ/fashr-paper">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -525,13 +530,13 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong9f55956">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong0ac74ee">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 9f55956
+aria-hidden="true"></span> <strong>Repository version:</strong> 0ac74ee
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong9f55956"
+<div id="strongRepositoryversionstrong0ac74ee"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +545,7 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 9f55956.
+The results in this page were generated with repository version 0ac74ee.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,14 +563,12 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-    Ignored:    analysis/figure/
     Ignored:    code/.DS_Store
     Ignored:    data/.DS_Store
+    Ignored:    data/toy_example/
     Ignored:    output/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/nonlinear_dynamic_eQTL_real.rmd
-    Untracked:  analysis/toy_example.rmd
     Untracked:  code/00_eQTLs.R
     Untracked:  code/01_fash.R
     Untracked:  code/01_fash_uncorrected.R
@@ -581,10 +584,10 @@ Untracked files:
     Untracked:  data/dynamic_eQTL_real/
     Untracked:  output/appendixB/
     Untracked:  output/dynamic_eQTL_real/
+    Untracked:  output/toy_example/
 
 Unstaged changes:
-    Modified:   analysis/about.Rmd
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/_site.yml
 
 </code></pre>
 <p>
@@ -629,6 +632,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -775,6 +795,43 @@ plot(lfdr1_vec_unadj, min_lfsr1_unadj,
      xlab = &quot;lfdr&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;lfdr vs min-lfsr (Un-adjusted)&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s also visualize the min-lfsr and the lfdr from the BF-updated
 model:</p>
 <pre class="r"><code>load(paste0(result_dir, &quot;/min_lfsr_summary1_update.RData&quot;))
@@ -786,6 +843,43 @@ plot(lfdr1_vec, min_lfsr1,
      xlab = &quot;lfdr&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;lfdr vs min-lfsr (BF-adjusted)&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Indeed, the min-lfsr tends to be more conservative than the lfdr,
 especially when <span class="math inline">\(\hat{\pi_0}\)</span> has not
 been adjusted using the BF procedure.</p>
@@ -797,6 +891,43 @@ class="math inline">\(\pi_0\)</span> affect the min-lfsr.</p>
      xlab = &quot;min-lfsr (unadjusted)&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;Effect of BF adjustment on min-lfsr&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="detecting-dynamic-eqtls" class="section level2">
 <h2>Detecting dynamic eQTLs</h2>
@@ -836,6 +967,43 @@ using the min-lfsr or the lfdr. From now on, we will consider the pairs
 that are significant using the lfdr.</p>
 <p>Visualize top-ranked pairs:</p>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Some examples of null pairs:</p>
 <pre class="r"><code>genes_not_highlighted1 &lt;- setdiff(all_genes, genes_highlighted1)
 pairs_not_highlighted1 &lt;- setdiff(names(datasets), pairs_highlighted1)
@@ -884,6 +1052,43 @@ for (i in 1:4) {
   )
 }</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow = c(1,1))</code></pre>
 </div>
 <div id="comparing-with-strober-et.al" class="section level2">
@@ -912,6 +1117,43 @@ ggVennDiagram(gene_sets, label = &quot;both&quot;) +
   scale_fill_gradient(low=&quot;grey90&quot;,high = &quot;red&quot;) +
   theme(legend.position = &quot;right&quot;)  # Move legend to the right</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>There is a large number of genes only detected by FASH (order 1).
 Let’s take a look at the 4 pairs that are least significant from
 FASH:</p>
@@ -920,6 +1162,43 @@ FASH:</p>
 <pre><code>7.568054e-05</code></pre>
 <pre><code>0.1427737</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s also take a look at the 4 pairs that are most significant from
 FASH:</p>
 <pre><code>7.059223e-09</code></pre>
@@ -927,10 +1206,84 @@ FASH:</p>
 <pre><code>2.142656e-08</code></pre>
 <pre><code>3.87763e-08</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-22-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
+Past versions of unnamed-chunk-22-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s also look at the genes that were missed by FASH, but detected
 by Strober et.al. In this case, we will pick the most significant pair
 for each gene in FASH:</p>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-23-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Even the most significant pairs from FASH for each gene do not show a
 clear pattern of dynamic eQTLs. It is kind of expected that FASH won’t
 conclude with high confidence that these genes have dynamic eQTLs.</p>
@@ -982,6 +1335,43 @@ length(early_genes)</code></pre>
 <pre><code>[1] 18</code></pre>
 <p>Let’s take a look at the top-ranked early dynamic eQTLs:</p>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-26-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>It is evident that these variants have largest <span
 class="math inline">\(|\beta(t)|\)</span> during the first three
 days.</p>
@@ -1049,6 +1439,43 @@ for (i in 1:4) {
   )
 }</code></pre>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-29-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
+Past versions of unnamed-chunk-29-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow = c(1,1))</code></pre>
 </div>
 <div id="late-dynamic-eqtls" class="section level3">
@@ -1073,6 +1500,43 @@ length(late_genes)</code></pre>
 <pre><code>[1] 18</code></pre>
 <p>Let’s take a look at the top-ranked late dynamic eQTLs:</p>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-32-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-32-1">
+Past versions of unnamed-chunk-32-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-32-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="switch-dynamic-eqtls" class="section level3">
 <h3>Switch dynamic eQTLs</h3>
@@ -1103,6 +1567,43 @@ length(switch_genes)</code></pre>
 <pre><code>[1] 285</code></pre>
 <p>Let’s take a look at the top-ranked switch dynamic eQTLs:</p>
 <p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-35-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-35-1">
+Past versions of unnamed-chunk-35-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-35-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+d73f3f1
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-11-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="gene-set-enrichment-analysis" class="section level2">
