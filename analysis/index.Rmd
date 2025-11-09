@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "**F**unction **A**daptive **SH**rinkage (FASH) Code Repository"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -8,4 +8,16 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+For an overview of FASH, see [here]().
+
+The software is implemented in R and is available at [fashr]().
+
+**Examples:**
+
+Here are examples of how to apply FASH 
+
++ [Simulated data examples](appendixB.html)
+
++ [Testing dynamic eQTLs using iPSC data](dynamic_eQTL_real.html)
+
++ [Testing nonlinear dynamic eQTLs using iPSC data](nonlinear_dynamic_eQTL_real.html)
