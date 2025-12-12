@@ -2007,9 +2007,9 @@ enrich_set <- function(genes_selected,
   # also make sure selected genes are a subset of the universe
   genes_sel_used <- intersect(genes_selected_raw, universe_for_test)
 
-  message("Original selected genes: ", length(genes_selected_raw),
-          " ; used in enrichment: ", length(genes_sel_used))
-  message("Universe size (background_gene): ", length(universe_for_test))
+  # message("Original selected genes: ", length(genes_selected_raw),
+  #         " ; used in enrichment: ", length(genes_sel_used))
+  # message("Universe size (background_gene): ", length(universe_for_test))
 
   enrich_res <- enricher(
     gene          = genes_sel_used,
