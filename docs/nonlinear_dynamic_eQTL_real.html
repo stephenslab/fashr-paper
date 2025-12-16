@@ -526,15 +526,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertreea7fabd490cf594553d1965095032acaf042b68a2targetblanka7fabd4a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree8914a446b959637e6967c5a41e971dd28e43d98ftargetblank8914a44a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/fashr-paper/tree/a7fabd490cf594553d1965095032acaf042b68a2" target="_blank">a7fabd4</a>
+<a href="https://github.com/stephenslab/fashr-paper/tree/8914a446b959637e6967c5a41e971dd28e43d98f" target="_blank">8914a44</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertreea7fabd490cf594553d1965095032acaf042b68a2targetblanka7fabd4a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree8914a446b959637e6967c5a41e971dd28e43d98ftargetblank8914a44a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -544,7 +544,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/fashr-paper/tree/a7fabd490cf594553d1965095032acaf042b68a2" target="_blank">a7fabd4</a>.
+<a href="https://github.com/stephenslab/fashr-paper/tree/8914a446b959637e6967c5a41e971dd28e43d98f" target="_blank">8914a44</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -562,7 +562,6 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/site_libs/
     Ignored:    data/.DS_Store
     Ignored:    data/toy_example/
     Ignored:    output/.DS_Store
@@ -618,6 +617,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/stephenslab/fashr-paper/blob/8914a446b959637e6967c5a41e971dd28e43d98f/analysis/nonlinear_dynamic_eQTL_real.rmd" target="_blank">8914a44</a>
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-12-16
+</td>
+<td>
+workflowr::wflow_publish("analysis/nonlinear_dynamic_eQTL_real.rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/fashr-paper/1c558a195c3a6f8d9d0db2314d49bfbb88ccc09a/docs/nonlinear_dynamic_eQTL_real.html" target="_blank">1c558a1</a>
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2025-12-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -819,148 +852,9 @@ length(genes_highlighted2_before)</code></pre>
 <pre class="r"><code>length(genes_highlighted2_before)/length(all_genes)</code></pre>
 <pre><code>[1] 0.009902546</code></pre>
 <p>Visualize top-ranked pairs:</p>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/nonlinear_dynamic_examples-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Some examples of null pairs:</p>
-<pre class="r"><code>genes_not_highlighted2 &lt;- setdiff(all_genes, genes_highlighted2)
-pairs_not_highlighted2 &lt;- setdiff(names(datasets), pairs_highlighted2)
-par(mfrow = c(2,2))
-for (i in 10:13) {
-  selected_gene &lt;- genes_not_highlighted2[i]
-  pairs_of_selected_gene &lt;- grep(selected_gene, pairs_not_highlighted2, value = TRUE)
-  selected_indices &lt;- which(names(datasets) %in% pairs_of_selected_gene)
-
-  # here we pick the *least* interesting one: max lfdr after adjustment
-  selected_index &lt;- selected_indices[
-    which(fash_fit2_update$lfdr[selected_indices] ==
-            max(fash_fit2_update$lfdr[selected_indices]))[1]
-  ]
-
-  # shorthand
-  x  &lt;- datasets[[selected_index]]$x
-  y  &lt;- datasets[[selected_index]]$y
-  se &lt;- datasets[[selected_index]]$SE
-  w  &lt;- 1 / (se^2)
-
-  y_min &lt;- min(y - 2 * se)
-  y_max &lt;- max(y + 2 * se)
-
-  # weighted mean
-  y_wmean &lt;- sum(y * w) / sum(w)
-
-  # weighted linear fit
-  lin_fit &lt;- lm(y ~ x, weights = w)
-
-  # weighted quadratic fit
-  quad_fit  &lt;- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
-  x_grid    &lt;- seq(min(x), max(x), length.out = 200)
-  quad_pred &lt;- predict(quad_fit, newdata = data.frame(x = x_grid))
-
-  # FASH fit (after adjustment)
-  fitted_result &lt;- predict(
-    fash_fit2_update,
-    index      = selected_index,
-    smooth_var = seq(0, 15, by = 0.1)
-  )
-
-  # lfdr before and after
-  lfdr_before &lt;- fash_fit2$lfdr[selected_index]
-  lfdr_after  &lt;- fash_fit2_update$lfdr[selected_index]
-
-  # caption text
-  caption &lt;- sprintf(&quot;lfdr (raw) = %.3f, lfdr (adj) = %.3f&quot;,
-                     lfdr_before, lfdr_after)
-
-  plot(
-    x, y,
-    pch  = 20,
-    col  = &quot;black&quot;,
-    xlab = &quot;Time&quot;,
-    ylab = &quot;Effect Est&quot;,
-    # main = names(datasets)[selected_index],
-    ylim = c(y_min, y_max)
-  )
-  
-  variant_id &lt;- strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][2]
-  gene_symbol &lt;- full_map$hgnc_symbol[full_map$ensembl_gene_id == selected_gene]
-  title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-
-  arrows(
-    x0 = x,
-    y0 = y - 2 * se,
-    x1 = x,
-    y1 = y + 2 * se,
-    length = 0.05,
-    angle  = 90,
-    code   = 3,
-    col    = &quot;black&quot;
-  )
-
-  polygon(
-    c(fitted_result$x, rev(fitted_result$x)),
-    c(fitted_result$lower, rev(fitted_result$upper)),
-    col    = rgb(1, 0, 0, 0.3),
-    border = NA
-  )
-
-  # posterior mean curve
-  lines(
-    fitted_result$x,
-    fitted_result$mean,
-    col = &quot;red&quot;,
-    lwd = 2
-  )
-
-  # # weighted average line (replaces simple mean)
-  # abline(h = y_wmean, col = &quot;blue&quot;,  lty = 2)
-
-  # weighted linear fit
-  abline(lin_fit,     col = &quot;green&quot;, lty = 2, lwd = 1)
-
-  # weighted quadratic curve
-  lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-
-  # add caption as subtitle
-  title(sub = caption, cex.sub = 0.8)
-}</code></pre>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
-Past versions of unnamed-chunk-14-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-14-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/e9f6ed7748c1427db83227d85d276c9e3df12f5d/docs/figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-14-1.png" target="_blank">e9f6ed7</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,1))</code></pre>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/nonlinear_null_examples-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="comparing-with-strober-et.al" class="section level2">
 <h2>Comparing with Strober et.al</h2>
@@ -980,59 +874,14 @@ Strober et.al.</p>
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>Let’s take a look at the overlap between the two methods used in
 Strober et.al and FASH (order 2):</p>
-<pre class="r"><code>gene_sets &lt;- list(
-  &quot;Strober (Nonlinear)&quot; = genes_highlighted_strober_nonlinear,
-  &quot;Strober (Linear)&quot; = genes_highlighted_strober_linear,
-  &quot;FASH (2)&quot; = genes_highlighted2
-)
-ggVennDiagram(gene_sets, label = &quot;both&quot;) +
-  scale_fill_gradient(low=&quot;grey90&quot;,high = &quot;red&quot;) +
-  theme(legend.position = &quot;right&quot;)  # Move legend to the right</code></pre>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
-Past versions of unnamed-chunk-16-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-16-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/e9f6ed7748c1427db83227d85d276c9e3df12f5d/docs/figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-16-1.png" target="_blank">e9f6ed7</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/venn_diagram-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Let’s take a look at the 4 pairs that are least significant from
 FASH:</p>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/only_fash_least-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Let’s also look at the genes that were missed by FASH, but detected
 by Strober et.al. In this case, we will pick the most significant pair
 for each gene in FASH:</p>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/miss_fash_most-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="classifying-nonlinear-dynamic-eqtls" class="section level2">
 <h2>Classifying nonlinear dynamic eQTLs</h2>
@@ -1094,76 +943,7 @@ length(middle_indices)</code></pre>
 length(middle_genes)</code></pre>
 <pre><code>[1] 7</code></pre>
 <p>Take a look at their results:</p>
-<pre class="r"><code>par(mfrow = c(2,2))
-for (i in 1:4) {
-  selected_index &lt;- sample(middle_indices, 1)
-  fitted_result &lt;- predict(fash_fit2,
-                           index = selected_index,
-                           smooth_var = seq(0, 15, by = 0.1))
-  plot(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y,
-    pch = 20,
-    col = &quot;black&quot;,
-    xlab = &quot;Time&quot;,
-    ylab = &quot;Effect Est&quot;,
-    # main = paste0(names(datasets)[selected_index]),
-    ylim = c(
-      min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
-      max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
-    )
-  )
-  variant_id &lt;- strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][2]
-  gene_symbol &lt;- full_map$hgnc_symbol[full_map$ensembl_gene_id == sapply(strsplit(names(datasets)[selected_index], &quot;_&quot;), &quot;[[&quot;, 1)]
-  title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-  arrows(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE,
-    length = 0.05,
-    angle = 90,
-    code = 3,
-    col = &quot;black&quot;
-  )
-  lines(fitted_result$x,
-        fitted_result$mean,
-        col = &quot;red&quot;,
-        lwd = 2)
-  polygon(
-    c(fitted_result$x, rev(fitted_result$x)),
-    c(fitted_result$lower, rev(fitted_result$upper)),
-    col = rgb(1, 0, 0, 0.3),
-    border = NA
-  )
-  
-  # add lfsr
-  lfsr_adj &lt;- testing_middle_nonlin_dyn$lfsr[testing_middle_nonlin_dyn$indices == selected_index]
-  
-  caption &lt;- sprintf(&quot;lfsr (adj) = %.3f&quot;,
-                     lfsr_adj)
-
-  # add caption as subtitle
-  title(sub = caption, cex.sub = 0.8)
-  
-  # shorthand
-  x  &lt;- datasets[[selected_index]]$x
-  y  &lt;- datasets[[selected_index]]$y
-  se &lt;- datasets[[selected_index]]$SE
-  w  &lt;- 1 / (se^2)
-  # weighted linear fit
-  lin_fit &lt;- lm(y ~ x, weights = w)
-  # weighted quadratic fit
-  quad_fit  &lt;- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
-  x_grid    &lt;- seq(min(x), max(x), length.out = 200)
-  quad_pred &lt;- predict(quad_fit, newdata = data.frame(x = x_grid))
-  # weighted linear fit
-  abline(lin_fit,     col = &quot;green&quot;, lty = 2, lwd = 1)
-  # weighted quadratic curve
-  lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-}</code></pre>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>par(mfrow = c(1,1))</code></pre>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/middle_examples-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>How many pairs are classified as late dynamic eQTLs?</p>
 <pre class="r"><code>functional_late &lt;- function(x){
   max(abs(x[smooth_var_refined &gt;= 12])) - max(abs(x[smooth_var_refined &lt; 12]))
@@ -1182,7 +962,7 @@ length(late_indices)</code></pre>
 length(late_genes)</code></pre>
 <pre><code>[1] 14</code></pre>
 <p>Let’s take a look at the top-ranked late dynamic eQTLs:</p>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-26-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/late_examples-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>How many pairs and how many unique genes are classified as switch
 dynamic eQTLs?</p>
 <pre class="r"><code>switch_threshold &lt;- 0.25
@@ -1209,7 +989,7 @@ length(switch_indices)</code></pre>
 length(switch_genes)</code></pre>
 <pre><code>[1] 9</code></pre>
 <p>Let’s take a look at the top-ranked switch dynamic eQTLs:</p>
-<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/unnamed-chunk-29-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/nonlinear_dynamic_eQTL_real.rmd/switch_examples-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="gene-set-enrichment-analysis" class="section level2">
 <h2>Gene Set Enrichment Analysis</h2>
