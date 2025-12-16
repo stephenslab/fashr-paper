@@ -172,7 +172,7 @@ length(genes_highlighted2_before)/length(all_genes)
 
 Visualize top-ranked pairs:
 
-```{r echo=FALSE}
+```{r nonlinear_dynamic_examples, echo=FALSE}
 genes_highlighted2_subset <- c("AMN", "RIPK2", "DENND5B", "ZIC2")
 # convert to ensembl IDs
 map <- getBM(
@@ -288,7 +288,7 @@ par(mfrow = c(1,1))
 
 Some examples of null pairs:
 
-```{r}
+```{r nonlinear_null_examples, echo=FALSE}
 genes_not_highlighted2 <- setdiff(all_genes, genes_highlighted2)
 pairs_not_highlighted2 <- setdiff(names(datasets), pairs_highlighted2)
 par(mfrow = c(2,2))
@@ -416,7 +416,7 @@ genes_highlighted_strober_linear <- unique(sapply(strsplit(pairs_highlighted_str
 
 Let's take a look at the overlap between the two methods used in Strober et.al and FASH (order 2):
 
-```{r}
+```{r venn_diagram, echo=FALSE}
 gene_sets <- list(
   "Strober (Nonlinear)" = genes_highlighted_strober_nonlinear,
   "Strober (Linear)" = genes_highlighted_strober_linear,
@@ -429,7 +429,7 @@ ggVennDiagram(gene_sets, label = "both") +
 
 Let's take a look at the 4 pairs that are least significant from FASH:
 
-```{r echo=FALSE}
+```{r only_fash_least, echo=FALSE}
 gene_fashr_only <- setdiff(genes_highlighted2, union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear))
 ## produce four plots for four genes
 par(mfrow = c(2,2))
@@ -510,7 +510,7 @@ par(mfrow = c(1,1))
 Let's also look at the genes that were missed by FASH, but detected by Strober et.al.
 In this case, we will pick the most significant pair for each gene in FASH:
 
-```{r echo=FALSE}
+```{r miss_fash_most, echo=FALSE}
 gene_missed <- setdiff(union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear), genes_highlighted2)
 ## produce four plots for four genes
 par(mfrow = c(2,2))
@@ -648,7 +648,7 @@ length(middle_genes)
 
 Take a look at their results:
 
-```{r}
+```{r middle_examples, echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_index <- sample(middle_indices, 1)
@@ -745,7 +745,7 @@ length(late_genes)
 
 Let's take a look at the top-ranked late dynamic eQTLs:
 
-```{r echo=FALSE}
+```{r late_examples, echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_index <- late_indices[i]
@@ -845,7 +845,7 @@ length(switch_genes)
 
 Let's take a look at the top-ranked switch dynamic eQTLs:
 
-```{r echo=FALSE}
+```{r switch_examples, echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_index <- switch_indices[i]
