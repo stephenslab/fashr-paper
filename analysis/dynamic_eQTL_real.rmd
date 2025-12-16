@@ -131,7 +131,7 @@ save(min_lfsr_summary1_update, file = "./results/min_lfsr_summary1_update.RData"
 
 Let's visualize how the min-lfsr compares with the local false discovery rate (lfdr):
 
-```{r}
+```{r visualize_minlfsr}
 load(paste0(result_dir, "/min_lfsr_summary1.RData"))
 # sample some indices for easy visualization
 sample_indices <- sample(1:length(min_lfsr_summary1$min_lfsr), 1e5)
@@ -146,7 +146,7 @@ lines(c(0,1), c(0,1), col = "red")
 
 Let's also visualize the min-lfsr and the lfdr from the BF-updated model:
 
-```{r}
+```{r visualize_minlfsr_bf}
 load(paste0(result_dir, "/min_lfsr_summary1_update.RData"))
 min_lfsr1 <- min_lfsr_summary1_update$min_lfsr[sample_indices]
 lfdr1_vec <- fash_fit1_update$lfdr[min_lfsr_summary1_update$index[sample_indices]]
@@ -162,7 +162,7 @@ Indeed, the min-lfsr tends to be more conservative than the lfdr, especially whe
 
 Let's also assess how does the BF-update of $\pi_0$ affect the min-lfsr.
 
-```{r}
+```{r visualize_minlfsr_bf_vs_unadj}
 plot(min_lfsr1_unadj, min_lfsr1, 
      pch = 20, cex = 0.1,
      ylim = c(0,1), xlim = c(0,1),
@@ -239,7 +239,7 @@ From now on, we will consider the pairs that are significant using the lfdr.
 
 Visualize top-ranked pairs for some selected genes:
 
-```{r echo=FALSE}
+```{r dynamic_example , echo=FALSE}
 genes_highlighted1_subset <- c("FHL2", "SCN5A", "FZD6", "GSN")
 # convert to ensembl IDs
 map <- getBM(
@@ -354,7 +354,7 @@ par(mfrow = c(1,1))
 
 
 Visualize some genes highlighted in the original analysis:
-```{r}
+```{r some_genes_highlighted_original , echo=FALSE}
 highlights <- paste0("ENSG00000183873", c("_rs7633988", "_rs6599234"))
 par(mfrow = c(2,2))
 for (i in seq_along(highlights)) {
@@ -514,14 +514,13 @@ These examples were highlighted using the un-adjusted FASH model, but not signif
 
 Take a look at the most significant variants for the gene 'ENSG00000183873':
 
-```{r}
+```{r most_significant_SCN5A , echo=FALSE}
 # get the indices of the highlighted pairs for ENSG00000183873
 SCN5A_pairs <- pairs_highlighted1[grep("ENSG00000183873", names(datasets)[fash_highlighted1])]
 # pick the most significant four variants
 all_selected_indices <- fash_highlighted1[grep("ENSG00000183873", names(datasets)[fash_highlighted1])]
 lfdr_values <- fash_fit1_update$lfdr[all_selected_indices]
 selected_indices <- all_selected_indices[order(lfdr_values)][1:4]
-# plot
 par(mfrow = c(2,2))
 for (selected_index in selected_indices) {
   # shorthand 
@@ -909,7 +908,7 @@ There is a significant variant for ENSG00000115641, but not for ENSG00000167173 
 
 Some examples of null pairs:
 
-```{r}
+```{r null_examples , echo=FALSE}
 genes_not_highlighted1 <- setdiff(all_genes, genes_highlighted1)
 pairs_not_highlighted1 <- setdiff(names(datasets), pairs_highlighted1)
 par(mfrow = c(2,2))
@@ -1037,7 +1036,7 @@ genes_highlighted_strober_linear <- unique(sapply(strsplit(pairs_highlighted_str
 
 Let's take a look at the overlap between the two methods used in Strober et.al and FASH (order 1):
 
-```{r}
+```{r venn_diagram_strober_fash , echo=FALSE}
 gene_sets <- list(
   "Strober (Nonlinear)" = genes_highlighted_strober_nonlinear,
   "Strober (Linear)" = genes_highlighted_strober_linear,
@@ -1050,7 +1049,7 @@ ggVennDiagram(gene_sets, label = "both") +
 
 Produce another Venn diagram for the pairs detected by the three methods:
 
-```{r}
+```{r venn_diagram_strober_fash_pairs , echo=FALSE}
 pair_sets <- list(
   "Strober (Nonlinear)" = pairs_highlighted_strober_nonlinear,
   "Strober (Linear)" = pairs_highlighted_strober_linear,
@@ -1063,7 +1062,7 @@ ggVennDiagram(pair_sets, label = "both") +
 
 Produce similar Venn diagrams for genes and pairs detected by FASH without BF adjustment:
 
-```{r}
+```{r venn_diagram_strober_fash_unadj , echo=FALSE}
 gene_sets_unadj <- list(
   "Strober (Nonlinear)" = genes_highlighted_strober_nonlinear,
   "Strober (Linear)" = genes_highlighted_strober_linear,
@@ -1086,7 +1085,7 @@ ggVennDiagram(pair_sets_unadj, label = "both") +
 There is a large number of genes only detected by FASH (order 1). 
 Let's take a look at the 4 pairs that are least significant from FASH:
 
-```{r echo=FALSE}
+```{r only_fash_least , echo=FALSE}
 gene_fashr_only <- setdiff(genes_highlighted1, union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear))
 
 qt_threshold <- quantile(fash_fit1_update$lfdr[test1$fdr_results$index[test1$fdr_results$FDR <= 0.05]], 0.9)
@@ -1211,7 +1210,7 @@ par(mfrow = c(1,1))
 
 Let's also take a look at the 4 pairs that are most significant from FASH:
 
-```{r echo=FALSE}
+```{r only_fash_most , echo=FALSE}
 gene_fashr_only <- setdiff(genes_highlighted1, union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear))
 
 map <- getBM(
@@ -1332,7 +1331,7 @@ par(mfrow = c(1,1))
 Let's also look at the genes that were missed by FASH, but detected by Strober et.al.
 In this case, we will pick the most significant pair for each gene in FASH:
 
-```{r echo=FALSE}
+```{r miss_fash_most , echo=FALSE}
 gene_missed <- setdiff(union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear), genes_highlighted1)
 
 map <- getBM(
@@ -1448,7 +1447,7 @@ par(mfrow = c(1,1))
 
 Take a look at the same plot but with the unadjusted FASH results:
 
-```{r}
+```{r miss_fash_most_unadj , echo=FALSE}
 ## produce four plots for four genes
 par(mfrow = c(2,2))
 for (i in 1:4) {
@@ -1592,7 +1591,7 @@ length(early_genes)
 
 Let's take a look at the top-ranked early dynamic eQTLs:
 
-```{r echo=FALSE}
+```{r early_examples , echo=FALSE}
 map <- getBM(
   attributes = c("ensembl_gene_id", "hgnc_symbol"),
   filters    = "ensembl_gene_id",
@@ -1693,7 +1692,7 @@ middle_genes_symbols <- map$hgnc_symbol[match(middle_genes, map$ensembl_gene_id)
 
 Take a look at their results:
 
-```{r}
+```{r middle_examples , echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_index <- sample(middle_indices, 1)
@@ -1785,7 +1784,7 @@ late_genes_symbols[6] <- "SCO2"
 
 Let's take a look at the top-ranked late dynamic eQTLs:
 
-```{r echo=FALSE}
+```{r late_examples , echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_index <- late_indices[i]
@@ -1885,7 +1884,7 @@ selected_switch_genes <- map$ensembl_gene_id[match(selected_switch_genes_symbols
 
 Let's take a look at the top-ranked switch dynamic eQTLs:
 
-```{r echo=FALSE}
+```{r switch_examples, , echo=FALSE}
 par(mfrow = c(2,2))
 for (i in 1:4) {
   selected_switch_gene <- selected_switch_genes[i]
