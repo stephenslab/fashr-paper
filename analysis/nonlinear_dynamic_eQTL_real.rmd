@@ -12,6 +12,8 @@ editor_options:
 ```{r setup}
 knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
 library(fashr)
+library(biomaRt)
+mart <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
 result_dir <- paste0(getwd(), "/output/dynamic_eQTL_real")
 data_dir <- paste0(getwd(), "/data/dynamic_eQTL_real")
 code_dir <- paste0(getwd(), "/code/dynamic_eQTL_real")
@@ -56,6 +58,13 @@ for (i in 1:length(datasets)) {
   datasets[[i]]$SE <- fash_fit2$fash_data$S[[i]]
 }
 all_genes <- unique(sapply(strsplit(names(datasets), "_"), "[[", 1))
+
+full_map <- getBM(
+  attributes = c("hgnc_symbol", "ensembl_gene_id"),
+  filters    = "ensembl_gene_id",
+  values     = all_genes,
+  mart       = mart
+)
 ```
 
 
@@ -121,6 +130,9 @@ We will use the updated FASH model (2) to detect nonlinear dynamic eQTLs.
 alpha <- 0.05
 test2 <- fdr_control(fash_fit2_update, alpha = alpha, plot = F)
 fash_highlighted2 <- test2$fdr_results$index[test2$fdr_results$FDR <= alpha]
+
+test2_before <- fdr_control(fash_fit2, alpha = alpha, plot = F)
+fash_highlighted2_before <- test2_before$fdr_results$index[test2_before$fdr_results$FDR <= alpha]
 ```
 
 How many pairs are detected?
@@ -131,6 +143,16 @@ length(pairs_highlighted2)
 length(pairs_highlighted2)/length(datasets)
 ```
 
+
+What is the number before the BF adjustment?
+
+```{r}
+pairs_highlighted2_before <- names(datasets)[fash_highlighted2_before]
+length(pairs_highlighted2_before)
+length(pairs_highlighted2_before)/length(datasets)
+```
+
+
 How many unique genes are detected?
 
 ```{r}
@@ -139,52 +161,126 @@ length(genes_highlighted2)
 length(genes_highlighted2)/length(all_genes)
 ```
 
+Before the BF adjustment?
+
+```{r}
+genes_highlighted2_before <- unique(sapply(strsplit(pairs_highlighted2_before, "_"), "[[", 1))
+length(genes_highlighted2_before)
+length(genes_highlighted2_before)/length(all_genes)
+```
+
+
 Visualize top-ranked pairs:
 
 ```{r echo=FALSE}
+genes_highlighted2_subset <- c("AMN", "RIPK2", "DENND5B", "ZIC2")
+# convert to ensembl IDs
+map <- getBM(
+  attributes = c("hgnc_symbol", "ensembl_gene_id"),
+  filters    = "hgnc_symbol",
+  values     = genes_highlighted2_subset,
+  mart       = mart
+)
+genes_highlighted2_subset_ens <- map$ensembl_gene_id[match(genes_highlighted2_subset, map$hgnc_symbol)]
+
 par(mfrow = c(2,2))
 for (i in 1:4) {
-  selected_gene <- (genes_highlighted2)[i] #sample(genes_highlighted2, 1)
-  pairs_of_selected_gene <- grep(selected_gene, pairs_highlighted2, value = T)
+  selected_gene <- genes_highlighted2_subset_ens[i]  # sample(genes_highlighted2, 1)
+  pairs_of_selected_gene <- grep(selected_gene, pairs_highlighted2, value = TRUE)
   selected_indices <- which(names(datasets) %in% pairs_of_selected_gene)
-  selected_index <- selected_indices[which(fash_fit2_update$lfdr[selected_indices] == min(fash_fit2_update$lfdr[selected_indices]))][1]
-  fitted_result <- predict(fash_fit2_update,
-                           index = selected_index,
-                           smooth_var = seq(0, 15, by = 0.1))
+
+  selected_index <- selected_indices[
+    which(fash_fit2_update$lfdr[selected_indices] ==
+            min(fash_fit2_update$lfdr[selected_indices]))[1]
+  ]
+
+  # shorthand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+
+  y_min <- min(y - 2 * se)
+  y_max <- max(y + 2 * se)
+
+  # weighted mean
+  y_wmean <- sum(y * w) / sum(w)
+
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+
+  fitted_result <- predict(
+    fash_fit2_update,
+    index      = selected_index,
+    smooth_var = seq(0, 15, by = 0.1)
+  )
+
   plot(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y,
-    pch = 20,
-    col = "black",
+    x, y,
+    pch  = 20,
+    col  = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
-    ylim = c(
-      min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
-      max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
-    )
+    # main = names(datasets)[selected_index],
+    ylim = c(y_min, y_max)
   )
+  
+  # define the title to be the gene symbol: rs ID
+  gene_symbol <- map$hgnc_symbol[map$ensembl_gene_id == selected_gene]
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  title(main = paste0(gene_symbol, ": ", variant_id))
+
   arrows(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE,
+    x0 = x,
+    y0 = y - 2 * se,
+    x1 = x,
+    y1 = y + 2 * se,
     length = 0.05,
-    angle = 90,
-    code = 3,
-    col = "black"
+    angle  = 90,
+    code   = 3,
+    col    = "black"
   )
-  lines(fitted_result$x,
-        fitted_result$mean,
-        col = "red",
-        lwd = 2)
-  abline(h = mean(datasets[[selected_index]]$y), col = "blue", lty = 2)
+
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
-    col = rgb(1, 0, 0, 0.3),
+    col    = rgb(1, 0, 0, 0.3),
     border = NA
   )
+
+  # posterior mean curve
+  lines(
+    fitted_result$x,
+    fitted_result$mean,
+    col = "red",
+    lwd = 2
+  )
+
+  # # weighted average line
+  # abline(h = y_wmean, col = "blue",  lty = 2)
+
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  
+  # lfdr before and after
+  lfdr_before <- fash_fit2$lfdr[selected_index]
+  lfdr_after  <- fash_fit2_update$lfdr[selected_index]
+  
+  # text for caption
+  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
+                     lfdr_before, lfdr_after)
+  
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
+ 
 }
 par(mfrow = c(1,1))
 ```
@@ -197,47 +293,102 @@ genes_not_highlighted2 <- setdiff(all_genes, genes_highlighted2)
 pairs_not_highlighted2 <- setdiff(names(datasets), pairs_highlighted2)
 par(mfrow = c(2,2))
 for (i in 10:13) {
-  selected_gene <- (genes_not_highlighted2)[i] #sample(genes_highlighted2, 1)
-  pairs_of_selected_gene <- grep(selected_gene, pairs_not_highlighted2, value = T)
+  selected_gene <- genes_not_highlighted2[i]
+  pairs_of_selected_gene <- grep(selected_gene, pairs_not_highlighted2, value = TRUE)
   selected_indices <- which(names(datasets) %in% pairs_of_selected_gene)
-  selected_index <- selected_indices[which(fash_fit2_update$lfdr[selected_indices] == max(fash_fit2_update$lfdr[selected_indices]))][1]
-  fitted_result <- predict(fash_fit2_update,
-                           index = selected_index,
-                           smooth_var = seq(0, 15, by = 0.1))
+
+  # here we pick the *least* interesting one: max lfdr after adjustment
+  selected_index <- selected_indices[
+    which(fash_fit2_update$lfdr[selected_indices] ==
+            max(fash_fit2_update$lfdr[selected_indices]))[1]
+  ]
+
+  # shorthand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+
+  y_min <- min(y - 2 * se)
+  y_max <- max(y + 2 * se)
+
+  # weighted mean
+  y_wmean <- sum(y * w) / sum(w)
+
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+
+  # FASH fit (after adjustment)
+  fitted_result <- predict(
+    fash_fit2_update,
+    index      = selected_index,
+    smooth_var = seq(0, 15, by = 0.1)
+  )
+
+  # lfdr before and after
+  lfdr_before <- fash_fit2$lfdr[selected_index]
+  lfdr_after  <- fash_fit2_update$lfdr[selected_index]
+
+  # caption text
+  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
+                     lfdr_before, lfdr_after)
+
   plot(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y,
-    pch = 20,
-    col = "black",
+    x, y,
+    pch  = 20,
+    col  = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
-    ylim = c(
-      min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
-      max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
-    )
+    # main = names(datasets)[selected_index],
+    ylim = c(y_min, y_max)
   )
+  
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == selected_gene]
+  title(main = paste0(gene_symbol, ": ", variant_id))
+
   arrows(
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
-    datasets[[selected_index]]$x,
-    datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE,
+    x0 = x,
+    y0 = y - 2 * se,
+    x1 = x,
+    y1 = y + 2 * se,
     length = 0.05,
-    angle = 90,
-    code = 3,
-    col = "black"
+    angle  = 90,
+    code   = 3,
+    col    = "black"
   )
-  lines(fitted_result$x,
-        fitted_result$mean,
-        col = "red",
-        lwd = 2)
-  abline(h = mean(datasets[[selected_index]]$y), col = "blue", lty = 2)
+
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
-    col = rgb(1, 0, 0, 0.3),
+    col    = rgb(1, 0, 0, 0.3),
     border = NA
   )
+
+  # posterior mean curve
+  lines(
+    fitted_result$x,
+    fitted_result$mean,
+    col = "red",
+    lwd = 2
+  )
+
+  # # weighted average line (replaces simple mean)
+  # abline(h = y_wmean, col = "blue",  lty = 2)
+
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
 ```
@@ -276,7 +427,6 @@ ggVennDiagram(gene_sets, label = "both") +
   theme(legend.position = "right")  # Move legend to the right
 ```
 
-There is a large number of genes only detected by FASH (order 2). 
 Let's take a look at the 4 pairs that are least significant from FASH:
 
 ```{r echo=FALSE}
@@ -298,12 +448,15 @@ for (i in 1:min(c(4,length(gene_fashr_only)))) {
     col = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
+    # main = paste0(names(datasets)[selected_index]),
     ylim = c(
       min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
       max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
     )
   )
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == selected_gene]
+  title(main = paste0(gene_symbol, ": ", variant_id))
   arrows(
     datasets[[selected_index]]$x,
     datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
@@ -318,13 +471,38 @@ for (i in 1:min(c(4,length(gene_fashr_only)))) {
         fitted_result$mean,
         col = "red",
         lwd = 2)
-  abline(h = mean(datasets[[selected_index]]$y), col = "blue", lty = 2)
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
     col = rgb(1, 0, 0, 0.3),
     border = NA
   )
+  
+  # lfdr before and after
+  lfdr_before <- fash_fit2$lfdr[selected_index]
+  lfdr_after  <- fash_fit2_update$lfdr[selected_index]
+  
+  # text for caption
+  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
+                     lfdr_before, lfdr_after)
+  
+  # short hand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
 ```
@@ -351,12 +529,15 @@ for (i in 1:min(c(4,length(gene_missed)))) {
     col = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
+    # main = paste0(names(datasets)[selected_index]),
     ylim = c(
       min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
       max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
     )
   )
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == selected_gene]
+  title(main = paste0(gene_symbol, ": ", variant_id))
   arrows(
     datasets[[selected_index]]$x,
     datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
@@ -371,13 +552,36 @@ for (i in 1:min(c(4,length(gene_missed)))) {
         fitted_result$mean,
         col = "red",
         lwd = 2)
-  abline(h = mean(datasets[[selected_index]]$y), col = "blue", lty = 2)
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
     col = rgb(1, 0, 0, 0.3),
     border = NA
   )
+  
+  # lfdr before and after
+  lfdr_before <- fash_fit2$lfdr[selected_index]
+  lfdr_after  <- fash_fit2_update$lfdr[selected_index]
+  # text for caption
+  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
+                     lfdr_before, lfdr_after)
+  # short hand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
 ```
@@ -458,12 +662,15 @@ for (i in 1:4) {
     col = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
+    # main = paste0(names(datasets)[selected_index]),
     ylim = c(
       min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
       max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
     )
   )
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == sapply(strsplit(names(datasets)[selected_index], "_"), "[[", 1)]
+  title(main = paste0(gene_symbol, ": ", variant_id))
   arrows(
     datasets[[selected_index]]$x,
     datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
@@ -478,13 +685,37 @@ for (i in 1:4) {
         fitted_result$mean,
         col = "red",
         lwd = 2)
-  abline(h = 0, lty = 2, col = "blue")
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
     col = rgb(1, 0, 0, 0.3),
     border = NA
   )
+  
+  # add lfsr
+  lfsr_adj <- testing_middle_nonlin_dyn$lfsr[testing_middle_nonlin_dyn$indices == selected_index]
+  
+  caption <- sprintf("lfsr (adj) = %.3f",
+                     lfsr_adj)
+
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
+  
+  # shorthand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
 }
 par(mfrow = c(1,1))
 ```
@@ -528,12 +759,15 @@ for (i in 1:4) {
     col = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
+    # main = paste0(names(datasets)[selected_index]),
     ylim = c(
       min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
       max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
     )
   )
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == sapply(strsplit(names(datasets)[selected_index], "_"), "[[", 1)]
+  title(main = paste0(gene_symbol, ": ", variant_id))
   arrows(
     datasets[[selected_index]]$x,
     datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
@@ -548,13 +782,34 @@ for (i in 1:4) {
         fitted_result$mean,
         col = "red",
         lwd = 2)
-  abline(h = 0, lty = 2, col = "blue")
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
     col = rgb(1, 0, 0, 0.3),
     border = NA
   )
+  # shorthand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  
+  # add lfsr
+  lfsr_adj <- testing_late_nonlin_dyn$lfsr[testing_late_nonlin_dyn$indices == selected_index]
+  caption <- sprintf("lfsr (adj) = %.3f",
+                     lfsr_adj)
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
 ```
@@ -604,12 +859,15 @@ for (i in 1:4) {
     col = "black",
     xlab = "Time",
     ylab = "Effect Est",
-    main = paste0(names(datasets)[selected_index]),
+    # main = paste0(names(datasets)[selected_index]),
     ylim = c(
       min(datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE),
       max(datasets[[selected_index]]$y + 2 * datasets[[selected_index]]$SE)
     )
   )
+  variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
+  gene_symbol <- full_map$hgnc_symbol[full_map$ensembl_gene_id == sapply(strsplit(names(datasets)[selected_index], "_"), "[[", 1)]
+  title(main = paste0(gene_symbol, ": ", variant_id))
   arrows(
     datasets[[selected_index]]$x,
     datasets[[selected_index]]$y - 2 * datasets[[selected_index]]$SE,
@@ -624,13 +882,33 @@ for (i in 1:4) {
         fitted_result$mean,
         col = "red",
         lwd = 2)
-  abline(h = 0, lty = 2, col = "blue")
   polygon(
     c(fitted_result$x, rev(fitted_result$x)),
     c(fitted_result$lower, rev(fitted_result$upper)),
     col = rgb(1, 0, 0, 0.3),
     border = NA
   )
+  # shorthand
+  x  <- datasets[[selected_index]]$x
+  y  <- datasets[[selected_index]]$y
+  se <- datasets[[selected_index]]$SE
+  w  <- 1 / (se^2)
+  # weighted linear fit
+  lin_fit <- lm(y ~ x, weights = w)
+  # weighted quadratic fit
+  quad_fit  <- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
+  x_grid    <- seq(min(x), max(x), length.out = 200)
+  quad_pred <- predict(quad_fit, newdata = data.frame(x = x_grid))
+  # weighted linear fit
+  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  # weighted quadratic curve
+  lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  # add lfsr
+  lfsr_adj <- testing_switch_nonlin_dyn$lfsr[testing_switch_nonlin_dyn$indices == selected_index]
+  caption <- sprintf("lfsr (adj) = %.3f",
+                     lfsr_adj)
+  # add caption as subtitle
+  title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
 ```
@@ -652,34 +930,87 @@ m_t2g <- msigdbr(species = "Homo sapiens", category = "H") %>%
 mart <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
 
 ## A function to check gene-enrichment
-enrich_set <- function(genes_selected, background_gene, q_val_cutoff = 0.05, pvalueCutoff = 0.05) {
-  
-  genes_converted <- getBM(
-    filters = "ensembl_gene_id", 
-    attributes = c("ensembl_gene_id", "entrezgene_id"), 
-    values = genes_selected, 
-    mart = mart
+## Retrieve Hallmark gene sets for Homo sapiens (use Ensembl IDs)
+m_t2g <- msigdbr(species = "Homo sapiens", category = "H") %>% 
+  mutate(ensembl_use = dplyr::coalesce(ensembl_gene, db_ensembl_gene)) %>% 
+  dplyr::filter(!is.na(ensembl_use)) %>% 
+  dplyr::select(gs_name, ensembl_use) %>%
+  dplyr::distinct()    # one row per (pathway, Ensembl) pair
+
+
+## A function to check gene-enrichment using Ensembl IDs,
+## forcing the universe to be exactly background_gene
+enrich_set <- function(genes_selected,
+                       background_gene,
+                       q_val_cutoff = 0.05,
+                       pvalueCutoff = 0.05) {
+
+  # ensure character vectors & unique
+  genes_selected_raw  <- unique(as.character(genes_selected))
+  background_gene_raw <- unique(as.character(background_gene))
+
+  # we'll enforce that the test universe is exactly these:
+  universe_for_test <- background_gene_raw
+
+  # genes that are in Hallmark already
+  hallmark_genes <- unique(m_t2g$ensembl_use)
+
+  # background genes that are NOT in Hallmark (no annotation)
+  bg_not_in_hallmark <- setdiff(universe_for_test, hallmark_genes)
+
+  # extend TERM2GENE so that *all* background genes appear in it at least once
+  # add them to a dummy pathway that we will later drop
+  dummy_id <- "__DUMMY_BACKGROUND__"
+
+  if (length(bg_not_in_hallmark) > 0) {
+    dummy_t2g <- tibble(
+      gs_name     = dummy_id,
+      ensembl_use = bg_not_in_hallmark
+    )
+    TERM2GENE_full <- bind_rows(m_t2g, dummy_t2g)
+  } else {
+    TERM2GENE_full <- m_t2g
+  }
+
+  # also make sure selected genes are a subset of the universe
+  genes_sel_used <- intersect(genes_selected_raw, universe_for_test)
+
+  # message("Original selected genes: ", length(genes_selected_raw),
+  #         " ; used in enrichment: ", length(genes_sel_used))
+  # message("Universe size (background_gene): ", length(universe_for_test))
+
+  enrich_res <- enricher(
+    gene          = genes_sel_used,
+    TERM2GENE     = TERM2GENE_full,
+    universe      = universe_for_test,
+    pAdjustMethod = "BH",
+    qvalueCutoff  = q_val_cutoff,
+    pvalueCutoff  = pvalueCutoff
   )
-  
-  # Extract Entrez IDs from the converted data
-  entrez_gene_list <- genes_converted$entrezgene_id
-  
-  genes_converted_all <- getBM(
-    filters = "ensembl_gene_id", 
-    attributes = c("ensembl_gene_id", "entrezgene_id"), 
-    values = background_gene, 
-    mart = mart
-  )
-  entrez_universe <- as.character(genes_converted_all$entrezgene_id)
-  entrez_universe <- entrez_universe[!is.na(entrez_universe)]
-  
-  # Perform enrichment analysis using Hallmark gene sets
-  enrich_res <- enricher(pAdjustMethod = "BH", 
-                         entrez_gene_list, 
-                         TERM2GENE = m_t2g, 
-                         qvalueCutoff = q_val_cutoff, 
-                         pvalueCutoff = pvalueCutoff, 
-                         universe = entrez_universe)
+
+  if (is.null(enrich_res) || nrow(enrich_res@result) == 0L) {
+    return(enrich_res)
+  }
+
+  df <- enrich_res@result
+
+  # drop the dummy term from results
+  df <- df %>% dplyr::filter(ID != dummy_id)
+
+  # keep original ratios for reference
+  df$GeneRatio_orig <- df$GeneRatio
+  df$BgRatio_orig   <- df$BgRatio
+
+  # now recompute ratios using exactly:
+  #   - denominator for GeneRatio = number of selected genes in universe
+  #   - denominator for BgRatio   = number of background genes
+  n_sel_total <- length(genes_sel_used)
+  n_bg_total  <- length(universe_for_test)
+
+  df$GeneRatio_fixed <- paste0(df$Count,   "/", n_sel_total)
+  df$BgRatio_fixed   <- paste0(df$setSize, "/", n_bg_total)
+
+  enrich_res@result <- df
   enrich_res
 }
 ```
