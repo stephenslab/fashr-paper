@@ -1327,6 +1327,16 @@ par(mfrow = c(1,1))
 ```
 
 
+Take a look at the p-values and eFDRs from Strober et.al for some of these pairs:
+
+```{r}
+select_gene_id <- full_map$ensembl_gene_id[full_map$hgnc_symbol %in% c("ALS2", "HACD2", "PRELID3B", "FZD3")]
+select_variant_id <- c("rs56361049", "rs13091529", "rs1023654", "rs73557252")
+strober_linear %>%
+  filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)
+strober_nonlinear %>%
+  filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)
+```
 
 Let's also look at the genes that were missed by FASH, but detected by Strober et.al.
 In this case, we will pick the most significant pair for each gene in FASH:
@@ -1342,6 +1352,17 @@ map <- getBM(
 )
 
 gene_missed_gene_symbol <- map$hgnc_symbol[match(gene_missed, map$ensembl_gene_id)]
+
+# find fash lfdr for these genes
+all_genes_nonunique <- sapply(strsplit(names(datasets), "_"), "[[", 1)
+index_missed_genes <- which(all_genes_nonunique %in% gene_missed)
+# get the minimum lfdr for each gene
+min_lfdr_missed_genes <- sapply(gene_missed, function(gene) {
+  indices <- which(all_genes_nonunique == gene)
+  min(fash_fit1_update$lfdr[indices])
+})
+# pick the four genes with smallest min lfdr
+gene_missed <- names(sort(min_lfdr_missed_genes))
 
 ## produce four plots for four genes
 par(mfrow = c(2,2))
