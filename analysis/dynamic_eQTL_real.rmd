@@ -13,6 +13,7 @@ editor_options:
 knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
 library(fashr)
 library(biomaRt)
+library(ggrepel)
 mart <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
 result_dir <- paste0(getwd(), "/output/dynamic_eQTL_real")
 data_dir <- paste0(getwd(), "/data/dynamic_eQTL_real")
@@ -1024,6 +1025,8 @@ library(ggVennDiagram)
 library(tidyverse)
 strober_nonlinear <- read.delim(paste0(data_dir, "/strober_nonlinear/non_linear_dynamic_eqtls_5_pc.txt"))
 strober_nonlinear$key <- paste0(strober_nonlinear$ensamble_id, "_", strober_nonlinear$rs_id)
+# map ensamble_id to gene_symbol
+strober_nonlinear$gene_symbol <- full_map$hgnc_symbol[match(strober_nonlinear$ensamble_id, full_map$ensembl_gene_id)]
 strober_nonlinear_highlighted <- strober_nonlinear %>% filter(eFDR <= alpha)
 pairs_highlighted_strober_nonlinear <- strober_nonlinear_highlighted$key
 genes_highlighted_strober_nonlinear <- unique(sapply(strsplit(pairs_highlighted_strober_nonlinear, "_"), "[[", 1))
@@ -1033,6 +1036,26 @@ strober_linear_highlighted <- strober_linear %>% filter(eFDR <= alpha)
 pairs_highlighted_strober_linear <- strober_linear_highlighted$key
 genes_highlighted_strober_linear <- unique(sapply(strsplit(pairs_highlighted_strober_linear, "_"), "[[", 1))
 ```
+
+What are the p-value cutoff for linear and non-linear methods in Strober et.al?
+
+```{r}
+pval_cutoff_strober_nonlinear <- max(strober_nonlinear_highlighted$pvalue)
+pval_cutoff_strober_linear <- max(strober_linear_highlighted$pvalue)
+pval_cutoff_strober_nonlinear
+pval_cutoff_strober_linear
+```
+
+What are the lfdr cutoff for FASH (order 1) before and after BF adjustment?
+
+```{r}
+lfdr_cutoff1_before <- max(fash_fit1$lfdr[test1$fdr_results$index[test1$fdr_results$FDR <= alpha]])
+lfdr_cutoff1_after  <- max(fash_fit1_update$lfdr[test1$fdr_results$index[test1$fdr_results$FDR <= alpha]])
+lfdr_cutoff1_before
+lfdr_cutoff1_after
+```
+
+
 
 Let's take a look at the overlap between the two methods used in Strober et.al and FASH (order 1):
 
@@ -1147,11 +1170,7 @@ for (i in 1:4) {
   # lfdr before and after
   lfdr_before <- fash_fit1$lfdr[selected_index]
   lfdr_after  <- fash_fit1_update$lfdr[selected_index]
-
-  # caption text
-  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
-                     lfdr_before, lfdr_after)
-
+  
   plot(
     x, y,
     pch  = 20,
@@ -1166,6 +1185,16 @@ for (i in 1:4) {
   gene_symbol <- selected_gene_fashr_only[i]
   variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
   title(main = paste0(gene_symbol, ": ", variant_id))
+  
+  # p-value from Strober et.al
+  strober_pval_linear_which <- which(strober_linear$rs_id == variant_id & strober_linear$ensamble_id == selected_gene)
+  strober_pval_linear <- strober_linear$pvalue[strober_pval_linear_which]
+  strober_pval_nonlinear_which <- which(strober_nonlinear$rs_id == variant_id & strober_nonlinear$ensamble_id == selected_gene)
+  strober_pval_nonlinear <- strober_nonlinear$pvalue[strober_pval_nonlinear_which]
+
+  caption <- sprintf("lfdr = %.3f (%.3f), p-value = %.3f (%.3f)",
+                     lfdr_after, lfdr_before,
+                     strober_pval_linear, strober_pval_nonlinear)
 
   arrows(
     x0 = x,
@@ -1192,9 +1221,6 @@ for (i in 1:4) {
     col = "red",
     lwd = 2
   )
-
-  # # weighted average line
-  # abline(h = y_wmean, col = "blue",  lty = 2)
 
   # weighted linear fit
   abline(lin_fit, col = "green", lty = 2, lwd = 1)
@@ -1266,10 +1292,6 @@ for (i in 1:4) {
   lfdr_before <- fash_fit1$lfdr[selected_index]
   lfdr_after  <- fash_fit1_update$lfdr[selected_index]
 
-  # caption text
-  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
-                     lfdr_before, lfdr_after)
-
   plot(
     x, y,
     pch  = 20,
@@ -1284,6 +1306,16 @@ for (i in 1:4) {
   gene_symbol <- selected_gene_fashr_only[i]
   variant_id <- strsplit(names(datasets)[selected_index], "_")[[1]][2]
   title(main = paste0(gene_symbol, ": ", variant_id))
+  
+  # p-value from Strober et.al
+  strober_pval_linear_which <- which(strober_linear$rs_id == variant_id & strober_linear$ensamble_id == selected_gene)
+  strober_pval_linear <- strober_linear$pvalue[strober_pval_linear_which]
+  strober_pval_nonlinear_which <- which(strober_nonlinear$rs_id == variant_id & strober_nonlinear$ensamble_id == selected_gene)
+  strober_pval_nonlinear <- strober_nonlinear$pvalue[strober_pval_nonlinear_which]
+
+  caption <- sprintf("lfdr = %.3f (%.3f), p-value = %.3f (%.3f)",
+                     lfdr_after, lfdr_before,
+                     strober_pval_linear, strober_pval_nonlinear)
 
   arrows(
     x0 = x,
@@ -1311,9 +1343,6 @@ for (i in 1:4) {
     lwd = 2
   )
 
-  # # weighted average line
-  # abline(h = y_wmean, col = "blue",  lty = 2)
-
   # weighted linear fit
   abline(lin_fit, col = "green", lty = 2, lwd = 1)
 
@@ -1339,7 +1368,7 @@ strober_nonlinear %>%
 ```
 
 Let's also look at the genes that were missed by FASH, but detected by Strober et.al.
-In this case, we will pick the most significant pair for each gene in FASH:
+In this case, we will pick the most significant pair for each gene in Strober et.al's results:
 
 ```{r miss_fash_most , echo=FALSE}
 gene_missed <- setdiff(union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear), genes_highlighted1)
@@ -1353,22 +1382,46 @@ map <- getBM(
 
 gene_missed_gene_symbol <- map$hgnc_symbol[match(gene_missed, map$ensembl_gene_id)]
 
-# find fash lfdr for these genes
-all_genes_nonunique <- sapply(strsplit(names(datasets), "_"), "[[", 1)
-index_missed_genes <- which(all_genes_nonunique %in% gene_missed)
-# get the minimum lfdr for each gene
-min_lfdr_missed_genes <- sapply(gene_missed, function(gene) {
-  indices <- which(all_genes_nonunique == gene)
-  min(fash_fit1_update$lfdr[indices])
-})
-# pick the four genes with smallest min lfdr
-gene_missed <- names(sort(min_lfdr_missed_genes))
+## Find p-values from Strober et.al for these genes
+strober_nonlinear_highlighted_missed <- strober_nonlinear_highlighted %>%
+  filter(ensamble_id %in% gene_missed)
+
+strober_linear_highlighted_missed <- strober_linear_highlighted %>%
+  filter(ensamble_id %in% gene_missed)
+
+# keep the most significant pair for each gene
+strober_nonlinear_highlighted_missed <- strober_nonlinear_highlighted_missed %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+strober_linear_highlighted_missed <- strober_linear_highlighted_missed %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+# take the most significant between linear and non-linear
+strober_highlighted_missed <- merge(strober_linear_highlighted_missed,
+                                 strober_nonlinear_highlighted_missed,
+                                 by = "ensamble_id",
+                                 suffixes = c("_linear", "_nonlinear"))
+
+strober_highlighted_missed <- strober_highlighted_missed %>%
+  rowwise() %>%
+  mutate(
+    pvalue = min(pvalue_linear, pvalue_nonlinear),
+    rs_id  = ifelse(pvalue_linear <= pvalue_nonlinear, rs_id_linear, rs_id_nonlinear)
+  ) %>%
+  select(ensamble_id, rs_id, pvalue, eFDR_linear, eFDR_nonlinear)
+
+
 
 ## produce four plots for four genes
 par(mfrow = c(2,2))
 for (i in 1:4) {
-  selected_gene <- gene_missed[i]
-  pairs_of_selected_gene <- grep(selected_gene, names(datasets), value = TRUE)
+  selected_gene <- strober_highlighted_missed$ensamble_id[i]
+  selected_variant <- strober_highlighted_missed$rs_id[i]
+  pairs_of_selected_gene <- paste0(selected_gene, "_", selected_variant)
   selected_indices <- which(names(datasets) %in% pairs_of_selected_gene)
 
   # pick the pair with smallest adjusted lfdr
@@ -1407,10 +1460,6 @@ for (i in 1:4) {
   # lfdr before and after
   lfdr_before <- fash_fit1$lfdr[selected_index]
   lfdr_after  <- fash_fit1_update$lfdr[selected_index]
-
-  # caption text
-  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
-                     lfdr_before, lfdr_after)
 
   plot(
     x, y,
@@ -1451,14 +1500,21 @@ for (i in 1:4) {
     lwd = 2
   )
 
-  # # weighted average line (replaces inv_weights version)
-  # abline(h = y_wmean, col = "blue",  lty = 2)
-
   # weighted linear fit
-  abline(lin_fit,     col = "green", lty = 2, lwd = 1)
+  abline(lin_fit, col = "green", lty = 2, lwd = 1)
 
   # weighted quadratic curve
   lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  
+  # p-value from Strober et.al
+  strober_pval_linear_which <- which(strober_linear$rs_id == variant_id & strober_linear$ensamble_id == selected_gene)
+  strober_pval_linear <- strober_linear$pvalue[strober_pval_linear_which]
+  strober_pval_nonlinear_which <- which(strober_nonlinear$rs_id == variant_id & strober_nonlinear$ensamble_id == selected_gene)
+  strober_pval_nonlinear <- strober_nonlinear$pvalue[strober_pval_nonlinear_which]
+
+  caption <- sprintf("lfdr = %.3f (%.3f), p-value = %.3f (%.3f)",
+                     lfdr_after, lfdr_before,
+                     strober_pval_linear, strober_pval_nonlinear)
 
   # add caption as subtitle
   title(sub = caption, cex.sub = 0.8)
@@ -1513,17 +1569,15 @@ for (i in 1:4) {
   lfdr_before <- fash_fit1$lfdr[selected_index]
   lfdr_after  <- fash_fit1_update$lfdr[selected_index]
 
-  # caption text
-  caption <- sprintf("lfdr (raw) = %.3f, lfdr (adj) = %.3f",
-                     lfdr_before, lfdr_after)
-
   plot(
     x, y,
     pch  = 20,
     col  = "black",
-    xlab = "Time",
-    ylab = "Effect Est",
+    # xlab = "Time",
+    # ylab = "Effect Est",
     # main = names(datasets)[selected_index],
+    xlab = "",
+    ylab = "",
     ylim = c(y_min, y_max)
   )
   
@@ -1556,19 +1610,319 @@ for (i in 1:4) {
     lwd = 2
   )
 
-  # # weighted average line (replaces inv_weights version)
-  # abline(h = y_wmean, col = "blue",  lty = 2)
-
   # weighted linear fit
   abline(lin_fit,     col = "green", lty = 2, lwd = 1)
 
   # weighted quadratic curve
   lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  
+  # p-value from Strober et.al
+  strober_pval_linear_which <- which(strober_linear$rs_id == variant_id & strober_linear$ensamble_id == selected_gene)
+  strober_pval_linear <- strober_linear$pvalue[strober_pval_linear_which]
+  strober_pval_nonlinear_which <- which(strober_nonlinear$rs_id == variant_id & strober_nonlinear$ensamble_id == selected_gene)
+  strober_pval_nonlinear <- strober_nonlinear$pvalue[strober_pval_nonlinear_which]
+  
+  caption <- sprintf("lfdr = %.3f (%.3f), p-value = %.3f (%.3f)",
+                     lfdr_after, lfdr_before,
+                     strober_pval_linear, strober_pval_nonlinear)
 
   # add caption as subtitle
   title(sub = caption, cex.sub = 0.8)
 }
 par(mfrow = c(1,1))
+```
+
+The shape of eFDR (Strober et al) and FDR (FASH):
+
+```{r}
+# make it easier to plot by subsetting
+subset_size <- 10000
+subset_seq <- seq(1, length(test1$fdr_results$FDR), length.out = subset_size)
+subset_seq <- round(subset_seq)
+plot(
+  sort(strober_nonlinear$eFDR)[subset_seq],
+  x = subset_seq,
+  type = "l",
+  col  = "blue",
+  lwd  = 2,
+  xlab = "Ranked tests",
+  ylab = "FDR",
+  lty = "dashed",
+  main = ""
+)
+lines(
+  sort(test1$fdr_results$FDR)[subset_seq],
+  x = subset_seq,
+  col  = "red",
+  lty = "solid",
+  lwd  = 2
+)
+lines(
+  sort(strober_linear$eFDR)[subset_seq],
+  x = subset_seq,
+  col  = "green",
+  lty = "dotted",
+  lwd  = 2
+)
+legend(
+  "topleft",
+  legend = c("Strober Nonlinear", "Strober Linear", "FASH (1)"),
+  col    = c("blue", "green", "red"),
+  lty    = c("dashed", "dotted", "solid"),
+  lwd    = c(2, 2, 2)
+)
+
+# zoom into the significant region
+plot(
+  sort(strober_nonlinear$eFDR[strober_nonlinear$eFDR <= 0.05]),
+  xlim = c(0, 10000),
+  type = "l",
+  col  = "blue",
+  lwd  = 2,
+  lty  = "dashed",
+  xlab = "Ranked tests",
+  ylab = "FDR",
+  main = "(Zoomed in)"
+)
+lines(
+  sort(test1$fdr_results$FDR[test1$fdr_results$FDR <= 0.05]),
+  col  = "red",
+  lty  = "solid",
+  lwd  = 2
+)
+lines(
+  sort(strober_linear$eFDR[strober_linear$eFDR <= 0.05]),
+  col  = "green",
+  lty  = "dotted",
+  lwd  = 2
+)
+legend(
+  "topleft",
+  legend = c("Strober Nonlinear", "Strober Linear", "FASH (1)"),
+  col    = c("blue", "green", "red"),
+  lty    = c("dashed", "dotted", "solid"),
+  lwd    = c(2, 2, 2)
+)
+```
+
+
+Scatterplot of lfdr and p-values from Strober et.al:
+
+```{r}
+eps <- .Machine$double.eps
+# compare lfdr versus linear p-values
+all_result <- merge(
+  data.frame(
+    key = names(datasets)[test1$fdr_results$index],
+    lfdr  = fash_fit1_update$lfdr[test1$fdr_results$index]
+  ),
+  strober_linear %>%
+    select(key, ensamble_id, rs_id, pvalue) %>%
+    select(key, ensamble_id, pvalue),
+  by = "key"
+)
+
+# take the min lfdr and pvalue for each gene
+all_result_genes_pvalue <- all_result %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+all_result_genes_lfdr <- all_result %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = lfdr, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+# merge by gene
+all_result_genes <- merge(
+  all_result_genes_pvalue %>%
+    select(ensamble_id, pvalue),
+  all_result_genes_lfdr %>%
+    select(ensamble_id, lfdr),
+  by = "ensamble_id"
+)
+
+all_result_genes$gene_symbol <- full_map$hgnc_symbol[match(all_result_genes$ensamble_id, full_map$ensembl_gene_id)]
+
+
+all_result_genes <- all_result_genes %>%
+  mutate(
+    neglog_p    = -log10(pmin(pmax(pvalue, eps), 1)),
+    neglog_lfdr = -log10(pmin(pmax(lfdr,   eps), 1)),
+    category = case_when(
+      pvalue <= pval_cutoff_strober_linear & lfdr <= lfdr_cutoff1_after ~ "Both",
+      pvalue <= pval_cutoff_strober_linear & lfdr >  lfdr_cutoff1_after ~ "Strober only",
+      pvalue >  pval_cutoff_strober_linear & lfdr <= lfdr_cutoff1_after ~ "FASH only",
+      TRUE ~ "Neither"
+    ),
+    category = factor(category, levels = c("Both", "FASH only", "Strober only", "Neither"))
+  )
+
+# Recompute “top” sets (now based on category)
+top_strober_only <- all_result_genes %>%
+  filter(category == "Strober only") %>%
+  arrange(pvalue) %>%
+  slice_head(n = 10)
+
+top_fash_only <- all_result_genes %>%
+  filter(category == "FASH only") %>%
+  arrange(lfdr) %>%
+  slice_head(n = 10)
+
+top_both <- all_result_genes %>%
+  filter(category == "Both") %>%
+  arrange(pvalue + lfdr) %>%
+  slice_head(n = 10)
+
+label_df <- bind_rows(top_strober_only, top_fash_only, top_both)
+
+# Color map
+col_map <- c(
+  "Both" = "#7B3294",
+  "FASH only" = "#1B9E77",
+  "Strober only" = "#D95F02",
+  "Neither" = "grey80"
+)
+
+ggplot(all_result_genes, aes(x = neglog_p, y = neglog_lfdr)) +
+  # draw grey background first
+  geom_point(data = subset(all_result_genes, category == "Neither"),
+             color = col_map["Neither"], alpha = 0.25, size = 1.8) +
+  # then colored highlights on top
+  geom_point(data = subset(all_result_genes, category != "Neither"),
+             aes(color = category), alpha = 0.8, size = 2.2) +
+  scale_color_manual(values = col_map) +
+  geom_vline(xintercept = -log10(pval_cutoff_strober_linear), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(lfdr_cutoff1_after), linetype = "dashed", color = "red") +
+  geom_text_repel(
+    data = label_df,
+    aes(label = gene_symbol, color = category),
+    size = 3,
+    box.padding = 0.3,
+    point.padding = 0.5,
+    max.overlaps = Inf,
+    show.legend = FALSE
+  ) +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 16),
+    axis.text = element_text(size = 14),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Scatterplot of lfdr (FASH) vs p-values (Strober Linear)",
+    x = "-log10(p-value)",
+    y = "-log10(lfdr)",
+    color = NULL
+  )
+```
+
+```{r}
+# compare lfdr versus linear p-values
+all_result <- merge(
+  data.frame(
+    key = names(datasets)[test1$fdr_results$index],
+    lfdr  = fash_fit1_update$lfdr[test1$fdr_results$index]
+  ),
+  strober_nonlinear %>%
+    select(key, ensamble_id, rs_id, pvalue) %>%
+    select(key, ensamble_id, pvalue),
+  by = "key"
+)
+
+# take the min lfdr and pvalue for each gene
+all_result_genes_pvalue <- all_result %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+all_result_genes_lfdr <- all_result %>%
+  group_by(ensamble_id) %>%
+  slice_min(order_by = lfdr, n = 1, with_ties = FALSE) %>%
+  ungroup()
+
+# merge by gene
+all_result_genes <- merge(
+  all_result_genes_pvalue %>%
+    select(ensamble_id, pvalue),
+  all_result_genes_lfdr %>%
+    select(ensamble_id, lfdr),
+  by = "ensamble_id"
+)
+
+all_result_genes$gene_symbol <- full_map$hgnc_symbol[match(all_result_genes$ensamble_id, full_map$ensembl_gene_id)]
+
+
+all_result_genes <- all_result_genes %>%
+  mutate(
+    neglog_p    = -log10(pmin(pmax(pvalue, eps), 1)),
+    neglog_lfdr = -log10(pmin(pmax(lfdr,   eps), 1)),
+    category = case_when(
+      pvalue <= pval_cutoff_strober_nonlinear & lfdr <= lfdr_cutoff1_after ~ "Both",
+      pvalue <= pval_cutoff_strober_nonlinear & lfdr >  lfdr_cutoff1_after ~ "Strober only",
+      pvalue >  pval_cutoff_strober_nonlinear & lfdr <= lfdr_cutoff1_after ~ "FASH only",
+      TRUE ~ "Neither"
+    ),
+    category = factor(category, levels = c("Both", "FASH only", "Strober only", "Neither"))
+  )
+
+# Recompute “top” sets (now based on category)
+top_strober_only <- all_result_genes %>%
+  filter(category == "Strober only") %>%
+  arrange(pvalue) %>%
+  slice_head(n = 10)
+
+top_fash_only <- all_result_genes %>%
+  filter(category == "FASH only") %>%
+  arrange(lfdr) %>%
+  slice_head(n = 10)
+
+top_both <- all_result_genes %>%
+  filter(category == "Both") %>%
+  arrange(pvalue + lfdr) %>%
+  slice_head(n = 10)
+
+label_df <- bind_rows(top_strober_only, top_fash_only, top_both)
+
+# Color map
+col_map <- c(
+  "Both" = "#7B3294",
+  "FASH only" = "#1B9E77",
+  "Strober only" = "#D95F02",
+  "Neither" = "grey80"
+)
+
+ggplot(all_result_genes, aes(x = neglog_p, y = neglog_lfdr)) +
+  # draw grey background first
+  geom_point(data = subset(all_result_genes, category == "Neither"),
+             color = col_map["Neither"], alpha = 0.25, size = 1.8) +
+  # then colored highlights on top
+  geom_point(data = subset(all_result_genes, category != "Neither"),
+             aes(color = category), alpha = 0.8, size = 2.2) +
+  scale_color_manual(values = col_map) +
+  geom_vline(xintercept = -log10(pval_cutoff_strober_nonlinear), linetype = "dashed", color = "red") +
+  geom_hline(yintercept = -log10(lfdr_cutoff1_after), linetype = "dashed", color = "red") +
+  geom_text_repel(
+    data = label_df,
+    aes(label = gene_symbol, color = category),
+    size = 3,
+    box.padding = 0.3,
+    point.padding = 0.5,
+    max.overlaps = Inf,
+    show.legend = FALSE
+  ) +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 16),
+    axis.text = element_text(size = 14),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Scatterplot of lfdr (FASH) vs p-values (Strober Quadratic)",
+    x = "-log10(p-value)",
+    y = "-log10(lfdr)",
+    color = NULL
+  )
 ```
 
 
@@ -2075,6 +2429,29 @@ result@result %>%
   filter(pvalue < 0.05) %>%
   dplyr::select(GeneRatio, BgRatio, pvalue, qvalue)
 ```
+
+Among all the genes that are only highlighted by FASH but not by Strober et.al:
+
+```{r}
+genes_only_middle <- intersect(gene_fashr_only, middle_genes)
+result <- enrich_set(genes_selected = genes_only_middle, background_gene = all_genes)
+result@result %>% 
+  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %>%
+  filter(pvalue < 0.05)
+
+genes_only_late <- intersect(gene_fashr_only, late_genes)
+result <- enrich_set(genes_selected = genes_only_late, background_gene = all_genes)
+result@result %>% 
+  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %>%
+  filter(pvalue < 0.05)
+
+genes_only_switch <- intersect(gene_fashr_only, switch_genes)
+result <- enrich_set(genes_selected = genes_only_switch, background_gene = all_genes)
+result@result %>% 
+  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %>%
+  filter(pvalue < 0.05)
+```
+
 
 Among the genes highlighted by FASH that are classified as early dynamic eQTLs:
 
