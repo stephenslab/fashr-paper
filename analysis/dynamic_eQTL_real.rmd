@@ -1645,7 +1645,7 @@ plot(
   type = "l",
   col  = "blue",
   lwd  = 2,
-  xlab = "Ranked tests",
+  xlab = "Ranked pairs",
   ylab = "FDR",
   lty = "dashed",
   main = ""
@@ -1666,7 +1666,7 @@ lines(
 )
 legend(
   "topleft",
-  legend = c("Strober Nonlinear", "Strober Linear", "FASH (1)"),
+  legend = c("Strober Quadratic", "Strober Linear", "FASH (1)"),
   col    = c("blue", "green", "red"),
   lty    = c("dashed", "dotted", "solid"),
   lwd    = c(2, 2, 2)
@@ -1680,7 +1680,7 @@ plot(
   col  = "blue",
   lwd  = 2,
   lty  = "dashed",
-  xlab = "Ranked tests",
+  xlab = "Ranked pairs",
   ylab = "FDR",
   main = "(Zoomed in)"
 )
@@ -1698,7 +1698,7 @@ lines(
 )
 legend(
   "topleft",
-  legend = c("Strober Nonlinear", "Strober Linear", "FASH (1)"),
+  legend = c("Strober Quadratic", "Strober Linear", "FASH (1)"),
   col    = c("blue", "green", "red"),
   lty    = c("dashed", "dotted", "solid"),
   lwd    = c(2, 2, 2)
