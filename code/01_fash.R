@@ -36,7 +36,8 @@ correct_SE <- function(y_vec, SE_vec, df_vec){
 for (i in 1:length(datasets)) {
   SE_vec_corrected <- correct_SE(y_vec = datasets[[i]]$beta,
                                  SE_vec = datasets[[i]]$SE,
-                                 df_vec = (num_vec - 5))
+                                 # -7 because we have 5 PCs and 1 genotype predictor and 1 intercept
+                                 df_vec = (num_vec - 7))
   # update the dataset
   datasets[[i]]$SE <- SE_vec_corrected
 }

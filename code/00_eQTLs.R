@@ -27,7 +27,7 @@ analyze_one_gene <- function(selected_gene){
       selected_cell_lines <- gsub(paste0("^X|_", selected_time), "", selected_colnames)
       PC_selected <- PC_data[paste0(selected_cell_lines, "_", selected_time), c("PC1", "PC2", "PC3", "PC4", "PC5")]
       G <- geno_data[selected_variant, selected_cell_lines]
-      mod_fit <- lm(as.numeric(Yt) ~ G + PC_selected$PC1 + PC_selected$PC2 + PC_selected$PC3)
+      mod_fit <- lm(as.numeric(Yt) ~ G + PC_selected$PC1 + PC_selected$PC2 + PC_selected$PC3 + PC_selected$PC4 + PC_selected$PC5)
       beta_vec <- c(beta_vec, coef(mod_fit)[2])
       SE_vec <- c(SE_vec, summary(mod_fit)$coefficients[2,2])
       pvalue_vec <- c(pvalue_vec, summary(mod_fit)$coefficients[2,4])

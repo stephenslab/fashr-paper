@@ -394,7 +394,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-12-18
+<strong>Last updated:</strong> 2026-01-19
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -525,15 +525,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertreec0e05d7654f97cdb2d3ea49b45e28b37ee094dc9targetblankc0e05d7a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree0fc1046025038bcdac8f7c5cd57b48b15f10d679targetblank0fc1046a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/fashr-paper/tree/c0e05d7654f97cdb2d3ea49b45e28b37ee094dc9" target="_blank">c0e05d7</a>
+<a href="https://github.com/stephenslab/fashr-paper/tree/0fc1046025038bcdac8f7c5cd57b48b15f10d679" target="_blank">0fc1046</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertreec0e05d7654f97cdb2d3ea49b45e28b37ee094dc9targetblankc0e05d7a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree0fc1046025038bcdac8f7c5cd57b48b15f10d679targetblank0fc1046a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -543,7 +543,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/fashr-paper/tree/c0e05d7654f97cdb2d3ea49b45e28b37ee094dc9" target="_blank">c0e05d7</a>.
+<a href="https://github.com/stephenslab/fashr-paper/tree/0fc1046025038bcdac8f7c5cd57b48b15f10d679" target="_blank">0fc1046</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -561,18 +561,29 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
     Ignored:    code/.DS_Store
+    Ignored:    code/.Rhistory
     Ignored:    data/.DS_Store
     Ignored:    data/toy_example/
     Ignored:    output/.DS_Store
 
 Untracked files:
+    Untracked:  analysis/dynamic_eQTL_real_full.rmd
+    Untracked:  analysis/nonlinear_dynamic_eQTL_real_full.rmd
     Untracked:  code/enrich_analysis.R
     Untracked:  data/appendixB/
     Untracked:  data/dynamic_eQTL_real/
+    Untracked:  fash_but_not_strober_most.png
     Untracked:  output/appendixB/
     Untracked:  output/dynamic_eQTL_real/
     Untracked:  output/toy_example/
+
+Unstaged changes:
+    Modified:   analysis/dynamic_eQTL_real.rmd
+    Deleted:    analysis/nonlinear_dynamic_eQTL_real.rmd
+    Modified:   code/00_eQTLs.R
+    Modified:   code/01_fash.R
 
 </code></pre>
 <p>
@@ -589,7 +600,7 @@ have uncommitted changes.
 <div id="versions" class="tab-pane fade">
 <p>
 These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/dynamic_eQTL_real.rmd</code>) and
+made to the R Markdown (<code>analysis/dynamic_eQTL_real.Rmd</code>) and
 HTML (<code>docs/dynamic_eQTL_real.html</code>) files. If you’ve
 configured a remote Git repository (see <code>?wflow_git_remote</code>),
 click on the hyperlinks in the table below to view the files as they
@@ -619,10 +630,10 @@ Message
 <tbody>
 <tr>
 <td>
-Rmd
+html
 </td>
 <td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c0e05d7654f97cdb2d3ea49b45e28b37ee094dc9/analysis/dynamic_eQTL_real.rmd" target="_blank">c0e05d7</a>
+<a href="https://rawcdn.githack.com/stephenslab/fashr-paper/0fc1046025038bcdac8f7c5cd57b48b15f10d679/docs/dynamic_eQTL_real.html" target="_blank">0fc1046</a>
 </td>
 <td>
 Ziang Zhang
@@ -631,7 +642,7 @@ Ziang Zhang
 2025-12-18
 </td>
 <td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
+Build site.
 </td>
 </tr>
 <tr>
@@ -653,23 +664,6 @@ Build site.
 </tr>
 <tr>
 <td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/27c41979454bf5a472f9bf96cde32bbb9d7717fc/analysis/dynamic_eQTL_real.rmd" target="_blank">27c4197</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
-</td>
-</tr>
-<tr>
-<td>
 html
 </td>
 <td>
@@ -683,23 +677,6 @@ Ziang Zhang
 </td>
 <td>
 Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c636ff90795f2085840f9582ebdee25ec7b1b764/analysis/dynamic_eQTL_real.rmd" target="_blank">c636ff9</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-17
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
 </td>
 </tr>
 <tr>
@@ -721,23 +698,6 @@ Build site.
 </tr>
 <tr>
 <td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/bd29c151c7a5acc2ad32ce43ad85f9a6902b15f3/analysis/dynamic_eQTL_real.rmd" target="_blank">bd29c15</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
-</td>
-</tr>
-<tr>
-<td>
 html
 </td>
 <td>
@@ -755,23 +715,6 @@ Build site.
 </tr>
 <tr>
 <td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/bb505cfcbd54c461a55c7a6dfed6062fc14e065a/analysis/dynamic_eQTL_real.rmd" target="_blank">bb505cf</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
-</td>
-</tr>
-<tr>
-<td>
 html
 </td>
 <td>
@@ -785,23 +728,6 @@ Ziang Zhang
 </td>
 <td>
 Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/aae296454cdd2c65cf1a19e7b3ebe3e4b7fd6758/analysis/dynamic_eQTL_real.rmd" target="_blank">aae2964</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
 </td>
 </tr>
 <tr>
@@ -838,23 +764,6 @@ Ziang Zhang
 Build site.
 </td>
 </tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/9f55956f2d4282027c02961d7a2d1b5f57903fd8/analysis/dynamic_eQTL_real.rmd" target="_blank">9f55956</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-<td>
-workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -862,17 +771,285 @@ workflowr::wflow_publish("analysis/dynamic_eQTL_real.rmd")
 </div>
 </div>
 </div>
-<pre class="r"><code>knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
+<pre class="r"><code>knitr::opts_chunk$set(fig.width = 8, fig.height = 6, message = FALSE, warning = FALSE)
+
 library(fashr)
-library(biomaRt)
-library(ggrepel)</code></pre>
-<pre><code>Loading required package: ggplot2</code></pre>
-<pre class="r"><code>mart &lt;- useEnsembl(biomart = &quot;genes&quot;, dataset = &quot;hsapiens_gene_ensembl&quot;)
-result_dir &lt;- paste0(getwd(), &quot;/output/dynamic_eQTL_real&quot;)
-data_dir &lt;- paste0(getwd(), &quot;/data/dynamic_eQTL_real&quot;)
-code_dir &lt;- paste0(getwd(), &quot;/code/dynamic_eQTL_real&quot;)
-log_prec &lt;- seq(0,10, by = 0.2)
-fine_grid &lt;- sort(c(0, exp(-0.5*log_prec)))</code></pre>
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(purrr)
+
+# plotting / viz
+library(ggplot2)
+library(ggrepel)
+
+# paths
+result_dir &lt;- file.path(getwd(), &quot;output&quot;, &quot;dynamic_eQTL_real&quot;)
+data_dir   &lt;- file.path(getwd(), &quot;data&quot;,   &quot;dynamic_eQTL_real&quot;)
+code_dir   &lt;- file.path(getwd(), &quot;code&quot;,   &quot;dynamic_eQTL_real&quot;)
+
+# grids
+log_prec  &lt;- seq(0, 10, by = 0.2)
+fine_grid &lt;- sort(c(0, exp(-0.5 * log_prec)))
+
+# ----------------------------
+# small utilities
+# ----------------------------
+cache_read &lt;- function(path) if (file.exists(path)) readRDS(path) else NULL
+cache_write &lt;- function(x, path) {
+  dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+  saveRDS(x, path)
+  x
+}
+
+sample_int &lt;- function(n, size, seed = 1L) {
+  set.seed(seed)
+  sample.int(n, size = min(size, n))
+}
+
+# Parse &quot;ENSG..._rs...&quot; keys once
+parse_pair_keys &lt;- function(keys) {
+  m &lt;- str_match(keys, &quot;^([^_]+)_(.+)$&quot;)
+  tibble(key = keys, ens_id = m[,2], rs_id = m[,3])
+}
+
+# ----------------------------
+# biomaRt mapping with cache
+# ----------------------------
+get_gene_map &lt;- function(ens_ids, cache_path) {
+  ens_ids &lt;- unique(as.character(ens_ids))
+  cached &lt;- cache_read(cache_path)
+  if (!is.null(cached)) return(cached)
+
+  suppressMessages({
+    library(biomaRt)
+    mart &lt;- useEnsembl(biomart = &quot;genes&quot;, dataset = &quot;hsapiens_gene_ensembl&quot;)
+  })
+
+  mp &lt;- getBM(
+    attributes = c(&quot;ensembl_gene_id&quot;, &quot;hgnc_symbol&quot;),
+    filters    = &quot;ensembl_gene_id&quot;,
+    values     = ens_ids,
+    mart       = mart
+  ) %&gt;%
+    as_tibble() %&gt;%
+    distinct()
+
+  cache_write(mp, cache_path)
+}
+
+symbol_of &lt;- function(ens_id, map_tbl) {
+  s &lt;- map_tbl$hgnc_symbol[match(ens_id, map_tbl$ensembl_gene_id)]
+  ifelse(is.na(s) | s == &quot;&quot;, ens_id, s)
+}
+
+# (optional) symbol -&gt; ensembl (small list); cache too
+symbol_to_ens &lt;- function(symbols, cache_path) {
+  symbols &lt;- unique(as.character(symbols))
+  cached &lt;- cache_read(cache_path)
+  if (!is.null(cached)) return(cached)
+
+  suppressMessages({
+    library(biomaRt)
+    mart &lt;- useEnsembl(biomart = &quot;genes&quot;, dataset = &quot;hsapiens_gene_ensembl&quot;)
+  })
+
+  mp &lt;- getBM(
+    attributes = c(&quot;hgnc_symbol&quot;, &quot;ensembl_gene_id&quot;),
+    filters    = &quot;hgnc_symbol&quot;,
+    values     = symbols,
+    mart       = mart
+  ) %&gt;% as_tibble() %&gt;% distinct()
+
+  cache_write(mp, cache_path)
+}
+
+# ----------------------------
+# index selection helpers
+# ----------------------------
+pick_best_idx_by_gene &lt;- function(ens_id, pair_tbl, lfdr_vec, which = c(&quot;min&quot;, &quot;max&quot;)) {
+  which &lt;- match.arg(which)
+  cand &lt;- pair_tbl %&gt;% filter(ens_id == !!ens_id) %&gt;% pull(idx)
+  if (length(cand) == 0) return(NA_integer_)
+  if (which == &quot;min&quot;) cand[which.min(lfdr_vec[cand])] else cand[which.max(lfdr_vec[cand])]
+}
+
+pick_idxs_for_genes &lt;- function(ens_ids, pair_tbl, lfdr_vec, which = &quot;min&quot;) {
+  purrr::map_int(ens_ids, ~pick_best_idx_by_gene(.x, pair_tbl, lfdr_vec, which = which))
+}
+
+# ----------------------------
+# unified plotting
+# ----------------------------
+fmt_sci &lt;- function(x, digits = 2) {
+  if (length(x) == 0L || is.null(x) || is.na(x)) return(&quot;NA&quot;)
+  formatC(as.numeric(x), format = &quot;e&quot;, digits = digits)
+}
+
+plot_pair_base &lt;- function(idx,
+                           datasets,
+                           fash_raw,
+                           fash_adj,
+                           gene_map,
+                           p_lin = NULL,
+                           p_non = NULL,
+                           smooth_var = seq(0, 15, by = 0.1),
+                           add_lm = TRUE,
+                           add_quad = TRUE,
+                           main_prefix = NULL) {
+
+  dat &lt;- datasets[[idx]]
+  x &lt;- dat$x; y &lt;- dat$y; se &lt;- dat$SE
+  w &lt;- 1 / (se^2)
+
+  fitted &lt;- predict(fash_adj, index = idx, smooth_var = smooth_var)
+
+  y_min &lt;- min(y - 2 * se, fitted$lower, na.rm = TRUE)
+  y_max &lt;- max(y + 2 * se, fitted$upper, na.rm = TRUE)
+
+  # titles
+  key_parts &lt;- strsplit(names(datasets)[idx], &quot;_&quot;, fixed = TRUE)[[1]]
+  ens_id &lt;- key_parts[1]
+  rs_id  &lt;- key_parts[2]
+  key   &lt;- names(datasets)[idx]
+  gsym   &lt;- symbol_of(ens_id, gene_map)
+
+  main_txt &lt;- paste0(gsym, &quot;: &quot;, rs_id)
+  if (!is.null(main_prefix)) main_txt &lt;- paste0(main_prefix, &quot; &quot;, main_txt)
+
+  # fits
+  lin_fit  &lt;- if (add_lm)   lm(y ~ x, weights = w) else NULL
+  quad_fit &lt;- if (add_quad) lm(y ~ poly(x, 2, raw = TRUE), weights = w) else NULL
+  x_grid   &lt;- if (add_quad) seq(min(x), max(x), length.out = 200) else NULL
+  quad_pred &lt;- if (add_quad) predict(quad_fit, newdata = data.frame(x = x_grid)) else NULL
+
+  plot(x, y, pch = 20, col = &quot;black&quot;, xlab = &quot;Time&quot;, ylab = &quot;Effect Est&quot;, ylim = c(y_min, y_max))
+  title(main = main_txt)
+
+  arrows(x0 = x, y0 = y - 2 * se, x1 = x, y1 = y + 2 * se,
+         length = 0.05, angle = 90, code = 3, col = &quot;black&quot;)
+
+  polygon(c(fitted$x, rev(fitted$x)), c(fitted$lower, rev(fitted$upper)),
+          col = rgb(1, 0, 0, 0.3), border = NA)
+  lines(fitted$x, fitted$mean, col = &quot;red&quot;, lwd = 2)
+
+  if (add_lm)   abline(lin_fit, col = &quot;green&quot;, lty = 2, lwd = 1)
+  if (add_quad) lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
+
+  lfdr_before &lt;- fash_raw$lfdr[idx]
+  lfdr_after  &lt;- fash_adj$lfdr[idx]
+  p_lin_val &lt;- if (!is.null(p_lin) &amp;&amp; !is.null(names(p_lin)) &amp;&amp; key %in% names(p_lin)) unname(p_lin[[key]]) else NA_real_
+
+  p_non_val &lt;- if (!is.null(p_non) &amp;&amp; !is.null(names(p_non)) &amp;&amp; key %in% names(p_non)) unname(p_non[[key]]) else NA_real_
+
+  if (!is.na(p_lin_val) || !is.na(p_non_val)) {
+
+    cap &lt;- sprintf(&quot;lfdr = %s (%s), p-value = %s (%s)&quot;,
+                  fmt_sci(lfdr_after), fmt_sci(lfdr_before),
+                  fmt_sci(p_lin_val), fmt_sci(p_non_val))
+
+  } else {
+
+    cap &lt;- sprintf(&quot;lfdr (raw) = %s, lfdr (adj) = %s&quot;, fmt_sci(lfdr_before), fmt_sci(lfdr_after))
+
+  }
+
+  title(sub = cap, cex.sub = 0.8)
+  invisible(NULL)
+}
+
+plot_many_pairs &lt;- function(idxs, nrow = 2, ncol = 2, ...) {
+  dots &lt;- list(...)
+  datasets &lt;- dots$datasets
+
+  idxs &lt;- as.integer(idxs)
+  idxs &lt;- idxs[!is.na(idxs)]
+  idxs &lt;- idxs[idxs &gt;= 1]
+  if (!is.null(datasets)) idxs &lt;- idxs[idxs &lt;= length(datasets)]
+
+  if (length(idxs) == 0L) {
+    message(&quot;plot_many_pairs: no valid indices to plot.&quot;)
+    return(invisible(NULL))
+  }
+
+  oldpar &lt;- par(no.readonly = TRUE)
+  on.exit(par(oldpar), add = TRUE)
+  par(mfrow = c(nrow, ncol))
+
+  for (idx in idxs) {
+    try(plot_pair_base(idx = idx, ...), silent = TRUE)
+  }
+
+  invisible(NULL)
+}
+
+
+
+
+
+# ----------------------------
+# Strober loading helpers
+# ----------------------------
+read_strober &lt;- function(path) {
+  read.delim(path) %&gt;%
+    as_tibble() %&gt;%
+    mutate(key = paste0(ensamble_id, &quot;_&quot;, rs_id))
+}
+
+# ----------------------------
+# lfdr vs p-value scatter helper
+# ----------------------------
+plot_lfdr_vs_p &lt;- function(fash_tbl, strober_df, pval_cutoff, lfdr_cutoff,
+                           gene_map, title_text = &quot;&quot;,
+                           manual_symbol = NULL) {
+  eps &lt;- .Machine$double.eps
+  if (is.null(manual_symbol)) manual_symbol &lt;- c()
+
+  df &lt;- fash_tbl %&gt;%
+    inner_join(strober_df %&gt;% dplyr::select(key, ensamble_id, pvalue), by = &quot;key&quot;) %&gt;%
+    mutate(ensamble_id = dplyr::coalesce(ensamble_id, ens_id))
+
+  # min per gene
+  df_p &lt;- df %&gt;% dplyr::group_by(ensamble_id) %&gt;% dplyr::slice_min(pvalue, n = 1, with_ties = FALSE) %&gt;% dplyr::ungroup()
+  df_l &lt;- df %&gt;% dplyr::group_by(ensamble_id) %&gt;% dplyr::slice_min(lfdr_adj, n = 1, with_ties = FALSE) %&gt;% dplyr::ungroup()
+
+  g &lt;- df_p %&gt;% dplyr::select(ensamble_id, pvalue) %&gt;%
+    inner_join(df_l %&gt;% dplyr::select(ensamble_id, lfdr_adj), by = &quot;ensamble_id&quot;) %&gt;%
+    mutate(
+      gene_symbol = symbol_of(ensamble_id, gene_map),
+      gene_label  = dplyr::coalesce(unname(manual_symbol[ensamble_id]), gene_symbol, ensamble_id),
+      neglog_p    = -log10(pmin(pmax(pvalue, eps), 1)),
+      neglog_lfdr = -log10(pmin(pmax(lfdr_adj, eps), 1)),
+      category = dplyr::case_when(
+        pvalue &lt;= pval_cutoff &amp; lfdr_adj &lt;= lfdr_cutoff ~ &quot;Both&quot;,
+        pvalue &lt;= pval_cutoff &amp; lfdr_adj &gt;  lfdr_cutoff ~ &quot;Strober only&quot;,
+        pvalue &gt;  pval_cutoff &amp; lfdr_adj &lt;= lfdr_cutoff ~ &quot;FASH only&quot;,
+        TRUE ~ &quot;Neither&quot;
+      ),
+      category = factor(category, levels = c(&quot;Both&quot;, &quot;FASH only&quot;, &quot;Strober only&quot;, &quot;Neither&quot;))
+    )
+
+  top_strober_only &lt;- g %&gt;% dplyr::filter(category == &quot;Strober only&quot;) %&gt;% dplyr::arrange(pvalue) %&gt;% dplyr::slice_head(n = 10)
+  top_fash_only    &lt;- g %&gt;% dplyr::filter(category == &quot;FASH only&quot;)    %&gt;% dplyr::arrange(lfdr_adj) %&gt;% dplyr::slice_head(n = 10)
+  top_both         &lt;- g %&gt;% dplyr::filter(category == &quot;Both&quot;)         %&gt;% dplyr::arrange(pvalue + lfdr_adj) %&gt;% dplyr::slice_head(n = 10)
+  label_df &lt;- dplyr::bind_rows(top_strober_only, top_fash_only, top_both)
+
+  col_map &lt;- c(&quot;Both&quot;=&quot;#7B3294&quot;,&quot;FASH only&quot;=&quot;#1B9E77&quot;,&quot;Strober only&quot;=&quot;#D95F02&quot;,&quot;Neither&quot;=&quot;grey80&quot;)
+
+  ggplot(g, aes(x = neglog_p, y = neglog_lfdr)) +
+    geom_point(data = subset(g, category == &quot;Neither&quot;), color = col_map[&quot;Neither&quot;], alpha = 0.25, size = 1.8) +
+    geom_point(data = subset(g, category != &quot;Neither&quot;), aes(color = category), alpha = 0.8, size = 2.2) +
+    scale_color_manual(values = col_map) +
+    geom_vline(xintercept = -log10(pval_cutoff), linetype = &quot;dashed&quot;) +
+    geom_hline(yintercept = -log10(lfdr_cutoff), linetype = &quot;dashed&quot;) +
+    geom_text_repel(
+      data = label_df, aes(label = gene_label, color = category),
+      size = 3, box.padding = 0.3, point.padding = 0.5, max.overlaps = Inf, show.legend = FALSE
+    ) +
+    theme_minimal() +
+    theme(text = element_text(size = 16), axis.text = element_text(size = 14), legend.position = &quot;bottom&quot;) +
+    labs(title = title_text, x = &quot;-log10(p-value)&quot;, y = &quot;-log10(lfdr)&quot;, color = NULL)
+}</code></pre>
 <div id="obtain-the-effect-size-of-eqtls" class="section level2">
 <h2>Obtain the effect size of eQTLs</h2>
 <p>We use the processed (expression &amp; genotype) data of <a
@@ -880,7 +1057,7 @@ href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6623972/">Strober
 et.al, 2019</a> to perform the eQTL analysis.</p>
 <p>For the association testing, we use a linear regression model for
 each gene-variant pair at each time point. Following the practice in
-Strober et.al, we adjust for the first five PCs.</p>
+Strober et.al, we adjust for the first 3 PCs.</p>
 <p>The code to perform this step can be found in the script
 <code>dynamic_eQTL_real/00_eQTLs.R</code> from the code directory.</p>
 <p>After this step, we have the effect size of eQTLs for each
@@ -902,18 +1079,20 @@ nonlinear-dynamic eQTLs: <span class="math inline">\(H_0:
 <code>dynamic_eQTL_real/01_fash.R</code> from the code directory.</p>
 <p>We will directly load the fitted FASH models from the output
 directory.</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/fash_fit1_all.RData&quot;))</code></pre>
+<pre class="r"><code>load(file.path(result_dir, &quot;fash_fit1_all.RData&quot;))</code></pre>
 <p>We will load the datasets from the fitted FASH object:</p>
 <pre class="r"><code>datasets &lt;- fash_fit1$fash_data$data_list
-for (i in 1:length(datasets)) {
-  datasets[[i]]$SE &lt;- fash_fit1$fash_data$S[[i]]
-}
-all_genes &lt;- unique(sapply(strsplit(names(datasets), &quot;_&quot;), &quot;[[&quot;, 1))
-full_map &lt;- getBM(
-  attributes = c(&quot;hgnc_symbol&quot;, &quot;ensembl_gene_id&quot;),
-  filters    = &quot;ensembl_gene_id&quot;,
-  values     = all_genes,
-  mart       = mart
+S_list   &lt;- fash_fit1$fash_data$S
+for (i in seq_along(datasets)) datasets[[i]]$SE &lt;- S_list[[i]]
+
+pair_tbl &lt;- parse_pair_keys(names(datasets)) %&gt;%
+  mutate(idx = row_number())
+
+all_genes &lt;- unique(pair_tbl$ens_id)
+
+gene_map &lt;- get_gene_map(
+  ens_ids = all_genes,
+  cache_path = file.path(result_dir, &quot;cache_gene_map.rds&quot;)
 )</code></pre>
 <p>In this analysis, we will focus on the <strong>FASH(1)</strong> model
 that assumes a <strong>first order IWP</strong> and <strong>tests for
@@ -983,17 +1162,20 @@ min_lfsr_summary1_update &lt;- min_lfsr_summary(fash_fit1_update, num_cores = nu
 save(min_lfsr_summary1_update, file = &quot;./results/min_lfsr_summary1_update.RData&quot;)</code></pre>
 <p>Let’s visualize how the min-lfsr compares with the local false
 discovery rate (lfdr):</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/min_lfsr_summary1.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;min_lfsr_summary1.RData&quot;))
+
 # sample some indices for easy visualization
-sample_indices &lt;- sample(1:length(min_lfsr_summary1$min_lfsr), 1e5)
+sample_indices &lt;- sample_int(length(min_lfsr_summary1$min_lfsr), size = 1e5, seed = 1)
+
 min_lfsr1_unadj &lt;- min_lfsr_summary1$min_lfsr[sample_indices]
 lfdr1_vec_unadj &lt;- fash_fit1$lfdr[min_lfsr_summary1$index][sample_indices]
+
 plot(lfdr1_vec_unadj, min_lfsr1_unadj, 
      pch = 20, cex = 0.1,
      ylim = c(0,1), xlim = c(0,1),
      xlab = &quot;lfdr&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;lfdr vs min-lfsr (Un-adjusted)&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/visualize_minlfsr-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/visualize_minlfsr-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-visualize_minlfsr-1">
 Past versions of visualize_minlfsr-1.png
@@ -1033,15 +1215,17 @@ Ziang Zhang
 </div>
 <p>Let’s also visualize the min-lfsr and the lfdr from the BF-updated
 model:</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/min_lfsr_summary1_update.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;min_lfsr_summary1_update.RData&quot;))
+
 min_lfsr1 &lt;- min_lfsr_summary1_update$min_lfsr[sample_indices]
-lfdr1_vec &lt;- fash_fit1_update$lfdr[min_lfsr_summary1_update$index[sample_indices]]
+lfdr1_vec &lt;- fash_fit1_update$lfdr[min_lfsr_summary1_update$index][sample_indices]
+
 plot(lfdr1_vec, min_lfsr1, 
      pch = 20, cex = 0.1,
      ylim = c(0,1), xlim = c(0,1),
      xlab = &quot;lfdr&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;lfdr vs min-lfsr (BF-adjusted)&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/visualize_minlfsr_bf-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/visualize_minlfsr_bf-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-visualize_minlfsr_bf-1">
 Past versions of visualize_minlfsr_bf-1.png
@@ -1089,7 +1273,7 @@ class="math inline">\(\pi_0\)</span> affect the min-lfsr.</p>
      ylim = c(0,1), xlim = c(0,1),
      xlab = &quot;min-lfsr (unadjusted)&quot;, ylab = &quot;min-lfsr&quot;, main = &quot;Effect of BF adjustment on min-lfsr&quot;)
 lines(c(0,1), c(0,1), col = &quot;red&quot;)</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/visualize_minlfsr_bf_vs_unadj-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/visualize_minlfsr_bf_vs_unadj-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-visualize_minlfsr_bf_vs_unadj-1">
 Past versions of visualize_minlfsr_bf_vs_unadj-1.png
@@ -1132,11 +1316,12 @@ Ziang Zhang
 <h2>Detecting dynamic eQTLs</h2>
 <p>We will use the updated FASH model (1) to detect dynamic eQTLs.</p>
 <pre class="r"><code>alpha &lt;- 0.05
-test1 &lt;- fdr_control(fash_fit1_update, alpha = alpha, plot = F)</code></pre>
+
+test1 &lt;- fdr_control(fash_fit1_update, alpha = alpha, plot = FALSE)</code></pre>
 <pre><code>10290 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
 <pre class="r"><code>fash_highlighted1 &lt;- test1$fdr_results$index[test1$fdr_results$FDR &lt;= alpha]
 
-test1_before &lt;- fdr_control(fash_fit1, alpha = alpha, plot = F)</code></pre>
+test1_before &lt;- fdr_control(fash_fit1, alpha = alpha, plot = FALSE)</code></pre>
 <pre><code>50027 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
 <pre class="r"><code>fash_highlighted1_before &lt;- test1_before$fdr_results$index[test1_before$fdr_results$FDR &lt;= alpha]</code></pre>
 <p>How many pairs are detected as dynamic eQTLs?</p>
@@ -1152,13 +1337,13 @@ length(pairs_highlighted1_before)</code></pre>
 <pre class="r"><code>length(pairs_highlighted1_before)/length(datasets)</code></pre>
 <pre><code>[1] 0.04957227</code></pre>
 <p>How many unique genes are detected?</p>
-<pre class="r"><code>genes_highlighted1 &lt;- unique(sapply(strsplit(pairs_highlighted1, &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>genes_highlighted1 &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1])
 length(genes_highlighted1)</code></pre>
 <pre><code>[1] 1295</code></pre>
 <pre class="r"><code>length(genes_highlighted1)/length(all_genes)</code></pre>
 <pre><code>[1] 0.2035523</code></pre>
 <p>Before the BF adjustment?</p>
-<pre class="r"><code>genes_highlighted1_before &lt;- unique(sapply(strsplit(pairs_highlighted1_before, &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>genes_highlighted1_before &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1_before])
 length(genes_highlighted1_before)</code></pre>
 <pre><code>[1] 3417</code></pre>
 <pre class="r"><code>length(genes_highlighted1_before)/length(all_genes)</code></pre>
@@ -1171,7 +1356,7 @@ length(pairs_highlighted1_lfsr)</code></pre>
 <pre><code>[1] 10070</code></pre>
 <pre class="r"><code>length(pairs_highlighted1_lfsr)/length(datasets)</code></pre>
 <pre><code>[1] 0.009978468</code></pre>
-<pre class="r"><code>genes_highlighted1_lfsr &lt;- unique(sapply(strsplit(pairs_highlighted1_lfsr, &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>genes_highlighted1_lfsr &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1_lfsr])
 length(genes_highlighted1_lfsr)</code></pre>
 <pre><code>[1] 1271</code></pre>
 <pre class="r"><code>length(genes_highlighted1_lfsr)/length(all_genes)</code></pre>
@@ -1181,7 +1366,7 @@ is adjusted, there is not much difference between measuring significance
 using the min-lfsr or the lfdr. From now on, we will consider the pairs
 that are significant using the lfdr.</p>
 <p>Visualize top-ranked pairs for some selected genes:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/dynamic_example%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/dynamic_example%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-dynamic_example--1">
 Past versions of "dynamic_example -1.png"
@@ -1219,622 +1404,8 @@ Ziang Zhang
 </table>
 </div>
 </div>
-<p>Visualize some genes highlighted in the original analysis:
-<img src="figure/dynamic_eQTL_real.rmd/some_genes_highlighted_original%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-some_genes_highlighted_original--1">
-Past versions of "some_genes_highlighted_original -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-some_genes_highlighted_original--1"
-class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/some_genes_highlighted_original -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>These examples were highlighted using the un-adjusted FASH model, but
-not significant after the BF adjustment.</p>
-<p>Take a look at the most significant variants for the gene
-‘ENSG00000183873’:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/most_significant_SCN5A%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-most_significant_SCN5A--1">
-Past versions of "most_significant_SCN5A -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-most_significant_SCN5A--1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/most_significant_SCN5A -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Another highlighted pair in the original analysis is
-‘ENSG00000166704_rs8107849’:</p>
-<pre class="r"><code>selected_index &lt;- which(&quot;ENSG00000166704_rs8107849&quot; == names(datasets))
-# shorthand 
-x  &lt;- datasets[[selected_index]]$x
-y  &lt;- datasets[[selected_index]]$y
-se &lt;- datasets[[selected_index]]$SE
-w  &lt;- 1 / (se^2)
-y_min &lt;- min(y - 2 * se)
-y_max &lt;- max(y + 2 * se)
-# weighted mean
-y_wmean &lt;- sum(y * w) / sum(w)
-# weighted linear fit
-lin_fit &lt;- lm(y ~ x, weights = w)
-# weighted quadratic fit
-quad_fit  &lt;- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
-x_grid    &lt;- seq(min(x), max(x), length.out = 200)
-quad_pred &lt;- predict(quad_fit, newdata = data.frame(x = x_grid))
-# FASH fit (after adjustment)
-fitted_result &lt;- predict(
-  fash_fit1_update,
-  index      = selected_index,
-  smooth_var = seq(0, 15, by = 0.1)
-)
-# FASH fit (before adjustment)
-fitted_result_before &lt;- predict(
-  fash_fit1,
-  index      = selected_index,
-  smooth_var = seq(0, 15, by = 0.1)
-)
-par(mfrow = c(1,1))
-plot(
-  x, y,
-  pch  = 20,
-  col  = &quot;black&quot;,
-  xlab = &quot;Time&quot;,
-  ylab = &quot;Effect Est&quot;,
-  # main = names(datasets)[selected_index],
-  ylim = c(y_min, y_max)
-)
-variant_id &lt;- strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][2]
-gene_symbol &lt;- full_map$hgnc_symbol[full_map$ensembl_gene_id == &quot;ENSG00000166704&quot;]
-title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-arrows(
-  x0 = x,
-  y0 = y - 2 * se,
-  x1 = x,
-  y1 = y + 2 * se,
-  length = 0.05,
-  angle  = 90,
-  code   = 3,
-  col    = &quot;black&quot;
-)
-polygon(
-  c(fitted_result_before$x, rev(fitted_result_before$x)),
-  c(fitted_result_before$lower, rev(fitted_result_before$upper)),
-  col    = rgb(1, 0, 0, 0.3),
-  border = NA
-)
-# posterior mean curve
-lines(
-  fitted_result_before$x,
-  fitted_result_before$mean,
-  col = &quot;red&quot;,
-  lwd = 2
-)
-# # weighted average line
-# abline(h = y_wmean, col = &quot;blue&quot;,  lty = 2)
-# weighted linear fit
-abline(lin_fit, col = &quot;green&quot;, lty = 2, lwd = 1)
-# weighted quadratic curve
-lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-# lfdr before
-lfdr_before &lt;- fash_fit1$lfdr[selected_index]
-# caption text
-caption &lt;- sprintf(&quot;lfdr (raw) = %.3f&quot;,
-                   lfdr_before)
-title(sub = caption, cex.sub = 0.8)</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
-Past versions of unnamed-chunk-16-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-16-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-16-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(
-  x, y,
-  pch  = 20,
-  col  = &quot;black&quot;,
-  xlab = &quot;Time&quot;,
-  ylab = &quot;Effect Est&quot;,
-  # main = names(datasets)[selected_index],
-  ylim = c(y_min, y_max)
-)
-title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-arrows(
-  x0 = x,
-  y0 = y - 2 * se,
-  x1 = x,
-  y1 = y + 2 * se,
-  length = 0.05,
-  angle  = 90,
-  code   = 3,
-  col    = &quot;black&quot;
-)
-polygon(
-  c(fitted_result$x, rev(fitted_result$x)),
-  c(fitted_result$lower, rev(fitted_result$upper)),
-  col    = rgb(1, 0, 0, 0.3),
-  border = NA
-)
-# posterior mean curve
-lines(
-  fitted_result$x,
-  fitted_result$mean,
-  col = &quot;red&quot;,
-  lwd = 2
-)
-# # weighted average line
-# abline(h = y_wmean, col = &quot;blue&quot;,  lty = 2)
-# weighted linear fit
-abline(lin_fit, col = &quot;green&quot;, lty = 2, lwd = 1)
-# weighted quadratic curve
-lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-# lfdr after
-lfdr_after  &lt;- fash_fit1_update$lfdr[selected_index]
-# caption text
-caption &lt;- sprintf(&quot;lfdr (adj) = %.3f&quot;,
-                   lfdr_after)
-title(sub = caption, cex.sub = 0.8)</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-16-2.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-2">
-Past versions of unnamed-chunk-16-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-16-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-16-2.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,1))</code></pre>
-<p>This pair is not significant in FASH with or without BF
-adjustment.</p>
-<p>Take a look at the most significant variants for the gene
-‘ENSG00000166704’:</p>
-<pre class="r"><code># get the indices of the highlighted pairs for ENSG00000166704
-ZNF606_pairs &lt;- names(datasets)[grep(&quot;ENSG00000166704&quot;, names(datasets))]
-# pick the most significant four variants
-all_selected_indices &lt;- grep(&quot;ENSG00000166704&quot;, names(datasets))
-lfdr_values &lt;- fash_fit1_update$lfdr[all_selected_indices]
-selected_indices &lt;- all_selected_indices[order(lfdr_values)][1:4]
-# plot
-par(mfrow = c(2,2))
-for (selected_index in selected_indices) {
-  # shorthand 
-  x  &lt;- datasets[[selected_index]]$x
-  y  &lt;- datasets[[selected_index]]$y
-  se &lt;- datasets[[selected_index]]$SE
-  w  &lt;- 1 / (se^2)
-  y_min &lt;- min(y - 2 * se)
-  y_max &lt;- max(y + 2 * se)
-  # weighted mean
-  y_wmean &lt;- sum(y * w) / sum(w)
-  # weighted linear fit
-  lin_fit &lt;- lm(y ~ x, weights = w)
-  # weighted quadratic fit
-  quad_fit  &lt;- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
-  x_grid    &lt;- seq(min(x), max(x), length.out = 200)
-  quad_pred &lt;- predict(quad_fit, newdata = data.frame(x = x_grid))
-  # FASH fit (after adjustment)
-  fitted_result &lt;- predict(
-    fash_fit1_update,
-    index      = selected_index,
-    smooth_var = seq(0, 15, by = 0.1)
-  )
-  plot(
-    x, y,
-    pch  = 20,
-    col  = &quot;black&quot;,
-    xlab = &quot;Time&quot;,
-    ylab = &quot;Effect Est&quot;,
-    # main = names(datasets)[selected_index],
-    ylim = c(y_min, y_max)
-  )
-  variant_id &lt;- strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][2]
-  gene_symbol &lt;- full_map$hgnc_symbol[full_map$ensembl_gene_id == &quot;ENSG00000166704&quot;]
-  title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-  arrows(
-    x0 = x,
-    y0 = y - 2 * se,
-    x1 = x,
-    y1 = y + 2 * se,
-    length = 0.05,
-    angle  = 90,
-    code   = 3,
-    col    = &quot;black&quot;
-  )
-  polygon(
-    c(fitted_result$x, rev(fitted_result$x)),
-    c(fitted_result$lower, rev(fitted_result$upper)),
-    col    = rgb(1, 0, 0, 0.3),
-    border = NA
-  )
-  # posterior mean curve
-  lines(
-    fitted_result$x,
-    fitted_result$mean,
-    col = &quot;red&quot;,
-    lwd = 2
-  )
-  # # weighted average line
-  # abline(h = y_wmean, col = &quot;blue&quot;,  lty = 2)
-  # weighted linear fit
-  abline(lin_fit,     col = &quot;green&quot;, lty = 2, lwd = 1)
-  # weighted quadratic curve
-  lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-  # lfdr after
-  lfdr_after  &lt;- fash_fit1_update$lfdr[selected_index]
-  # lfdr before
-  lfdr_before &lt;- fash_fit1$lfdr[selected_index]
-  # caption text
-  caption &lt;- sprintf(&quot;lfdr (raw) = %.3f, lfdr (adj) = %.3f&quot;,
-                     lfdr_before, lfdr_after)
-  title(sub = caption, cex.sub = 0.8)
-}</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
-Past versions of unnamed-chunk-17-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/83145ccf6099e518cc99acf63dc9cb80ce30498a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" target="_blank">83145cc</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/d73f3f161feeb5fed3210ba260ee45830e53040a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-17-1.png" target="_blank">d73f3f1</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,1))</code></pre>
-<p>It seems like the BF adjustment significantly increased the lfdr for
-all these variants, and strongly penalized the curves toward the
-constant function.</p>
-<p>Another two highlighted genes are ‘ENSG00000115641’ and
-‘ENSG00000167173’:</p>
-<pre class="r"><code># pick the most significant variant for each gene
-all_fhl2_indices &lt;- fash_highlighted1[grep(&quot;ENSG00000115641&quot;, names(datasets)[fash_highlighted1])]
-lfdr_values_fhl2 &lt;- fash_fit1_update$lfdr[all_fhl2_indices]
-selected_fhl2_index &lt;- all_fhl2_indices[which.min(lfdr_values_fhl2)]
-all_c15orf39_indices &lt;- grep(&quot;ENSG00000167173&quot;, names(datasets))
-lfdr_values_c15orf39 &lt;- fash_fit1_update$lfdr[all_c15orf39_indices]
-selected_c15orf39_index &lt;- all_c15orf39_indices[which.min(lfdr_values_c15orf39)]
-# plot
-par(mfrow = c(1,1))
-for (selected_index in c(selected_fhl2_index, selected_c15orf39_index)) {
-  # shorthand 
-  x  &lt;- datasets[[selected_index]]$x
-  y  &lt;- datasets[[selected_index]]$y
-  se &lt;- datasets[[selected_index]]$SE
-  w  &lt;- 1 / (se^2)
-  y_min &lt;- min(y - 2 * se)
-  y_max &lt;- max(y + 2 * se)
-  # weighted mean
-  y_wmean &lt;- sum(y * w) / sum(w)
-  # weighted linear fit
-  lin_fit &lt;- lm(y ~ x, weights = w)
-  # weighted quadratic fit
-  quad_fit  &lt;- lm(y ~ poly(x, 2, raw = TRUE), weights = w)
-  x_grid    &lt;- seq(min(x), max(x), length.out = 200)
-  quad_pred &lt;- predict(quad_fit, newdata = data.frame(x = x_grid))
-  # FASH fit (after adjustment)
-  fitted_result &lt;- predict(
-    fash_fit1_update,
-    index      = selected_index,
-    smooth_var = seq(0, 15, by = 0.1)
-  )
-  plot(
-    x, y,
-    pch  = 20,
-    col  = &quot;black&quot;,
-    xlab = &quot;Time&quot;,
-    ylab = &quot;Effect Est&quot;,
-    # main = names(datasets)[selected_index],
-    ylim = c(y_min, y_max)
-  )
-  variant_id &lt;- strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][2]
-  gene_symbol &lt;- full_map$hgnc_symbol[full_map$ensembl_gene_id == strsplit(names(datasets)[selected_index], &quot;_&quot;)[[1]][1]]
-  title(main = paste0(gene_symbol, &quot;: &quot;, variant_id))
-  arrows(
-    x0 = x,
-    y0 = y - 2 * se,
-    x1 = x,
-    y1 = y + 2 * se,
-    length = 0.05,
-    angle  = 90,
-    code   = 3,
-    col    = &quot;black&quot;
-  )
-  polygon(
-    c(fitted_result$x, rev(fitted_result$x)),
-    c(fitted_result$lower, rev(fitted_result$upper)),
-    col    = rgb(1, 0, 0, 0.3),
-    border = NA
-  )
-  # posterior mean curve
-  lines(
-    fitted_result$x,
-    fitted_result$mean,
-    col = &quot;red&quot;,
-    lwd = 2
-  )
-  # # weighted average line
-  # abline(h = y_wmean, col = &quot;blue&quot;,  lty = 2)
-  # weighted linear fit
-  abline(lin_fit,     col = &quot;green&quot;, lty = 2, lwd = 1)
-  # weighted quadratic curve
-  lines(x_grid, quad_pred, col = &quot;purple&quot;, lty = 2, lwd = 1)
-  # lfdr after
-  lfdr_after  &lt;- fash_fit1_update$lfdr[selected_index]
-  # lfdr before
-  lfdr_before &lt;- fash_fit1$lfdr[selected_index]
-  # caption text
-  caption &lt;- sprintf(&quot;lfdr (raw) = %.3f, lfdr (adj) = %.3f&quot;,
-                     lfdr_before, lfdr_after)
-  title(sub = caption, cex.sub = 0.8)
-}</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
-Past versions of unnamed-chunk-18-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/83145ccf6099e518cc99acf63dc9cb80ce30498a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" target="_blank">83145cc</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/d73f3f161feeb5fed3210ba260ee45830e53040a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-1.png" target="_blank">d73f3f1</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-2.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-2">
-Past versions of unnamed-chunk-18-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-18-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-18-2.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,1))</code></pre>
-<p>There is a significant variant for ENSG00000115641, but not for
-ENSG00000167173 after BF adjustment.</p>
 <p>Some examples of null pairs:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/null_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/null_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-null_examples--1">
 Past versions of "null_examples -1.png"
@@ -1877,17 +1448,6 @@ Ziang Zhang
 <h2>Comparing with Strober et.al</h2>
 <p>We will compare the detected dynamic eQTLs with the results from
 Strober et.al.</p>
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.1     ✔ stringr   1.5.2
-✔ lubridate 1.9.4     ✔ tibble    3.3.0
-✔ purrr     1.1.0     ✔ tidyr     1.3.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::select() masks biomaRt::select()
-✖ tidyr::unite()  masks ggVennDiagram::unite()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>What are the p-value cutoff for linear and non-linear methods in
 Strober et.al?</p>
 <pre class="r"><code>pval_cutoff_strober_nonlinear &lt;- max(strober_nonlinear_highlighted$pvalue)
@@ -1906,7 +1466,7 @@ lfdr_cutoff1_before</code></pre>
 <pre><code>[1] 0.1478733</code></pre>
 <p>Let’s take a look at the overlap between the two methods used in
 Strober et.al and FASH (order 1):</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/venn_diagram_strober_fash%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/venn_diagram_strober_fash%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-venn_diagram_strober_fash--1">
 Past versions of "venn_diagram_strober_fash -1.png"
@@ -1946,7 +1506,7 @@ Ziang Zhang
 </div>
 <p>Produce another Venn diagram for the pairs detected by the three
 methods:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/venn_diagram_strober_fash_pairs%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/venn_diagram_strober_fash_pairs%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-venn_diagram_strober_fash_pairs--1">
 Past versions of "venn_diagram_strober_fash_pairs -1.png"
@@ -1987,7 +1547,7 @@ Ziang Zhang
 </div>
 <p>Produce similar Venn diagrams for genes and pairs detected by FASH
 without BF adjustment:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/venn_diagram_strober_fash_unadj%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/venn_diagram_strober_fash_unadj%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-venn_diagram_strober_fash_unadj--1">
 Past versions of "venn_diagram_strober_fash_unadj -1.png"
@@ -2026,7 +1586,7 @@ Ziang Zhang
 </table>
 </div>
 </div>
-<p><img src="figure/dynamic_eQTL_real.rmd/venn_diagram_strober_fash_unadj%20-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/venn_diagram_strober_fash_unadj%20-2.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-venn_diagram_strober_fash_unadj--2">
 Past versions of "venn_diagram_strober_fash_unadj -2.png"
@@ -2066,135 +1626,45 @@ Ziang Zhang
 </div>
 </div>
 <p>There is a large number of genes only detected by FASH (order 1).
-Let’s take a look at the 4 pairs that are least significant from
-FASH:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/only_fash_least%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-only_fash_least--1">
-Past versions of "only_fash_least -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-only_fash_least--1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/only_fash_least -1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/only_fash_least -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+Let’s take a look at the 4 pairs that are least significant from FASH,
+and have at least p-value 0.1 from Strober et.al (both linear and
+non-linear):</p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/only_fash_least-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Let’s also take a look at the 4 pairs that are most significant from
-FASH:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/only_fash_most%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-only_fash_most--1">
-Past versions of "only_fash_most -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-only_fash_most--1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/only_fash_most -1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/only_fash_most -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+FASH, also with at least p-value 0.1 from Strober et.al (both linear and
+non-linear):</p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/only_fash_most-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Take a look at the p-values and eFDRs from Strober et.al for some of
 these pairs:</p>
-<pre class="r"><code>select_gene_id &lt;- full_map$ensembl_gene_id[full_map$hgnc_symbol %in% c(&quot;ALS2&quot;, &quot;HACD2&quot;, &quot;PRELID3B&quot;, &quot;FZD3&quot;)]
-select_variant_id &lt;- c(&quot;rs56361049&quot;, &quot;rs13091529&quot;, &quot;rs1023654&quot;, &quot;rs73557252&quot;)
+<pre class="r"><code>select_gene_id &lt;- gene_map$ensembl_gene_id[gene_map$hgnc_symbol %in% selected_gene_fashr_only]
+select_variant_id &lt;- c(&quot;rs35399&quot;, &quot;rs2268744&quot;, &quot;rs7532265&quot;, &quot;rs2047804&quot;)
+
 strober_linear %&gt;%
   filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)</code></pre>
-<pre><code>       rs_id     ensamble_id      pvalue      eFDR                        key
-1 rs73557252 ENSG00000104290 0.001048184 0.1139101 ENSG00000104290_rs73557252
-2  rs1023654 ENSG00000101166 0.001612590 0.1314144  ENSG00000101166_rs1023654
-3 rs56361049 ENSG00000003393 0.093553609 0.5820322 ENSG00000003393_rs56361049
-4 rs13091529 ENSG00000206527 0.667012163 0.9389185 ENSG00000206527_rs13091529</code></pre>
+<pre><code># A tibble: 4 × 6
+  rs_id     ensamble_id     pvalue  eFDR key                       gene_symbol
+  &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
+1 rs2268744 ENSG00000156928  0.163 0.680 ENSG00000156928_rs2268744 MALSU1     
+2 rs2047804 ENSG00000215041  0.606 0.921 ENSG00000215041_rs2047804 NEURL4     
+3 rs35399   ENSG00000151388  0.685 0.944 ENSG00000151388_rs35399   ADAMTS12   
+4 rs7532265 ENSG00000157216  0.849 0.977 ENSG00000157216_rs7532265 SSBP3      </code></pre>
 <pre class="r"><code>strober_nonlinear %&gt;%
   filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)</code></pre>
-<pre><code>       rs_id     ensamble_id       pvalue      eFDR                        key
-1 rs73557252 ENSG00000104290 0.0005736255 0.1013022 ENSG00000104290_rs73557252
-2 rs13091529 ENSG00000206527 0.0026303365 0.1879072 ENSG00000206527_rs13091529
-3  rs1023654 ENSG00000101166 0.0029242646 0.1961376  ENSG00000101166_rs1023654
-4 rs56361049 ENSG00000003393 0.1095795058 0.6700229 ENSG00000003393_rs56361049
-  gene_symbol
-1        FZD3
-2       HACD2
-3    PRELID3B
-4        ALS2</code></pre>
+<pre><code># A tibble: 4 × 6
+  rs_id     ensamble_id     pvalue  eFDR key                       gene_symbol
+  &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
+1 rs35399   ENSG00000151388  0.116 0.680 ENSG00000151388_rs35399   ADAMTS12   
+2 rs2268744 ENSG00000156928  0.196 0.776 ENSG00000156928_rs2268744 MALSU1     
+3 rs7532265 ENSG00000157216  0.299 0.856 ENSG00000157216_rs7532265 SSBP3      
+4 rs2047804 ENSG00000215041  0.757 0.981 ENSG00000215041_rs2047804 NEURL4     </code></pre>
+<p>Next, look at some genes that were detected by both FASH and Strober
+et.al. We will pick the most significant pair for each gene in FASH’s
+results:</p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/common_fash_strober%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Let’s also look at the genes that were missed by FASH, but detected
 by Strober et.al. In this case, we will pick the most significant pair
 for each gene in Strober et.al’s results:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/miss_fash_most%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/miss_fash_most%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-miss_fash_most--1">
 Past versions of "miss_fash_most -1.png"
@@ -2256,7 +1726,7 @@ Ziang Zhang
 </div>
 <p>Take a look at the same plot but with the unadjusted FASH
 results:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/miss_fash_most_unadj%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/miss_fash_most_unadj%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-miss_fash_most_unadj--1">
 Past versions of "miss_fash_most_unadj -1.png"
@@ -2317,10 +1787,9 @@ Ziang Zhang
 </div>
 </div>
 <p>The shape of eFDR (Strober et al) and FDR (FASH):</p>
-<pre class="r"><code># make it easier to plot by subsetting
-subset_size &lt;- 10000
-subset_seq &lt;- seq(1, length(test1$fdr_results$FDR), length.out = subset_size)
-subset_seq &lt;- round(subset_seq)
+<pre class="r"><code>subset_size &lt;- 10000
+subset_seq &lt;- round(seq(1, length(test1$fdr_results$FDR), length.out = subset_size))
+
 plot(
   sort(strober_nonlinear$eFDR)[subset_seq],
   x = subset_seq,
@@ -2332,20 +1801,9 @@ plot(
   lty = &quot;dashed&quot;,
   main = &quot;&quot;
 )
-lines(
-  sort(test1$fdr_results$FDR)[subset_seq],
-  x = subset_seq,
-  col  = &quot;red&quot;,
-  lty = &quot;solid&quot;,
-  lwd  = 2
-)
-lines(
-  sort(strober_linear$eFDR)[subset_seq],
-  x = subset_seq,
-  col  = &quot;green&quot;,
-  lty = &quot;dotted&quot;,
-  lwd  = 2
-)
+lines(sort(test1$fdr_results$FDR)[subset_seq], x = subset_seq, col = &quot;red&quot;, lty = &quot;solid&quot;,  lwd = 2)
+lines(sort(strober_linear$eFDR)[subset_seq],   x = subset_seq, col = &quot;green&quot;, lty = &quot;dotted&quot;, lwd = 2)
+
 legend(
   &quot;topleft&quot;,
   legend = c(&quot;Strober Quadratic&quot;, &quot;Strober Linear&quot;, &quot;FASH (1)&quot;),
@@ -2353,79 +1811,8 @@ legend(
   lty    = c(&quot;dashed&quot;, &quot;dotted&quot;, &quot;solid&quot;),
   lwd    = c(2, 2, 2)
 )</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
-Past versions of unnamed-chunk-23-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-23-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/83145ccf6099e518cc99acf63dc9cb80ce30498a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" target="_blank">83145cc</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/d73f3f161feeb5fed3210ba260ee45830e53040a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-1.png" target="_blank">d73f3f1</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-11-09
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code># zoom into the significant region
-plot(
+<p><img src="figure/dynamic_eQTL_real.Rmd/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(
   sort(strober_nonlinear$eFDR[strober_nonlinear$eFDR &lt;= 0.05]),
   xlim = c(0, 10000),
   type = &quot;l&quot;,
@@ -2436,18 +1823,9 @@ plot(
   ylab = &quot;FDR&quot;,
   main = &quot;(Zoomed in)&quot;
 )
-lines(
-  sort(test1$fdr_results$FDR[test1$fdr_results$FDR &lt;= 0.05]),
-  col  = &quot;red&quot;,
-  lty  = &quot;solid&quot;,
-  lwd  = 2
-)
-lines(
-  sort(strober_linear$eFDR[strober_linear$eFDR &lt;= 0.05]),
-  col  = &quot;green&quot;,
-  lty  = &quot;dotted&quot;,
-  lwd  = 2
-)
+lines(sort(test1$fdr_results$FDR[test1$fdr_results$FDR &lt;= 0.05]), col = &quot;red&quot;,   lty = &quot;solid&quot;,  lwd = 2)
+lines(sort(strober_linear$eFDR[strober_linear$eFDR &lt;= 0.05]),     col = &quot;green&quot;, lty = &quot;dotted&quot;, lwd = 2)
+
 legend(
   &quot;topleft&quot;,
   legend = c(&quot;Strober Quadratic&quot;, &quot;Strober Linear&quot;, &quot;FASH (1)&quot;),
@@ -2455,380 +1833,35 @@ legend(
   lty    = c(&quot;dashed&quot;, &quot;dotted&quot;, &quot;solid&quot;),
   lwd    = c(2, 2, 2)
 )</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-2.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-2">
-Past versions of unnamed-chunk-23-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-23-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-23-2.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/dynamic_eQTL_real.Rmd/unnamed-chunk-20-2.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Scatterplot of lfdr and p-values from Strober et.al:</p>
-<pre class="r"><code>eps &lt;- .Machine$double.eps
-# compare lfdr versus linear p-values
-all_result &lt;- merge(
-  data.frame(
-    key = names(datasets)[test1$fdr_results$index],
-    lfdr  = fash_fit1_update$lfdr[test1$fdr_results$index]
-  ),
-  strober_linear %&gt;%
-    select(key, ensamble_id, rs_id, pvalue) %&gt;%
-    select(key, ensamble_id, pvalue),
-  by = &quot;key&quot;
-)
+<pre class="r"><code>fash_tbl &lt;- pair_tbl %&gt;%
+  transmute(key, ens_id, rs_id, idx,
+            lfdr_raw = fash_fit1$lfdr[idx],
+            lfdr_adj = fash_fit1_update$lfdr[idx])
 
-# take the min lfdr and pvalue for each gene
-all_result_genes_pvalue &lt;- all_result %&gt;%
-  group_by(ensamble_id) %&gt;%
-  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %&gt;%
-  ungroup()
+manual_symbol &lt;- c(&quot;ENSG00000225485&quot; = &quot;NFATC4&quot;)
 
-all_result_genes_lfdr &lt;- all_result %&gt;%
-  group_by(ensamble_id) %&gt;%
-  slice_min(order_by = lfdr, n = 1, with_ties = FALSE) %&gt;%
-  ungroup()
-
-# merge by gene
-all_result_genes &lt;- merge(
-  all_result_genes_pvalue %&gt;%
-    select(ensamble_id, pvalue),
-  all_result_genes_lfdr %&gt;%
-    select(ensamble_id, lfdr),
-  by = &quot;ensamble_id&quot;
-)
-
-all_result_genes$gene_symbol &lt;- full_map$hgnc_symbol[match(all_result_genes$ensamble_id, full_map$ensembl_gene_id)]
-
-
-all_result_genes &lt;- all_result_genes %&gt;%
-  mutate(
-    neglog_p    = -log10(pmin(pmax(pvalue, eps), 1)),
-    neglog_lfdr = -log10(pmin(pmax(lfdr,   eps), 1)),
-    category = case_when(
-      pvalue &lt;= pval_cutoff_strober_linear &amp; lfdr &lt;= lfdr_cutoff1_after ~ &quot;Both&quot;,
-      pvalue &lt;= pval_cutoff_strober_linear &amp; lfdr &gt;  lfdr_cutoff1_after ~ &quot;Strober only&quot;,
-      pvalue &gt;  pval_cutoff_strober_linear &amp; lfdr &lt;= lfdr_cutoff1_after ~ &quot;FASH only&quot;,
-      TRUE ~ &quot;Neither&quot;
-    ),
-    category = factor(category, levels = c(&quot;Both&quot;, &quot;FASH only&quot;, &quot;Strober only&quot;, &quot;Neither&quot;))
-  )
-
-# Recompute “top” sets (now based on category)
-top_strober_only &lt;- all_result_genes %&gt;%
-  filter(category == &quot;Strober only&quot;) %&gt;%
-  arrange(pvalue) %&gt;%
-  slice_head(n = 10)
-
-top_fash_only &lt;- all_result_genes %&gt;%
-  filter(category == &quot;FASH only&quot;) %&gt;%
-  arrange(lfdr) %&gt;%
-  slice_head(n = 10)
-
-top_both &lt;- all_result_genes %&gt;%
-  filter(category == &quot;Both&quot;) %&gt;%
-  arrange(pvalue + lfdr) %&gt;%
-  slice_head(n = 10)
-
-label_df &lt;- bind_rows(top_strober_only, top_fash_only, top_both)
-
-# Color map
-col_map &lt;- c(
-  &quot;Both&quot; = &quot;#7B3294&quot;,
-  &quot;FASH only&quot; = &quot;#1B9E77&quot;,
-  &quot;Strober only&quot; = &quot;#D95F02&quot;,
-  &quot;Neither&quot; = &quot;grey80&quot;
-)
-
-ggplot(all_result_genes, aes(x = neglog_p, y = neglog_lfdr)) +
-  # draw grey background first
-  geom_point(data = subset(all_result_genes, category == &quot;Neither&quot;),
-             color = col_map[&quot;Neither&quot;], alpha = 0.25, size = 1.8) +
-  # then colored highlights on top
-  geom_point(data = subset(all_result_genes, category != &quot;Neither&quot;),
-             aes(color = category), alpha = 0.8, size = 2.2) +
-  scale_color_manual(values = col_map) +
-  geom_vline(xintercept = -log10(pval_cutoff_strober_linear), linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
-  geom_hline(yintercept = -log10(lfdr_cutoff1_after), linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
-  geom_text_repel(
-    data = label_df,
-    aes(label = gene_symbol, color = category),
-    size = 3,
-    box.padding = 0.3,
-    point.padding = 0.5,
-    max.overlaps = Inf,
-    show.legend = FALSE
-  ) +
-  theme_minimal() +
-  theme(
-    text = element_text(size = 16),
-    axis.text = element_text(size = 14),
-    legend.position = &quot;bottom&quot;
-  ) +
-  labs(
-    title = &quot;Scatterplot of lfdr (FASH) vs p-values (Strober Linear)&quot;,
-    x = &quot;-log10(p-value)&quot;,
-    y = &quot;-log10(lfdr)&quot;,
-    color = NULL
-  )</code></pre>
-<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_text_repel()`).</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-24-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
-Past versions of unnamed-chunk-24-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-24-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-24-1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-24-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/83145ccf6099e518cc99acf63dc9cb80ce30498a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-24-1.png" target="_blank">83145cc</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code># compare lfdr versus linear p-values
-all_result &lt;- merge(
-  data.frame(
-    key = names(datasets)[test1$fdr_results$index],
-    lfdr  = fash_fit1_update$lfdr[test1$fdr_results$index]
-  ),
-  strober_nonlinear %&gt;%
-    select(key, ensamble_id, rs_id, pvalue) %&gt;%
-    select(key, ensamble_id, pvalue),
-  by = &quot;key&quot;
-)
-
-# take the min lfdr and pvalue for each gene
-all_result_genes_pvalue &lt;- all_result %&gt;%
-  group_by(ensamble_id) %&gt;%
-  slice_min(order_by = pvalue, n = 1, with_ties = FALSE) %&gt;%
-  ungroup()
-
-all_result_genes_lfdr &lt;- all_result %&gt;%
-  group_by(ensamble_id) %&gt;%
-  slice_min(order_by = lfdr, n = 1, with_ties = FALSE) %&gt;%
-  ungroup()
-
-# merge by gene
-all_result_genes &lt;- merge(
-  all_result_genes_pvalue %&gt;%
-    select(ensamble_id, pvalue),
-  all_result_genes_lfdr %&gt;%
-    select(ensamble_id, lfdr),
-  by = &quot;ensamble_id&quot;
-)
-
-all_result_genes$gene_symbol &lt;- full_map$hgnc_symbol[match(all_result_genes$ensamble_id, full_map$ensembl_gene_id)]
-
-
-all_result_genes &lt;- all_result_genes %&gt;%
-  mutate(
-    neglog_p    = -log10(pmin(pmax(pvalue, eps), 1)),
-    neglog_lfdr = -log10(pmin(pmax(lfdr,   eps), 1)),
-    category = case_when(
-      pvalue &lt;= pval_cutoff_strober_nonlinear &amp; lfdr &lt;= lfdr_cutoff1_after ~ &quot;Both&quot;,
-      pvalue &lt;= pval_cutoff_strober_nonlinear &amp; lfdr &gt;  lfdr_cutoff1_after ~ &quot;Strober only&quot;,
-      pvalue &gt;  pval_cutoff_strober_nonlinear &amp; lfdr &lt;= lfdr_cutoff1_after ~ &quot;FASH only&quot;,
-      TRUE ~ &quot;Neither&quot;
-    ),
-    category = factor(category, levels = c(&quot;Both&quot;, &quot;FASH only&quot;, &quot;Strober only&quot;, &quot;Neither&quot;))
-  )
-
-# Recompute “top” sets (now based on category)
-top_strober_only &lt;- all_result_genes %&gt;%
-  filter(category == &quot;Strober only&quot;) %&gt;%
-  arrange(pvalue) %&gt;%
-  slice_head(n = 10)
-
-top_fash_only &lt;- all_result_genes %&gt;%
-  filter(category == &quot;FASH only&quot;) %&gt;%
-  arrange(lfdr) %&gt;%
-  slice_head(n = 10)
-
-top_both &lt;- all_result_genes %&gt;%
-  filter(category == &quot;Both&quot;) %&gt;%
-  arrange(pvalue + lfdr) %&gt;%
-  slice_head(n = 10)
-
-label_df &lt;- bind_rows(top_strober_only, top_fash_only, top_both)
-
-# Color map
-col_map &lt;- c(
-  &quot;Both&quot; = &quot;#7B3294&quot;,
-  &quot;FASH only&quot; = &quot;#1B9E77&quot;,
-  &quot;Strober only&quot; = &quot;#D95F02&quot;,
-  &quot;Neither&quot; = &quot;grey80&quot;
-)
-
-ggplot(all_result_genes, aes(x = neglog_p, y = neglog_lfdr)) +
-  # draw grey background first
-  geom_point(data = subset(all_result_genes, category == &quot;Neither&quot;),
-             color = col_map[&quot;Neither&quot;], alpha = 0.25, size = 1.8) +
-  # then colored highlights on top
-  geom_point(data = subset(all_result_genes, category != &quot;Neither&quot;),
-             aes(color = category), alpha = 0.8, size = 2.2) +
-  scale_color_manual(values = col_map) +
-  geom_vline(xintercept = -log10(pval_cutoff_strober_nonlinear), linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
-  geom_hline(yintercept = -log10(lfdr_cutoff1_after), linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
-  geom_text_repel(
-    data = label_df,
-    aes(label = gene_symbol, color = category),
-    size = 3,
-    box.padding = 0.3,
-    point.padding = 0.5,
-    max.overlaps = Inf,
-    show.legend = FALSE
-  ) +
-  theme_minimal() +
-  theme(
-    text = element_text(size = 16),
-    axis.text = element_text(size = 14),
-    legend.position = &quot;bottom&quot;
-  ) +
-  labs(
-    title = &quot;Scatterplot of lfdr (FASH) vs p-values (Strober Quadratic)&quot;,
-    x = &quot;-log10(p-value)&quot;,
-    y = &quot;-log10(lfdr)&quot;,
-    color = NULL
-  )</code></pre>
-<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_text_repel()`).</code></pre>
-<p><img src="figure/dynamic_eQTL_real.rmd/unnamed-chunk-25-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
-Past versions of unnamed-chunk-25-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-25-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-25-1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-25-1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/83145ccf6099e518cc99acf63dc9cb80ce30498a/docs/figure/dynamic_eQTL_real.rmd/unnamed-chunk-25-1.png" target="_blank">83145cc</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+plot_lfdr_vs_p(
+  fash_tbl,
+  strober_linear,
+  pval_cutoff_strober_linear,
+  lfdr_cutoff1_after,
+  gene_map,
+  title_text = &quot;Scatterplot of lfdr (FASH) vs p-values (Strober Linear)&quot;,
+  manual_symbol = manual_symbol
+)</code></pre>
+<p><img src="figure/dynamic_eQTL_real.Rmd/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_lfdr_vs_p(
+  fash_tbl,
+  strober_nonlinear,
+  pval_cutoff_strober_nonlinear,
+  lfdr_cutoff1_after,
+  gene_map,
+  title_text = &quot;Scatterplot of lfdr (FASH) vs p-values (Strober Quadratic)&quot;,
+  manual_symbol = manual_symbol
+)</code></pre>
+<p><img src="figure/dynamic_eQTL_real.Rmd/unnamed-chunk-22-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="classifying-dynamic-eqtls" class="section level2">
 <h2>Classifying dynamic eQTLs</h2>
@@ -2868,15 +1901,15 @@ testing_early_dyn &lt;- testing_functional(functional_early,
                                               smooth_var = smooth_var_refined)</code></pre>
 <p>How many pairs and how many unique genes are classified as early
 dynamic eQTLs?</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/classify_dyn_eQTLs_early.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;classify_dyn_eQTLs_early.RData&quot;))
 early_indices &lt;- testing_early_dyn$indices[testing_early_dyn$cfsr &lt;= alpha]
 length(early_indices)</code></pre>
 <pre><code>[1] 129</code></pre>
-<pre class="r"><code>early_genes &lt;- unique(sapply(strsplit(names(datasets)[early_indices], &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>early_genes &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% early_indices])
 length(early_genes)</code></pre>
 <pre><code>[1] 18</code></pre>
 <p>Let’s take a look at the top-ranked early dynamic eQTLs:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/early_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/early_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-early_examples--1">
 Past versions of "early_examples -1.png"
@@ -2936,9 +1969,6 @@ Ziang Zhang
 </table>
 </div>
 </div>
-<p>It is evident that these variants have largest <span
-class="math inline">\(|\beta(t)|\)</span> during the first three
-days.</p>
 </div>
 <div id="middle-dynamic-eqtls" class="section level3">
 <h3>Middle dynamic eQTLs</h3>
@@ -2953,23 +1983,15 @@ testing_middle_dyn &lt;- testing_functional(functional_middle,
                                                smooth_var = smooth_var_refined)</code></pre>
 <p>How many pairs and how many unique genes are classified as middle
 dynamic eQTLs?</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/classify_dyn_eQTLs_middle.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;classify_dyn_eQTLs_middle.RData&quot;))
 middle_indices &lt;- testing_middle_dyn$indices[testing_middle_dyn$cfsr &lt;= alpha]
 length(middle_indices)</code></pre>
 <pre><code>[1] 54</code></pre>
-<pre class="r"><code>middle_genes &lt;- unique(sapply(strsplit(names(datasets)[middle_indices], &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>middle_genes &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% middle_indices])
 length(middle_genes)</code></pre>
 <pre><code>[1] 17</code></pre>
-<pre class="r"><code>map &lt;- getBM(
-  attributes = c(&quot;ensembl_gene_id&quot;, &quot;hgnc_symbol&quot;),
-  filters    = &quot;ensembl_gene_id&quot;,
-  values     = middle_genes,
-  mart       = mart
-)
-
-middle_genes_symbols &lt;- map$hgnc_symbol[match(middle_genes, map$ensembl_gene_id)]</code></pre>
 <p>Take a look at their results:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/middle_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/middle_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-middle_examples--1">
 Past versions of "middle_examples -1.png"
@@ -3043,23 +2065,15 @@ testing_late_dyn &lt;- testing_functional(functional_late,
                                              smooth_var = smooth_var_refined)</code></pre>
 <p>How many pairs and how many unique genes are classified as late
 dynamic eQTLs?</p>
-<pre class="r"><code>load(paste0(result_dir, &quot;/classify_dyn_eQTLs_late.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;classify_dyn_eQTLs_late.RData&quot;))
 late_indices &lt;- testing_late_dyn$indices[testing_late_dyn$cfsr &lt;= alpha]
 length(late_indices)</code></pre>
 <pre><code>[1] 50</code></pre>
-<pre class="r"><code>late_genes &lt;- unique(sapply(strsplit(names(datasets)[late_indices], &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>late_genes &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% late_indices])
 length(late_genes)</code></pre>
 <pre><code>[1] 18</code></pre>
-<pre class="r"><code>map &lt;- getBM(
-  attributes = c(&quot;ensembl_gene_id&quot;, &quot;hgnc_symbol&quot;),
-  filters    = &quot;ensembl_gene_id&quot;,
-  values     = late_genes,
-  mart       = mart
-)
-late_genes_symbols &lt;- map$hgnc_symbol[match(late_genes, map$ensembl_gene_id)]
-late_genes_symbols[6] &lt;- &quot;SCO2&quot;</code></pre>
 <p>Let’s take a look at the top-ranked late dynamic eQTLs:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/late_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dynamic_eQTL_real.Rmd/late_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-late_examples--1">
 Past versions of "late_examples -1.png"
@@ -3126,7 +2140,6 @@ Ziang Zhang
 dynamic eQTLs?</p>
 <pre class="r"><code>switch_threshold &lt;- 0.25
 functional_switch &lt;- function(x){
-  # compute the radius of x, measured by deviation from 0 from below and from above
   x_pos &lt;- x[x &gt; 0]
   x_neg &lt;- x[x &lt; 0]
   if(length(x_pos) == 0 || length(x_neg) == 0){
@@ -3140,83 +2153,18 @@ testing_switch_dyn &lt;- testing_functional(functional_switch,
                                                indices = fash_highlighted1, 
                                                num_cores = num_cores,
                                                smooth_var = smooth_var_refined)</code></pre>
-<pre class="r"><code>load(paste0(result_dir, &quot;/classify_dyn_eQTLs_switch.RData&quot;))
+<pre class="r"><code>load(file.path(result_dir, &quot;classify_dyn_eQTLs_switch.RData&quot;))
 switch_indices &lt;- testing_switch_dyn$indices[testing_switch_dyn$cfsr &lt;= alpha]
 length(switch_indices)</code></pre>
 <pre><code>[1] 1284</code></pre>
-<pre class="r"><code>switch_genes &lt;- unique(sapply(strsplit(names(datasets)[switch_indices], &quot;_&quot;), &quot;[[&quot;, 1))
+<pre class="r"><code>switch_genes &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% switch_indices])
 length(switch_genes)</code></pre>
 <pre><code>[1] 285</code></pre>
-<pre class="r"><code>map &lt;- getBM(
-  attributes = c(&quot;ensembl_gene_id&quot;, &quot;hgnc_symbol&quot;),
-  filters    = &quot;ensembl_gene_id&quot;,
-  values     = switch_genes,
-  mart       = mart
-)
-switch_genes_symbols &lt;- map$hgnc_symbol[match(switch_genes, map$ensembl_gene_id)]
-selected_switch_genes_symbols &lt;- c(&quot;SCN5A&quot;, &quot;USP3&quot;, &quot;VAMP8&quot;, &quot;CCND1&quot;)
-selected_switch_genes &lt;- map$ensembl_gene_id[match(selected_switch_genes_symbols, map$hgnc_symbol)]</code></pre>
+<pre class="r"><code>selected_switch_genes_symbols &lt;- c(&quot;SCN5A&quot;, &quot;USP3&quot;, &quot;VAMP8&quot;, &quot;CCND1&quot;)
+sym2ens_sw &lt;- symbol_to_ens(selected_switch_genes_symbols, file.path(result_dir, &quot;cache_sym2ens_switch.rds&quot;))
+selected_switch_genes &lt;- sym2ens_sw$ensembl_gene_id[match(selected_switch_genes_symbols, sym2ens_sw$hgnc_symbol)]</code></pre>
 <p>Let’s take a look at the top-ranked switch dynamic eQTLs:</p>
-<p><img src="figure/dynamic_eQTL_real.rmd/switch_examples,%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-switch_examples,--1">
-Past versions of "switch_examples, -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-switch_examples,--1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/switch_examples, -1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c3e274e43ddff0957131a44b6f82766532ee4760/docs/figure/dynamic_eQTL_real.rmd/switch_examples, -1.png" target="_blank">c3e274e</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-17
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/switch_examples, -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/dynamic_eQTL_real.Rmd/switch_examples%20-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="gene-set-enrichment-analysis" class="section level2">
@@ -3227,36 +2175,24 @@ library(msigdbr)
 library(org.Hs.eg.db)
 library(cowplot)
 
-## Retrieve Hallmark gene sets for Homo sapiens (use Ensembl IDs)
 m_t2g &lt;- msigdbr(species = &quot;Homo sapiens&quot;, category = &quot;H&quot;) %&gt;% 
   mutate(ensembl_use = dplyr::coalesce(ensembl_gene, db_ensembl_gene)) %&gt;% 
   dplyr::filter(!is.na(ensembl_use)) %&gt;% 
   dplyr::select(gs_name, ensembl_use) %&gt;%
-  dplyr::distinct()    # one row per (pathway, Ensembl) pair
+  dplyr::distinct()
 
-
-## A function to check gene-enrichment using Ensembl IDs,
-## forcing the universe to be exactly background_gene
 enrich_set &lt;- function(genes_selected,
                        background_gene,
                        q_val_cutoff = 0.05,
                        pvalueCutoff = 0.05) {
 
-  # ensure character vectors &amp; unique
   genes_selected_raw  &lt;- unique(as.character(genes_selected))
   background_gene_raw &lt;- unique(as.character(background_gene))
 
-  # we&#39;ll enforce that the test universe is exactly these:
   universe_for_test &lt;- background_gene_raw
-
-  # genes that are in Hallmark already
   hallmark_genes &lt;- unique(m_t2g$ensembl_use)
-
-  # background genes that are NOT in Hallmark (no annotation)
   bg_not_in_hallmark &lt;- setdiff(universe_for_test, hallmark_genes)
 
-  # extend TERM2GENE so that *all* background genes appear in it at least once
-  # add them to a dummy pathway that we will later drop
   dummy_id &lt;- &quot;__DUMMY_BACKGROUND__&quot;
 
   if (length(bg_not_in_hallmark) &gt; 0) {
@@ -3269,12 +2205,7 @@ enrich_set &lt;- function(genes_selected,
     TERM2GENE_full &lt;- m_t2g
   }
 
-  # also make sure selected genes are a subset of the universe
   genes_sel_used &lt;- intersect(genes_selected_raw, universe_for_test)
-
-  # message(&quot;Original selected genes: &quot;, length(genes_selected_raw),
-  #         &quot; ; used in enrichment: &quot;, length(genes_sel_used))
-  # message(&quot;Universe size (background_gene): &quot;, length(universe_for_test))
 
   enrich_res &lt;- enricher(
     gene          = genes_sel_used,
@@ -3290,17 +2221,11 @@ enrich_set &lt;- function(genes_selected,
   }
 
   df &lt;- enrich_res@result
-
-  # drop the dummy term from results
   df &lt;- df %&gt;% dplyr::filter(ID != dummy_id)
 
-  # keep original ratios for reference
   df$GeneRatio_orig &lt;- df$GeneRatio
   df$BgRatio_orig   &lt;- df$BgRatio
 
-  # now recompute ratios using exactly:
-  #   - denominator for GeneRatio = number of selected genes in universe
-  #   - denominator for BgRatio   = number of background genes
   n_sel_total &lt;- length(genes_sel_used)
   n_bg_total  &lt;- length(universe_for_test)
 
@@ -3321,33 +2246,6 @@ HALLMARK_COAGULATION         11/1295 31/6362 0.03642565 0.382977
 HALLMARK_MYOGENESIS          20/1295 67/6362 0.04127072 0.382977
 HALLMARK_KRAS_SIGNALING_UP   15/1295 47/6362 0.04152590 0.382977
 HALLMARK_KRAS_SIGNALING_DN   10/1295 28/6362 0.04318383 0.382977</code></pre>
-<p>Among all the genes that are only highlighted by FASH but not by
-Strober et.al:</p>
-<pre class="r"><code>genes_only_middle &lt;- intersect(gene_fashr_only, middle_genes)
-result &lt;- enrich_set(genes_selected = genes_only_middle, background_gene = all_genes)
-result@result %&gt;% 
-  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %&gt;%
-  filter(pvalue &lt; 0.05)</code></pre>
-<pre><code>                    GeneRatio BgRatio     pvalue     qvalue
-HALLMARK_COMPLEMENT      2/13 57/6362 0.00577433 0.04862594</code></pre>
-<pre class="r"><code>genes_only_late &lt;- intersect(gene_fashr_only, late_genes)
-result &lt;- enrich_set(genes_selected = genes_only_late, background_gene = all_genes)
-result@result %&gt;% 
-  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %&gt;%
-  filter(pvalue &lt; 0.05)</code></pre>
-<pre><code>                                   GeneRatio  BgRatio      pvalue     qvalue
-HALLMARK_ANDROGEN_RESPONSE               2/9  57/6362 0.002727101 0.01148253
-HALLMARK_OXIDATIVE_PHOSPHORYLATION       2/9 119/6362 0.011462028 0.02413059</code></pre>
-<pre class="r"><code>genes_only_switch &lt;- intersect(gene_fashr_only, switch_genes)
-result &lt;- enrich_set(genes_selected = genes_only_switch, background_gene = all_genes)
-result@result %&gt;% 
-  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue) %&gt;%
-  filter(pvalue &lt; 0.05)</code></pre>
-<pre><code>                         GeneRatio BgRatio      pvalue    qvalue
-HALLMARK_NOTCH_SIGNALING     3/186 15/6362 0.008631579 0.3378583
-HALLMARK_APOPTOSIS           6/186 70/6362 0.016048268 0.3378583
-HALLMARK_P53_PATHWAY         6/186 83/6362 0.033936986 0.3948364
-HALLMARK_HEME_METABOLISM     6/186 85/6362 0.037509462 0.3948364</code></pre>
 <p>Among the genes highlighted by FASH that are classified as early
 dynamic eQTLs:</p>
 <pre class="r"><code>result &lt;- enrich_set(genes_selected = early_genes, background_gene = all_genes)
@@ -3423,52 +2321,49 @@ other attached packages:
  [4] IRanges_2.42.0         S4Vectors_0.46.0       Biobase_2.68.0        
  [7] BiocGenerics_0.54.1    generics_0.1.4         msigdbr_25.1.1        
 [10] clusterProfiler_4.16.0 lubridate_1.9.4        forcats_1.0.1         
-[13] stringr_1.5.2          dplyr_1.1.4            purrr_1.1.0           
-[16] readr_2.1.5            tidyr_1.3.1            tibble_3.3.0          
-[19] tidyverse_2.0.0        ggVennDiagram_1.5.4    ggrepel_0.9.6         
-[22] ggplot2_4.0.0          biomaRt_2.64.0         fashr_0.1.42          
-[25] workflowr_1.7.2       
+[13] readr_2.1.6            tibble_3.3.0           tidyverse_2.0.0       
+[16] ggVennDiagram_1.5.4    ggrepel_0.9.6          ggplot2_4.0.1         
+[19] purrr_1.2.0            stringr_1.6.0          tidyr_1.3.1           
+[22] dplyr_1.1.4            fashr_0.1.42          
 
 loaded via a namespace (and not attached):
   [1] RColorBrewer_1.1-3      rstudioapi_0.17.1       jsonlite_2.0.0         
-  [4] magrittr_2.0.4          ggtangle_0.0.8          farver_2.1.2           
+  [4] magrittr_2.0.4          ggtangle_0.0.9          farver_2.1.2           
   [7] rmarkdown_2.30          fs_1.6.6                vctrs_0.6.5            
  [10] memoise_2.0.1           ggtree_3.16.3           mixsqp_0.3-54          
- [13] htmltools_0.5.8.1       progress_1.2.3          curl_7.0.0             
- [16] gridGraphics_0.5-1      sass_0.4.10             bslib_0.9.0            
- [19] plyr_1.8.9              httr2_1.2.1             cachem_1.1.0           
- [22] TMB_1.9.18              igraph_2.2.0            whisker_0.4.1          
- [25] lifecycle_1.0.4         pkgconfig_2.0.3         gson_0.1.0             
- [28] Matrix_1.7-3            R6_2.6.1                fastmap_1.2.0          
- [31] GenomeInfoDbData_1.2.14 digest_0.6.37           numDeriv_2016.8-1.1    
- [34] aplot_0.2.9             enrichplot_1.28.4       colorspace_2.1-2       
- [37] patchwork_1.3.2         ps_1.9.1                rprojroot_2.1.1        
- [40] irlba_2.3.5.1           RSQLite_2.4.3           filelock_1.0.3         
- [43] labeling_0.4.3          timechange_0.3.0        httr_1.4.7             
- [46] compiler_4.5.1          bit64_4.6.0-1           withr_3.0.2            
- [49] S7_0.2.0                BiocParallel_1.42.2     DBI_1.2.3              
- [52] R.utils_2.13.0          rappdirs_0.3.3          tools_4.5.1            
- [55] ape_5.8-1               httpuv_1.6.16           R.oo_1.27.1            
- [58] glue_1.8.0              callr_3.7.6             nlme_3.1-168           
- [61] GOSemSim_2.34.0         promises_1.3.3          grid_4.5.1             
- [64] getPass_0.2-4           reshape2_1.4.4          fgsea_1.34.2           
- [67] gtable_0.3.6            tzdb_0.5.0              R.methodsS3_1.8.2      
- [70] data.table_1.17.8       hms_1.1.3               xml2_1.4.0             
- [73] XVector_0.48.0          pillar_1.11.1           babelgene_22.9         
- [76] yulab.utils_0.2.1       later_1.4.4             splines_4.5.1          
- [79] treeio_1.32.0           BiocFileCache_2.16.2    lattice_0.22-7         
- [82] bit_4.6.0               tidyselect_1.2.1        GO.db_3.21.0           
- [85] Biostrings_2.76.0       knitr_1.50              git2r_0.36.2           
- [88] xfun_0.54               LaplacesDemon_16.1.6    stringi_1.8.7          
- [91] UCSC.utils_1.4.0        lazyeval_0.2.2          ggfun_0.2.0            
- [94] yaml_2.3.10             evaluate_1.0.5          codetools_0.2-20       
- [97] qvalue_2.40.0           ggplotify_0.1.3         cli_3.6.5              
-[100] processx_3.8.6          jquerylib_0.1.4         dichromat_2.0-0.1      
-[103] Rcpp_1.1.0              GenomeInfoDb_1.44.3     dbplyr_2.5.1           
-[106] png_0.1-8               parallel_4.5.1          assertthat_0.2.1       
-[109] blob_1.2.4              prettyunits_1.2.0       DOSE_4.2.0             
-[112] tidytree_0.4.6          scales_1.4.0            crayon_1.5.3           
-[115] rlang_1.1.6             fastmatch_1.1-6         KEGGREST_1.48.1        </code></pre>
+ [13] htmltools_0.5.9         curl_7.0.0              gridGraphics_0.5-1     
+ [16] sass_0.4.10             bslib_0.9.0             plyr_1.8.9             
+ [19] cachem_1.1.0            TMB_1.9.19              whisker_0.4.1          
+ [22] igraph_2.2.1            lifecycle_1.0.4         pkgconfig_2.0.3        
+ [25] Matrix_1.7-4            R6_2.6.1                fastmap_1.2.0          
+ [28] gson_0.1.0              GenomeInfoDbData_1.2.14 digest_0.6.39          
+ [31] numDeriv_2016.8-1.1     aplot_0.2.9             enrichplot_1.28.4      
+ [34] colorspace_2.1-2        patchwork_1.3.2         rprojroot_2.1.1        
+ [37] irlba_2.3.5.1           RSQLite_2.4.5           labeling_0.4.3         
+ [40] timechange_0.3.0        httr_1.4.7              compiler_4.5.1         
+ [43] bit64_4.6.0-1           withr_3.0.2             S7_0.2.1               
+ [46] BiocParallel_1.42.2     DBI_1.2.3               R.utils_2.13.0         
+ [49] rappdirs_0.3.3          tools_4.5.1             otel_0.2.0             
+ [52] ape_5.8-1               httpuv_1.6.16           R.oo_1.27.1            
+ [55] glue_1.8.0              nlme_3.1-168            GOSemSim_2.34.0        
+ [58] promises_1.5.0          grid_4.5.1              reshape2_1.4.5         
+ [61] fgsea_1.34.2            gtable_0.3.6            tzdb_0.5.0             
+ [64] R.methodsS3_1.8.2       data.table_1.17.8       hms_1.1.4              
+ [67] utf8_1.2.6              XVector_0.48.0          pillar_1.11.1          
+ [70] babelgene_22.9          yulab.utils_0.2.3       later_1.4.4            
+ [73] splines_4.5.1           treeio_1.32.0           lattice_0.22-7         
+ [76] bit_4.6.0               tidyselect_1.2.1        GO.db_3.21.0           
+ [79] Biostrings_2.76.0       knitr_1.50              git2r_0.36.2           
+ [82] xfun_0.55               LaplacesDemon_16.1.6    stringi_1.8.7          
+ [85] UCSC.utils_1.4.0        workflowr_1.7.2         lazyeval_0.2.2         
+ [88] ggfun_0.2.0             yaml_2.3.12             evaluate_1.0.5         
+ [91] codetools_0.2-20        qvalue_2.40.0           ggplotify_0.1.3        
+ [94] cli_3.6.5               jquerylib_0.1.4         dichromat_2.0-0.1      
+ [97] Rcpp_1.1.0              GenomeInfoDb_1.44.3     png_0.1-8              
+[100] parallel_4.5.1          assertthat_0.2.1        blob_1.2.4             
+[103] DOSE_4.2.0              tidytree_0.4.6          scales_1.4.0           
+[106] crayon_1.5.3            rlang_1.1.6             fastmatch_1.1-6        
+[109] KEGGREST_1.48.1        </code></pre>
 </div>
 </div>
 </div>
