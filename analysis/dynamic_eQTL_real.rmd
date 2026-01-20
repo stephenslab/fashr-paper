@@ -476,7 +476,9 @@ length(pairs_highlighted1_before)/length(datasets)
 How many unique genes are detected?
 
 ```{r}
-genes_highlighted1 <- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1])
+genes_highlighted1 <- unique(
+  str_split(test1$significant_units, "_") %>% 
+  map_chr(1))
 length(genes_highlighted1)
 length(genes_highlighted1)/length(all_genes)
 ```
@@ -510,7 +512,7 @@ From now on, we will consider the pairs that are significant using the lfdr.
 Visualize top-ranked pairs for some selected genes:
 
 ```{r dynamic_example , echo=FALSE}
-genes_highlighted1_subset <- c("FHL2", "SCN5A", "FZD6", "GSN")
+genes_highlighted1_subset <- c("FZD6", "GSN", "SCN5A", "ST6GALNAC2")
 
 map_sym2ens <- symbol_to_ens(
   genes_highlighted1_subset,
@@ -641,7 +643,7 @@ ggVennDiagram(pair_sets_unadj, label = "both") +
 ```
 
 There is a large number of genes only detected by FASH (order 1). 
-Let's take a look at the 4 pairs that are least significant from FASH, and have at least p-value 0.1 from Strober et.al (both linear and non-linear):
+Let's take a look at the 4 pairs that are least significant from FASH, and have at least p-value 0.2 from Strober et.al (both linear and non-linear):
 
 ```{r only_fash_least_filter, echo=FALSE}
 gene_fashr_only <- setdiff(genes_highlighted1, union(genes_highlighted_strober_nonlinear, genes_highlighted_strober_linear))
@@ -653,7 +655,7 @@ pairs_pass_filter <- names(datasets)[test1$fdr_results$index[test1$fdr_results$l
 p_lin <- setNames(strober_linear$pvalue,    strober_linear$key)
 p_non <- setNames(strober_nonlinear$pvalue, strober_nonlinear$key)
 
-p_val_thres <- 0.1
+p_val_thres <- 0.2
 pairs_pass_filter <- tibble(key = pairs_pass_filter) %>%
   mutate(p_linear = p_lin[key], p_nonlinear = p_non[key]) %>%
   filter(p_linear >= p_val_thres, p_nonlinear >= p_val_thres) %>%
@@ -666,9 +668,14 @@ map_pass <- gene_map %>% filter(ensembl_gene_id %in% genes_pass_filter)
 ```
 
 ```{r only_fash_least, echo=FALSE}
-selected_gene_fashr_only <- c("CASKIN2", "NF2", "SAMD4B", "ZNF765")
+selected_gene_fashr_only <- c("DNAJC11", "RASSF1", "ZNF83", "MYO5A")
+ 
+file.remove(file.path(result_dir, "cache_sym2ens_only_fash_least.rds"))
 
 sym2ens <- symbol_to_ens(selected_gene_fashr_only, file.path(result_dir, "cache_sym2ens_only_fash_least.rds"))
+
+sym2ens2 <- map_pass$ensembl_gene_id[match(selected_gene_fashr_only, map_pass$hgnc_symbol)]
+
 gene_ens <- sym2ens$ensembl_gene_id[match(selected_gene_fashr_only, sym2ens$hgnc_symbol)]
 
 # choose, for each gene, the pair among pairs_pass_filter with max adjusted lfdr
@@ -689,10 +696,10 @@ plot_many_pairs(
 )
 ```
 
-Let's also take a look at the 4 pairs that are most significant from FASH, also with at least p-value 0.1 from Strober et.al (both linear and non-linear):
+Let's also take a look at the 4 pairs that are most significant from FASH, also with at least p-value 0.2 from Strober et.al (both linear and non-linear):
 
 ```{r only_fash_most_filter, echo=FALSE}
-qt_threshold <- quantile(fash_fit1_update$lfdr[test1$fdr_results$index[test1$fdr_results$FDR <= alpha]], 0.1)
+qt_threshold <- quantile(fash_fit1_update$lfdr[test1$fdr_results$index[test1$fdr_results$FDR <= alpha]], 0.2)
 pairs_pass_filter2 <- names(datasets)[test1$fdr_results$index[test1$fdr_results$lfdr <= qt_threshold & test1$fdr_results$FDR <= alpha]]
 
 pairs_pass_filter2 <- tibble(key = pairs_pass_filter2) %>%
@@ -705,7 +712,7 @@ genes_pass_filter2 <- intersect(genes_pass_filter2, gene_fashr_only)
 ```
 
 ```{r only_fash_most, echo=FALSE}
-selected_gene_fashr_only <- c("ADAMTS12", "MALSU1", "SSBP3", "NEURL4")
+selected_gene_fashr_only <- c("ADAMTS12", "MALSU1", "FKBP9", "FUT8")
 
 gene_ens2 <- gene_map$ensembl_gene_id[match(selected_gene_fashr_only, gene_map$hgnc_symbol)]
 
@@ -735,7 +742,7 @@ Take a look at the p-values and eFDRs from Strober et.al for some of these pairs
 
 ```{r}
 select_gene_id <- gene_map$ensembl_gene_id[gene_map$hgnc_symbol %in% selected_gene_fashr_only]
-select_variant_id <- c("rs35399", "rs2268744", "rs7532265", "rs2047804")
+select_variant_id <- c("rs1593084", "rs114623230", "rs3750076", "rs111950176")
 
 strober_linear %>%
   filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)
@@ -779,9 +786,9 @@ gene_missed_symbols <- symbol_of(gene_missed, gene_map)
 # For each missed gene, take the best p-value among linear / nonlinear (for display only)
 strober_best <- full_join(
   strober_linear_highlighted  %>% group_by(ensamble_id) %>% slice_min(pvalue, n = 1, with_ties = FALSE) %>% ungroup() %>% 
-    select(ensamble_id, rs_id, pvalue) %>% rename(rs_id_linear = rs_id, p_linear = pvalue),
+    dplyr::select(ensamble_id, rs_id, pvalue) %>% rename(rs_id_linear = rs_id, p_linear = pvalue),
   strober_nonlinear_highlighted %>% group_by(ensamble_id) %>% slice_min(pvalue, n = 1, with_ties = FALSE) %>% ungroup() %>% 
-    select(ensamble_id, rs_id, pvalue) %>% rename(rs_id_nonlinear = rs_id, p_nonlinear = pvalue),
+    dplyr::select(ensamble_id, rs_id, pvalue) %>% rename(rs_id_nonlinear = rs_id, p_nonlinear = pvalue),
   by = "ensamble_id"
 ) %>%
   filter(ensamble_id %in% gene_missed) %>%
@@ -800,20 +807,6 @@ plot_many_pairs(
   datasets = datasets,
   fash_raw = fash_fit1,
   fash_adj = fash_fit1_update,
-  gene_map = gene_map,
-  p_lin = p_lin,
-  p_non = p_non
-)
-```
-
-Take a look at the same plot but with the unadjusted FASH results:
-
-```{r miss_fash_most_unadj , echo=FALSE}
-plot_many_pairs(
-  idxs_missed,
-  datasets = datasets,
-  fash_raw = fash_fit1,
-  fash_adj = fash_fit1,   # unadjusted
   gene_map = gene_map,
   p_lin = p_lin,
   p_non = p_non

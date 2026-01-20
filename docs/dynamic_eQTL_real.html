@@ -394,7 +394,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2026-01-19
+<strong>Last updated:</strong> 2026-01-20
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -525,15 +525,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree79ff501ca7a58f1c4b7ed7236da7f3a8d8fc24a5targetblank79ff501a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree885ee18a1f3a8797bd61fd1b9ef77b398d01f8a5targetblank885ee18a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/stephenslab/fashr-paper/tree/79ff501ca7a58f1c4b7ed7236da7f3a8d8fc24a5" target="_blank">79ff501</a>
+<a href="https://github.com/stephenslab/fashr-paper/tree/885ee18a1f3a8797bd61fd1b9ef77b398d01f8a5" target="_blank">885ee18</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree79ff501ca7a58f1c4b7ed7236da7f3a8d8fc24a5targetblank79ff501a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomstephenslabfashrpapertree885ee18a1f3a8797bd61fd1b9ef77b398d01f8a5targetblank885ee18a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -543,7 +543,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/stephenslab/fashr-paper/tree/79ff501ca7a58f1c4b7ed7236da7f3a8d8fc24a5" target="_blank">79ff501</a>.
+<a href="https://github.com/stephenslab/fashr-paper/tree/885ee18a1f3a8797bd61fd1b9ef77b398d01f8a5" target="_blank">885ee18</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -562,6 +562,8 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/site_libs/
     Ignored:    code/.DS_Store
     Ignored:    code/.Rhistory
     Ignored:    data/.DS_Store
@@ -571,9 +573,10 @@ Ignored files:
 Untracked files:
     Untracked:  data/appendixB/
     Untracked:  data/dynamic_eQTL_real/
-    Untracked:  output/appendixB/power_fdr_order2.pdf
     Untracked:  output/dynamic_eQTL_real/
-    Untracked:  output/toy_example/
+
+Unstaged changes:
+    Modified:   analysis/dynamic_eQTL_real.rmd
 
 </code></pre>
 <p>
@@ -618,6 +621,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/stephenslab/fashr-paper/885ee18a1f3a8797bd61fd1b9ef77b398d01f8a5/docs/dynamic_eQTL_real.html" target="_blank">885ee18</a>
+</td>
+<td>
+Ziang Zhang
+</td>
+<td>
+2026-01-19
+</td>
+<td>
+update code for non-linear dynamic
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1118,22 +1138,20 @@ save(fash_fit1, file = &quot;./results/fash_fit1_all.RData&quot;)</code></pre>
 -------------------
 Number of datasets: 1009173
 Likelihood: gaussian
-Number of PSD grid values: 52 (initial), 11 (non-trivial)
+Number of PSD grid values: 52 (initial), 9 (non-trivial)
 Order of Integrated Wiener Process (IWP): 1</code></pre>
 <p>As well as the estimated priors:</p>
 <pre class="r"><code>fash_fit1$prior_weights</code></pre>
-<pre><code>           psd prior_weight
-1  0.000000000  0.410663695
-2  0.006737947  0.141127785
-3  0.016572675  0.012015292
-4  0.049787068  0.178001757
-5  0.074273578  0.071560569
-6  0.110803158  0.098258453
-7  0.182683524  0.037970329
-8  0.246596964  0.021572272
-9  0.367879441  0.007501801
-10 0.406569660  0.011455909
-11 1.000000000  0.009872138</code></pre>
+<pre><code>          psd prior_weight
+1 0.000000000  0.428990301
+2 0.006737947  0.114737367
+3 0.040762204  0.101515369
+4 0.055023220  0.158922393
+5 0.100258844  0.029418944
+6 0.122456428  0.111020074
+7 0.223130160  0.025050394
+8 0.367879441  0.022618462
+9 1.000000000  0.007726694</code></pre>
 </div>
 <div id="problem-with-pi_0-estimation" class="section level2">
 <h2>Problem with <span class="math inline">\(\pi_0\)</span>
@@ -1141,7 +1159,7 @@ estimation</h2>
 <p>If we measure the significance using the false discovery rate, then
 it is sensitive to the value of <span
 class="math inline">\(\pi_0\)</span>. The estimated <span
-class="math inline">\(\pi_0\)</span> is 0.4106637, which is way too
+class="math inline">\(\pi_0\)</span> is 0.4289903, which is way too
 small to be realistic.</p>
 <p>One likely reason could be due to model-misspecification under the
 alternative hypothesis. To account for this, we will consider the
@@ -1151,7 +1169,7 @@ class="math inline">\(\pi_0\)</span> based on the BF procedure:</p>
 <pre class="r"><code>fash_fit1_update &lt;- BF_update(fash_fit1, plot = FALSE)
 fash_fit1_update$prior_weights
 save(fash_fit1_update, file = paste0(result_dir, &quot;/fash_fit1_update.RData&quot;))</code></pre>
-<p>The conservative estimate is 0.93568, which is much more
+<p>The conservative estimate is 0.9381533, which is much more
 realistic.</p>
 <p>(ii): Instead of looking at the FDR which is based on the estimated
 <span class="math inline">\(\pi_0\)</span>, we can use the minimum local
@@ -1358,36 +1376,38 @@ Ziang Zhang
 <pre class="r"><code>alpha &lt;- 0.05
 
 test1 &lt;- fdr_control(fash_fit1_update, alpha = alpha, plot = FALSE)</code></pre>
-<pre><code>10290 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
+<pre><code>9205 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
 <pre class="r"><code>fash_highlighted1 &lt;- test1$fdr_results$index[test1$fdr_results$FDR &lt;= alpha]
 
 test1_before &lt;- fdr_control(fash_fit1, alpha = alpha, plot = FALSE)</code></pre>
-<pre><code>50027 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
+<pre><code>43860 datasets are significant at alpha level 0.05. Total datasets tested: 1009173. </code></pre>
 <pre class="r"><code>fash_highlighted1_before &lt;- test1_before$fdr_results$index[test1_before$fdr_results$FDR &lt;= alpha]</code></pre>
 <p>How many pairs are detected as dynamic eQTLs?</p>
 <pre class="r"><code>pairs_highlighted1 &lt;- names(datasets)[fash_highlighted1]
 length(pairs_highlighted1)</code></pre>
-<pre><code>[1] 10290</code></pre>
+<pre><code>[1] 9205</code></pre>
 <pre class="r"><code>length(pairs_highlighted1)/length(datasets)</code></pre>
-<pre><code>[1] 0.01019647</code></pre>
+<pre><code>[1] 0.00912133</code></pre>
 <p>What is the number before the BF adjustment?</p>
 <pre class="r"><code>pairs_highlighted1_before &lt;- names(datasets)[fash_highlighted1_before]
 length(pairs_highlighted1_before)</code></pre>
-<pre><code>[1] 50027</code></pre>
+<pre><code>[1] 43860</code></pre>
 <pre class="r"><code>length(pairs_highlighted1_before)/length(datasets)</code></pre>
-<pre><code>[1] 0.04957227</code></pre>
+<pre><code>[1] 0.04346133</code></pre>
 <p>How many unique genes are detected?</p>
-<pre class="r"><code>genes_highlighted1 &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1])
+<pre class="r"><code>genes_highlighted1 &lt;- unique(
+  str_split(test1$significant_units, &quot;_&quot;) %&gt;% 
+  map_chr(1))
 length(genes_highlighted1)</code></pre>
-<pre><code>[1] 1295</code></pre>
+<pre><code>[1] 1177</code></pre>
 <pre class="r"><code>length(genes_highlighted1)/length(all_genes)</code></pre>
-<pre><code>[1] 0.2035523</code></pre>
+<pre><code>[1] 0.1850047</code></pre>
 <p>Before the BF adjustment?</p>
 <pre class="r"><code>genes_highlighted1_before &lt;- unique(pair_tbl$ens_id[pair_tbl$idx %in% fash_highlighted1_before])
 length(genes_highlighted1_before)</code></pre>
-<pre><code>[1] 3417</code></pre>
+<pre><code>[1] 3258</code></pre>
 <pre class="r"><code>length(genes_highlighted1_before)/length(all_genes)</code></pre>
-<pre><code>[1] 0.5370953</code></pre>
+<pre><code>[1] 0.5121031</code></pre>
 <p>Let’s see how many pairs and genes remain significant after
 controlling the min-lfsr:</p>
 <pre class="r"><code>fash_highlighted1_lfsr &lt;- min_lfsr_summary1_update$index[min_lfsr_summary1_update$fsr &lt;= alpha]
@@ -1523,9 +1543,9 @@ adjustment?</p>
 <pre class="r"><code>lfdr_cutoff1_before &lt;- max(fash_fit1$lfdr[test1$fdr_results$index[test1$fdr_results$FDR &lt;= alpha]])
 lfdr_cutoff1_after  &lt;- max(fash_fit1_update$lfdr[test1$fdr_results$index[test1$fdr_results$FDR &lt;= alpha]])
 lfdr_cutoff1_before</code></pre>
-<pre><code>[1] 0.008331724</code></pre>
+<pre><code>[1] 0.00856825</code></pre>
 <pre class="r"><code>lfdr_cutoff1_after</code></pre>
-<pre><code>[1] 0.1478733</code></pre>
+<pre><code>[1] 0.1474749</code></pre>
 <p>Let’s take a look at the overlap between the two methods used in
 Strober et.al and FASH (order 1):</p>
 <p><img src="figure/dynamic_eQTL_real.Rmd/venn_diagram_strober_fash%20-1.png" width="768" style="display: block; margin: auto;" /></p>
@@ -1689,8 +1709,9 @@ Ziang Zhang
 </div>
 <p>There is a large number of genes only detected by FASH (order 1).
 Let’s take a look at the 4 pairs that are least significant from FASH,
-and have at least p-value 0.1 from Strober et.al (both linear and
+and have at least p-value 0.2 from Strober et.al (both linear and
 non-linear):</p>
+<pre><code>[1] TRUE</code></pre>
 <p><img src="figure/dynamic_eQTL_real.Rmd/only_fash_least-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-only_fash_least-1">
@@ -1730,7 +1751,7 @@ Ziang Zhang
 </div>
 </div>
 <p>Let’s also take a look at the 4 pairs that are most significant from
-FASH, also with at least p-value 0.1 from Strober et.al (both linear and
+FASH, also with at least p-value 0.2 from Strober et.al (both linear and
 non-linear):</p>
 <p><img src="figure/dynamic_eQTL_real.Rmd/only_fash_most-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
@@ -1773,26 +1794,26 @@ Ziang Zhang
 <p>Take a look at the p-values and eFDRs from Strober et.al for some of
 these pairs:</p>
 <pre class="r"><code>select_gene_id &lt;- gene_map$ensembl_gene_id[gene_map$hgnc_symbol %in% selected_gene_fashr_only]
-select_variant_id &lt;- c(&quot;rs35399&quot;, &quot;rs2268744&quot;, &quot;rs7532265&quot;, &quot;rs2047804&quot;)
+select_variant_id &lt;- c(&quot;rs1593084&quot;, &quot;rs114623230&quot;, &quot;rs3750076&quot;, &quot;rs111950176&quot;)
 
 strober_linear %&gt;%
   filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)</code></pre>
 <pre><code># A tibble: 4 × 6
-  rs_id     ensamble_id     pvalue  eFDR key                       gene_symbol
-  &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
-1 rs2268744 ENSG00000156928  0.163 0.680 ENSG00000156928_rs2268744 MALSU1     
-2 rs2047804 ENSG00000215041  0.606 0.921 ENSG00000215041_rs2047804 NEURL4     
-3 rs35399   ENSG00000151388  0.685 0.944 ENSG00000151388_rs35399   ADAMTS12   
-4 rs7532265 ENSG00000157216  0.849 0.977 ENSG00000157216_rs7532265 SSBP3      </code></pre>
+  rs_id       ensamble_id     pvalue  eFDR key                       gene_symbol
+  &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
+1 rs111950176 ENSG00000033170  0.297 0.796 ENSG00000033170_rs111950… FUT8       
+2 rs1593084   ENSG00000151388  0.384 0.845 ENSG00000151388_rs1593084 ADAMTS12   
+3 rs3750076   ENSG00000122642  0.468 0.878 ENSG00000122642_rs3750076 FKBP9      
+4 rs114623230 ENSG00000156928  0.648 0.934 ENSG00000156928_rs114623… MALSU1     </code></pre>
 <pre class="r"><code>strober_nonlinear %&gt;%
   filter(rs_id %in% select_variant_id, ensamble_id %in% select_gene_id)</code></pre>
 <pre><code># A tibble: 4 × 6
-  rs_id     ensamble_id     pvalue  eFDR key                       gene_symbol
-  &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
-1 rs35399   ENSG00000151388  0.116 0.680 ENSG00000151388_rs35399   ADAMTS12   
-2 rs2268744 ENSG00000156928  0.196 0.776 ENSG00000156928_rs2268744 MALSU1     
-3 rs7532265 ENSG00000157216  0.299 0.856 ENSG00000157216_rs7532265 SSBP3      
-4 rs2047804 ENSG00000215041  0.757 0.981 ENSG00000215041_rs2047804 NEURL4     </code></pre>
+  rs_id       ensamble_id     pvalue  eFDR key                       gene_symbol
+  &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                     &lt;chr&gt;      
+1 rs111950176 ENSG00000033170  0.271 0.837 ENSG00000033170_rs111950… FUT8       
+2 rs3750076   ENSG00000122642  0.418 0.909 ENSG00000122642_rs3750076 FKBP9      
+3 rs1593084   ENSG00000151388  0.471 0.928 ENSG00000151388_rs1593084 ADAMTS12   
+4 rs114623230 ENSG00000156928  0.798 0.986 ENSG00000156928_rs114623… MALSU1     </code></pre>
 <p>Next, look at some genes that were detected by both FASH and Strober
 et.al. We will pick the most significant pair for each gene in FASH’s
 results:</p>
@@ -1896,79 +1917,6 @@ Ziang Zhang
 <tr>
 <td>
 <a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/miss_fash_most -1.png" target="_blank">2010ecb</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Take a look at the same plot but with the unadjusted FASH
-results:</p>
-<p><img src="figure/dynamic_eQTL_real.Rmd/miss_fash_most_unadj%20-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-miss_fash_most_unadj--1">
-Past versions of "miss_fash_most_unadj -1.png"
-</button>
-</p>
-<div id="fig-no-spaces-miss_fash_most_unadj--1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/79ff501ca7a58f1c4b7ed7236da7f3a8d8fc24a5/docs/figure/dynamic_eQTL_real.rmd/miss_fash_most_unadj -1.png" target="_blank">79ff501</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2026-01-19
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c75cd5f6dd356ec1ec25e1490ce29742e67985ca/docs/figure/dynamic_eQTL_real.rmd/miss_fash_most_unadj -1.png" target="_blank">c75cd5f</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-18
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/c3e274e43ddff0957131a44b6f82766532ee4760/docs/figure/dynamic_eQTL_real.rmd/miss_fash_most_unadj -1.png" target="_blank">c3e274e</a>
-</td>
-<td>
-Ziang Zhang
-</td>
-<td>
-2025-12-17
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/stephenslab/fashr-paper/blob/2010ecb3208b8ce7d34be6bb0a2106ab8977b688/docs/figure/dynamic_eQTL_real.rmd/miss_fash_most_unadj -1.png" target="_blank">2010ecb</a>
 </td>
 <td>
 Ziang Zhang
@@ -2752,12 +2700,12 @@ enrich_set &lt;- function(genes_selected,
 result@result %&gt;% 
   filter(pvalue &lt; 0.05) %&gt;%
   dplyr::select(GeneRatio, BgRatio, pvalue, qvalue)</code></pre>
-<pre><code>                           GeneRatio BgRatio     pvalue   qvalue
-HALLMARK_HYPOXIA             26/1295 89/6362 0.02879958 0.382977
-HALLMARK_COAGULATION         11/1295 31/6362 0.03642565 0.382977
-HALLMARK_MYOGENESIS          20/1295 67/6362 0.04127072 0.382977
-HALLMARK_KRAS_SIGNALING_UP   15/1295 47/6362 0.04152590 0.382977
-HALLMARK_KRAS_SIGNALING_DN   10/1295 28/6362 0.04318383 0.382977</code></pre>
+<pre><code>                                 GeneRatio BgRatio     pvalue    qvalue
+HALLMARK_HYPOXIA                   25/1177 89/6362 0.01692525 0.4356805
+HALLMARK_IL6_JAK_STAT3_SIGNALING    8/1177 21/6362 0.02796398 0.4356805
+HALLMARK_ESTROGEN_RESPONSE_EARLY   22/1177 82/6362 0.03940505 0.4356805
+HALLMARK_ESTROGEN_RESPONSE_LATE    21/1177 79/6362 0.04759267 0.4356805
+HALLMARK_ANDROGEN_RESPONSE         16/1177 57/6362 0.04992902 0.4356805</code></pre>
 <p>Among the genes highlighted by FASH that are classified as early
 dynamic eQTLs:</p>
 <pre class="r"><code>result &lt;- enrich_set(genes_selected = early_genes, background_gene = all_genes)
@@ -2832,51 +2780,54 @@ other attached packages:
  [1] cowplot_1.2.0          org.Hs.eg.db_3.21.0    AnnotationDbi_1.70.0  
  [4] IRanges_2.42.0         S4Vectors_0.46.0       Biobase_2.68.0        
  [7] BiocGenerics_0.54.1    generics_0.1.4         msigdbr_25.1.1        
-[10] clusterProfiler_4.16.0 lubridate_1.9.4        forcats_1.0.1         
-[13] readr_2.1.6            tibble_3.3.0           tidyverse_2.0.0       
-[16] ggVennDiagram_1.5.4    ggrepel_0.9.6          ggplot2_4.0.1         
-[19] purrr_1.2.0            stringr_1.6.0          tidyr_1.3.1           
-[22] dplyr_1.1.4            fashr_0.1.42           workflowr_1.7.2       
+[10] clusterProfiler_4.16.0 biomaRt_2.64.0         lubridate_1.9.4       
+[13] forcats_1.0.1          readr_2.1.6            tibble_3.3.0          
+[16] tidyverse_2.0.0        ggVennDiagram_1.5.4    ggrepel_0.9.6         
+[19] ggplot2_4.0.1          purrr_1.2.0            stringr_1.6.0         
+[22] tidyr_1.3.1            dplyr_1.1.4            fashr_0.1.42          
+[25] workflowr_1.7.2       
 
 loaded via a namespace (and not attached):
   [1] RColorBrewer_1.1-3      rstudioapi_0.17.1       jsonlite_2.0.0         
   [4] magrittr_2.0.4          ggtangle_0.0.9          farver_2.1.2           
   [7] rmarkdown_2.30          fs_1.6.6                vctrs_0.6.5            
  [10] memoise_2.0.1           ggtree_3.16.3           mixsqp_0.3-54          
- [13] htmltools_0.5.9         curl_7.0.0              gridGraphics_0.5-1     
- [16] sass_0.4.10             bslib_0.9.0             plyr_1.8.9             
- [19] cachem_1.1.0            TMB_1.9.19              whisker_0.4.1          
- [22] igraph_2.2.1            lifecycle_1.0.4         pkgconfig_2.0.3        
- [25] gson_0.1.0              Matrix_1.7-4            R6_2.6.1               
- [28] fastmap_1.2.0           GenomeInfoDbData_1.2.14 digest_0.6.39          
- [31] numDeriv_2016.8-1.1     aplot_0.2.9             enrichplot_1.28.4      
- [34] colorspace_2.1-2        patchwork_1.3.2         ps_1.9.1               
- [37] rprojroot_2.1.1         irlba_2.3.5.1           RSQLite_2.4.5          
- [40] labeling_0.4.3          timechange_0.3.0        httr_1.4.7             
- [43] compiler_4.5.1          bit64_4.6.0-1           withr_3.0.2            
- [46] S7_0.2.1                BiocParallel_1.42.2     DBI_1.2.3              
- [49] R.utils_2.13.0          rappdirs_0.3.3          tools_4.5.1            
- [52] otel_0.2.0              ape_5.8-1               httpuv_1.6.16          
- [55] R.oo_1.27.1             glue_1.8.0              callr_3.7.6            
- [58] nlme_3.1-168            GOSemSim_2.34.0         promises_1.5.0         
- [61] grid_4.5.1              getPass_0.2-4           reshape2_1.4.5         
- [64] fgsea_1.34.2            gtable_0.3.6            tzdb_0.5.0             
- [67] R.methodsS3_1.8.2       data.table_1.17.8       hms_1.1.4              
- [70] utf8_1.2.6              XVector_0.48.0          pillar_1.11.1          
- [73] babelgene_22.9          yulab.utils_0.2.3       later_1.4.4            
- [76] splines_4.5.1           treeio_1.32.0           lattice_0.22-7         
- [79] bit_4.6.0               tidyselect_1.2.1        GO.db_3.21.0           
- [82] Biostrings_2.76.0       knitr_1.50              git2r_0.36.2           
- [85] xfun_0.55               LaplacesDemon_16.1.6    stringi_1.8.7          
- [88] UCSC.utils_1.4.0        lazyeval_0.2.2          ggfun_0.2.0            
- [91] yaml_2.3.12             evaluate_1.0.5          codetools_0.2-20       
- [94] qvalue_2.40.0           ggplotify_0.1.3         cli_3.6.5              
- [97] processx_3.8.6          jquerylib_0.1.4         dichromat_2.0-0.1      
-[100] Rcpp_1.1.0              GenomeInfoDb_1.44.3     png_0.1-8              
-[103] parallel_4.5.1          assertthat_0.2.1        blob_1.2.4             
-[106] DOSE_4.2.0              tidytree_0.4.6          scales_1.4.0           
-[109] crayon_1.5.3            rlang_1.1.6             fastmatch_1.1-6        
-[112] KEGGREST_1.48.1        </code></pre>
+ [13] htmltools_0.5.9         progress_1.2.3          curl_7.0.0             
+ [16] gridGraphics_0.5-1      sass_0.4.10             bslib_0.9.0            
+ [19] plyr_1.8.9              httr2_1.2.2             cachem_1.1.0           
+ [22] TMB_1.9.19              igraph_2.2.1            whisker_0.4.1          
+ [25] lifecycle_1.0.4         pkgconfig_2.0.3         gson_0.1.0             
+ [28] Matrix_1.7-4            R6_2.6.1                fastmap_1.2.0          
+ [31] GenomeInfoDbData_1.2.14 digest_0.6.39           numDeriv_2016.8-1.1    
+ [34] aplot_0.2.9             enrichplot_1.28.4       colorspace_2.1-2       
+ [37] patchwork_1.3.2         ps_1.9.1                rprojroot_2.1.1        
+ [40] irlba_2.3.5.1           RSQLite_2.4.5           filelock_1.0.3         
+ [43] labeling_0.4.3          timechange_0.3.0        httr_1.4.7             
+ [46] compiler_4.5.1          bit64_4.6.0-1           withr_3.0.2            
+ [49] S7_0.2.1                BiocParallel_1.42.2     DBI_1.2.3              
+ [52] R.utils_2.13.0          rappdirs_0.3.3          tools_4.5.1            
+ [55] otel_0.2.0              ape_5.8-1               httpuv_1.6.16          
+ [58] R.oo_1.27.1             glue_1.8.0              callr_3.7.6            
+ [61] nlme_3.1-168            GOSemSim_2.34.0         promises_1.5.0         
+ [64] grid_4.5.1              getPass_0.2-4           reshape2_1.4.5         
+ [67] fgsea_1.34.2            gtable_0.3.6            tzdb_0.5.0             
+ [70] R.methodsS3_1.8.2       data.table_1.17.8       hms_1.1.4              
+ [73] xml2_1.5.1              utf8_1.2.6              XVector_0.48.0         
+ [76] pillar_1.11.1           babelgene_22.9          yulab.utils_0.2.3      
+ [79] later_1.4.4             splines_4.5.1           treeio_1.32.0          
+ [82] BiocFileCache_2.16.2    lattice_0.22-7          bit_4.6.0              
+ [85] tidyselect_1.2.1        GO.db_3.21.0            Biostrings_2.76.0      
+ [88] knitr_1.50              git2r_0.36.2            xfun_0.55              
+ [91] LaplacesDemon_16.1.6    stringi_1.8.7           UCSC.utils_1.4.0       
+ [94] lazyeval_0.2.2          ggfun_0.2.0             yaml_2.3.12            
+ [97] evaluate_1.0.5          codetools_0.2-20        qvalue_2.40.0          
+[100] ggplotify_0.1.3         cli_3.6.5               processx_3.8.6         
+[103] jquerylib_0.1.4         dichromat_2.0-0.1       Rcpp_1.1.0             
+[106] GenomeInfoDb_1.44.3     dbplyr_2.5.1            png_0.1-8              
+[109] parallel_4.5.1          assertthat_0.2.1        blob_1.2.4             
+[112] prettyunits_1.2.0       DOSE_4.2.0              tidytree_0.4.6         
+[115] scales_1.4.0            crayon_1.5.3            rlang_1.1.6            
+[118] fastmatch_1.1-6         KEGGREST_1.48.1        </code></pre>
 </div>
 </div>
 </div>

@@ -220,9 +220,6 @@ As well as the estimated priors:
 fash_fit2$prior_weights
 ```
 
-
-
-
 ## Problem with $\pi_0$ estimation
 
 The original MLE estimated $\pi_0$ is `r fash_fit2$prior_weights$prior_weight[1]`.
@@ -293,7 +290,7 @@ length(genes_highlighted2_before)/length(all_genes)
 Visualize top-ranked pairs:
 
 ```{r nonlinear_dynamic_examples, echo=FALSE}
-genes_highlighted2_subset <- c("AMN", "RIPK2", "DENND5B", "ZIC2")
+genes_highlighted2_subset <- c("AMN", "RIPK2", "LPAR2", "ST6GALNAC2")
 
 # convert symbols to ensembl IDs
 map <- getBM(
