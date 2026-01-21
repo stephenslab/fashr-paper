@@ -306,7 +306,7 @@ plot_lfdr_vs_p <- function(fash_tbl, strober_df, pval_cutoff, lfdr_cutoff,
 We use the processed (expression \& genotype) data of [Strober et.al, 2019](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6623972/) to perform the eQTL analysis.
 
 For the association testing, we use a linear regression model for each gene-variant pair at each time point.
-Following the practice in Strober et.al, we adjust for the first 3 PCs.
+Following the practice in Strober et.al, we adjust for the first 5 PCs.
 
 The code to perform this step can be found in the script `dynamic_eQTL_real/00_eQTLs.R` from the code directory.
 
