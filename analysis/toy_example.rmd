@@ -50,8 +50,8 @@ highlights_both <- intersect(highlights_1, highlights_2)
 ## An example that is significant in FASH(1) but not FASH(2)
 
 ```{r}
-selected_index <- highlights_1_not_2[50]
-# FZD6 and SNP rs2839290
+selected_index <- which(names(datasets) == "ENSG00000164930_rs28392906")
+# FZD6 and SNP rs28392906
 selected_data <- datasets[[selected_index]]
 ```
 
