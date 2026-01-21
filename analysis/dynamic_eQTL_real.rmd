@@ -135,7 +135,9 @@ plot_pair_base <- function(idx,
                            smooth_var = seq(0, 15, by = 0.1),
                            add_lm = TRUE,
                            add_quad = TRUE,
-                           main_prefix = NULL) {
+                           main_prefix = NULL,
+                           ylim_type = c("data_fitted", "fitted"),
+                           include_zero_line = FALSE) {
 
   dat <- datasets[[idx]]
   x <- dat$x; y <- dat$y; se <- dat$SE
@@ -143,8 +145,19 @@ plot_pair_base <- function(idx,
 
   fitted <- predict(fash_adj, index = idx, smooth_var = smooth_var)
 
-  y_min <- min(y - 2 * se, fitted$lower, na.rm = TRUE)
-  y_max <- max(y + 2 * se, fitted$upper, na.rm = TRUE)
+  # if ylim_type is data_fitted, take the max and min:
+  ylim_type <- match.arg(ylim_type)
+  if (ylim_type == "data_fitted") {
+    y_min <- min(y - 2 * se, fitted$lower, na.rm = TRUE)
+    y_max <- max(y + 2 * se, fitted$upper, na.rm = TRUE)
+  }
+  else{
+    y_min <- min(fitted$lower, na.rm = TRUE) 
+    y_max <- max(fitted$upper, na.rm = TRUE)
+    range <- y_max - y_min
+    y_min <- y_min - 0.2 * range
+    y_max <- y_max + 0.2 * y_max
+  }
 
   # titles
   key_parts <- strsplit(names(datasets)[idx], "_", fixed = TRUE)[[1]]
@@ -169,11 +182,12 @@ plot_pair_base <- function(idx,
          length = 0.05, angle = 90, code = 3, col = "black")
 
   polygon(c(fitted$x, rev(fitted$x)), c(fitted$lower, rev(fitted$upper)),
-          col = rgb(1, 0, 0, 0.3), border = NA)
+          col = rgb(1, 0, 0, 0.1), border = NA)
   lines(fitted$x, fitted$mean, col = "red", lwd = 2)
 
   if (add_lm)   abline(lin_fit, col = "green", lty = 2, lwd = 1)
   if (add_quad) lines(x_grid, quad_pred, col = "purple", lty = 2, lwd = 1)
+  if (include_zero_line) abline(h = 0, col = "blue", lty = 2, lwd = 1)
 
   lfdr_before <- fash_raw$lfdr[idx]
   lfdr_after  <- fash_adj$lfdr[idx]
@@ -221,10 +235,6 @@ plot_many_pairs <- function(idxs, nrow = 2, ncol = 2, ...) {
 
   invisible(NULL)
 }
-
-
-
-
 
 # ----------------------------
 # Strober loading helpers
@@ -528,7 +538,8 @@ plot_many_pairs(
   datasets = datasets,
   fash_raw = fash_fit1,
   fash_adj = fash_fit1_update,
-  gene_map = gene_map
+  gene_map = gene_map,
+  ylim_type = "fitted"
 )
 ```
 
@@ -602,7 +613,7 @@ gene_sets <- list(
   "Strober (Linear)" = genes_highlighted_strober_linear,
   "FASH (1)" = genes_highlighted1
 )
-ggVennDiagram(gene_sets, label = "both") +
+ggVennDiagram(gene_sets, label = "both", label_alpha = 0) +
   scale_fill_gradient(low="grey90",high = "red") +
   theme(legend.position = "right")
 ```
@@ -615,7 +626,7 @@ pair_sets <- list(
   "Strober (Linear)" = pairs_highlighted_strober_linear,
   "FASH (1)" = pairs_highlighted1
 )
-ggVennDiagram(pair_sets, label = "both") +
+ggVennDiagram(pair_sets, label = "both", label_alpha = 0) +
   scale_fill_gradient(low="grey90",high = "red") +
   theme(legend.position = "right")
 ```
@@ -628,7 +639,7 @@ gene_sets_unadj <- list(
   "Strober (Linear)" = genes_highlighted_strober_linear,
   "FASH (1) unadj" = genes_highlighted1_before
 )
-ggVennDiagram(gene_sets_unadj, label = "both") +
+ggVennDiagram(gene_sets_unadj, label = "both", label_alpha = 0) +
   scale_fill_gradient(low="grey90",high = "red") +
   theme(legend.position = "right")
 
@@ -637,7 +648,7 @@ pair_sets_unadj <- list(
   "Strober (Linear)" = pairs_highlighted_strober_linear,
   "FASH (1) unadj" = pairs_highlighted1_before
 )
-ggVennDiagram(pair_sets_unadj, label = "both") +
+ggVennDiagram(pair_sets_unadj, label = "both", label_alpha = 0) +
   scale_fill_gradient(low="grey90",high = "red") +
   theme(legend.position = "right")
 ```
@@ -668,18 +679,11 @@ map_pass <- gene_map %>% filter(ensembl_gene_id %in% genes_pass_filter)
 ```
 
 ```{r only_fash_least, echo=FALSE}
-selected_gene_fashr_only <- c("DNAJC11", "RASSF1", "ZNF83", "MYO5A")
- 
-file.remove(file.path(result_dir, "cache_sym2ens_only_fash_least.rds"))
-
-sym2ens <- symbol_to_ens(selected_gene_fashr_only, file.path(result_dir, "cache_sym2ens_only_fash_least.rds"))
-
+selected_gene_fashr_only <- c("TCF12", "SRXN1", "RNF149", "TGFBRAP1")
 sym2ens2 <- map_pass$ensembl_gene_id[match(selected_gene_fashr_only, map_pass$hgnc_symbol)]
 
-gene_ens <- sym2ens$ensembl_gene_id[match(selected_gene_fashr_only, sym2ens$hgnc_symbol)]
-
 # choose, for each gene, the pair among pairs_pass_filter with max adjusted lfdr
-idxs <- map_int(gene_ens, function(gid){
+idxs <- map_int(sym2ens2, function(gid){
   cand_keys <- pairs_pass_filter[str_detect(pairs_pass_filter, fixed(gid))]
   cand_idx  <- pair_tbl %>% filter(key %in% cand_keys) %>% pull(idx)
   cand_idx[which.max(fash_fit1_update$lfdr[cand_idx])]
@@ -692,7 +696,8 @@ plot_many_pairs(
   fash_adj = fash_fit1_update,
   gene_map = gene_map,
   p_lin = p_lin,
-  p_non = p_non
+  p_non = p_non,
+  ylim_type = "fitted"
 )
 ```
 
@@ -734,7 +739,8 @@ plot_many_pairs(
   fash_adj = fash_fit1_update,
   gene_map = gene_map,
   p_lin = p_lin,
-  p_non = p_non
+  p_non = p_non,
+  ylim_type = "fitted"
 )
 ```
 
@@ -961,15 +967,25 @@ length(early_genes)
 Let's take a look at the top-ranked early dynamic eQTLs:
 
 ```{r early_examples , echo=FALSE}
-idxs_early <- head(early_indices, 4)
+keep   <- testing_early_dyn$indices %in% early_indices
+idx_v  <- testing_early_dyn$indices[keep]
+rn_v   <- rownames(testing_early_dyn)[keep]
+genes_use <- early_genes[c(2,4,6,8)]
+idxs_early <- vapply(genes_use, function(g) {
+  pos <- match(TRUE, str_detect(rn_v, fixed(g))) 
+  if (is.na(pos)) NA_integer_ else as.integer(idx_v[pos])
+}, integer(1))
+
 
 plot_many_pairs_lfsr(
-  idxs_early,
-  testing_obj = testing_early_dyn,
-  datasets = datasets,
-  fash_raw = fash_fit1,
-  fash_adj = fash_fit1_update,
-  gene_map = gene_map
+  idxs_early, 
+  testing_obj = testing_early_dyn, 
+  datasets = datasets, 
+  fash_raw = fash_fit1, 
+  fash_adj = fash_fit1_update, 
+  gene_map = gene_map, 
+  add_lm = FALSE, add_quad = FALSE, 
+  ylim_type = c("fitted"), include_zero_line = TRUE
 )
 ```
 
@@ -1000,7 +1016,15 @@ length(middle_genes)
 Take a look at their results:
 
 ```{r middle_examples , echo=FALSE}
-idxs_middle <- middle_indices[sample_int(length(middle_indices), 4, seed = 2)]
+keep   <- testing_middle_dyn$indices %in% middle_indices
+idx_v  <- testing_middle_dyn$indices[keep]
+rn_v   <- rownames(testing_middle_dyn)[keep]
+genes_use <- middle_genes[1:4]
+idxs_middle <- vapply(genes_use, function(g) {
+  pos <- match(TRUE, str_detect(rn_v, fixed(g))) 
+  if (is.na(pos)) NA_integer_ else as.integer(idx_v[pos])
+}, integer(1))
+
 
 plot_many_pairs_lfsr(
   idxs_middle,
@@ -1008,7 +1032,9 @@ plot_many_pairs_lfsr(
   datasets = datasets,
   fash_raw = fash_fit1,
   fash_adj = fash_fit1_update,
-  gene_map = gene_map
+  gene_map = gene_map,
+  add_lm = FALSE, add_quad = FALSE, 
+  ylim_type = c("fitted"), include_zero_line = TRUE
 )
 ```
 
@@ -1039,7 +1065,15 @@ length(late_genes)
 Let's take a look at the top-ranked late dynamic eQTLs:
 
 ```{r late_examples , echo=FALSE}
-idxs_late <- head(late_indices, 4)
+keep   <- testing_late_dyn$indices %in% late_indices
+idx_v  <- testing_late_dyn$indices[keep]
+rn_v   <- rownames(testing_late_dyn)[keep]
+genes_use <- late_genes[c(9:12)]
+idxs_late <- vapply(genes_use, function(g) {
+  pos <- match(TRUE, str_detect(rn_v, fixed(g))) 
+  if (is.na(pos)) NA_integer_ else as.integer(idx_v[pos])
+}, integer(1))
+
 
 plot_many_pairs_lfsr(
   idxs_late,
@@ -1047,7 +1081,9 @@ plot_many_pairs_lfsr(
   datasets = datasets,
   fash_raw = fash_fit1,
   fash_adj = fash_fit1_update,
-  gene_map = gene_map
+  gene_map = gene_map,
+  add_lm = FALSE, add_quad = FALSE, 
+  ylim_type = c("fitted"), include_zero_line = TRUE
 )
 ```
 
@@ -1079,30 +1115,33 @@ switch_indices <- testing_switch_dyn$indices[testing_switch_dyn$cfsr <= alpha]
 length(switch_indices)
 switch_genes <- unique(pair_tbl$ens_id[pair_tbl$idx %in% switch_indices])
 length(switch_genes)
-
-selected_switch_genes_symbols <- c("SCN5A", "USP3", "VAMP8", "CCND1")
-sym2ens_sw <- symbol_to_ens(selected_switch_genes_symbols, file.path(result_dir, "cache_sym2ens_switch.rds"))
-selected_switch_genes <- sym2ens_sw$ensembl_gene_id[match(selected_switch_genes_symbols, sym2ens_sw$hgnc_symbol)]
 ```
 
 Let's take a look at the top-ranked switch dynamic eQTLs:
 
 ```{r switch_examples , echo=FALSE}
-# for each selected switch gene, pick the first significant index in that gene among switch_indices
-idxs_sw <- map_int(selected_switch_genes, function(gid){
-  cand <- pair_tbl %>% filter(ens_id == gid, idx %in% switch_indices) %>% pull(idx)
-  if (length(cand) == 0) return(NA_integer_)
-  cand[which.min(fash_fit1_update$lfdr[cand])]
-})
-idxs_sw <- idxs_sw[!is.na(idxs_sw)]
+switch_indices_toplot <- testing_switch_dyn$indices[testing_switch_dyn$cfsr <= alpha/10]
+switch_genes_toplot <- unique(pair_tbl$ens_id[pair_tbl$idx %in% switch_indices_toplot])
+
+keep   <- testing_switch_dyn$indices %in% switch_indices_toplot
+idx_v  <- testing_switch_dyn$indices[keep]
+rn_v   <- rownames(testing_switch_dyn)[keep]
+genes_use <- switch_genes_toplot[1:4]
+idxs_switch <- vapply(genes_use, function(g) {
+  pos <- match(TRUE, str_detect(rn_v, fixed(g))) 
+  if (is.na(pos)) NA_integer_ else as.integer(idx_v[pos])
+}, integer(1))
+
 
 plot_many_pairs_lfsr(
-  idxs_sw,
+  idxs_switch,
   testing_obj = testing_switch_dyn,
   datasets = datasets,
   fash_raw = fash_fit1,
   fash_adj = fash_fit1_update,
-  gene_map = gene_map
+  gene_map = gene_map,
+  add_lm = FALSE, add_quad = FALSE, 
+  ylim_type = c("fitted"), include_zero_line = TRUE
 )
 ```
 
