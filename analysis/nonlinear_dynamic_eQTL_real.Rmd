@@ -132,7 +132,7 @@ plot_pair_nonlinear_base <- function(idx,
 
   # credible interval band
   polygon(c(fitted$x, rev(fitted$x)), c(fitted$lower, rev(fitted$upper)),
-          col = rgb(1, 0, 0, 0.3), border = NA)
+          col = rgb(1, 0, 0, 0.1), border = NA)
   lines(fitted$x, fitted$mean, col = "red", lwd = 2)
 
   if (add_lm)   abline(lin_fit, col = "green", lty = 2, lwd = 1)
@@ -718,12 +718,4 @@ result@result %>%
   dplyr::select(GeneRatio, BgRatio, pvalue, qvalue)
 ```
 
-Among the genes highlighted by FASH that are classified as having switch dynamic eQTLs:
-
-```{r}
-result <- enrich_set(genes_selected = switch_genes, background_gene = all_genes)
-result@result %>% 
-  filter(pvalue < 0.05) %>%
-  dplyr::select(GeneRatio, BgRatio, pvalue, qvalue)
-```
 
