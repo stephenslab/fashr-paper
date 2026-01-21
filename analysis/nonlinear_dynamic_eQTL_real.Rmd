@@ -319,7 +319,7 @@ for (i in seq_along(genes_highlighted2_subset_ens)) {
     datasets = datasets,
     fash_raw = fash_fit2,
     fash_adj = fash_fit2_update,
-    gene_map = map
+    gene_map = full_map
   )
 }
 par(mfrow = c(1, 1))
@@ -349,7 +349,7 @@ for (i in 10:13) {
     datasets = datasets,
     fash_raw = fash_fit2,
     fash_adj = fash_fit2_update,
-    gene_map = map
+    gene_map = full_map
   )
 }
 par(mfrow = c(1, 1))
@@ -397,7 +397,7 @@ for (i in 1:min(4, length(gene_fashr_only))) {
     datasets = datasets,
     fash_raw = fash_fit2,
     fash_adj = fash_fit2_update,
-    gene_map = map
+    gene_map = full_map
   )
 }
 par(mfrow = c(1, 1))
@@ -425,7 +425,7 @@ for (i in 1:min(4, length(gene_missed))) {
     datasets = datasets,
     fash_raw = fash_fit2,
     fash_adj = fash_fit2_update,
-    gene_map = map
+    gene_map = full_map
   )
 }
 par(mfrow = c(1, 1))
@@ -502,7 +502,7 @@ plot_many_pairs_nonlinear_lfsr(
   datasets = datasets,
   fash_raw = fash_fit2,
   fash_adj = fash_fit2_update,
-  gene_map = map
+  gene_map = full_map
 )
 ```
 
@@ -540,7 +540,7 @@ plot_many_pairs_nonlinear_lfsr(
   datasets = datasets,
   fash_raw = fash_fit2,
   fash_adj = fash_fit2_update,
-  gene_map = map
+  gene_map = full_map
 )
 ```
 
@@ -585,7 +585,7 @@ plot_many_pairs_nonlinear_lfsr(
   datasets = datasets,
   fash_raw = fash_fit2,
   fash_adj = fash_fit2_update,
-  gene_map = map
+  gene_map = full_map
 )
 ```
 
